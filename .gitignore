@@ -5,3 +5,5 @@
 *.jar
 *.war
 *.ear
+/myChamp/dist/
+/myChamp/build/

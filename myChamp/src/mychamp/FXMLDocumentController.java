@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package mychamp.GUI.Controller;
+package mychamp;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,7 +16,7 @@ import javafx.scene.control.Label;
  *
  * @author jeppe
  */
-public class MainViewController implements Initializable
+public class FXMLDocumentController implements Initializable
 {
     
     @FXML

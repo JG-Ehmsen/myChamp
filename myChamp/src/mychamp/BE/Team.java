@@ -5,8 +5,12 @@ public class Team
 
     private int teamID; // The ID of the team.
     private String teamName; // The name of the team.
-    private String teamSchoolName; // The school the team comes from.
     private int teamGoalsScored; // The amount of goals the team has scored.
+    private int teamGoalsScoredAgainst; // The amount of goals scored against the team.
+    private int teamGamesPlayed; // The total amount of games played by the team.
+    private int teamGamesWon; // The amount of games won by the team.
+    private int teamGamesLost; // The amount of games lost by the team.
+    private int teamGamesDraw; // The amount of games played by the team that ended in a draw.
     private int teamPoints; // The amount of points the team has earned.
 
     /**
@@ -14,13 +18,11 @@ public class Team
      *
      * @param teamID, the ID of the team.
      * @param teamName, the name of the team.
-     * @param teamSchoolName, the name of the team's school.
      */
-    public Team(int teamID, String teamName, String teamSchoolName)
+    public Team(int teamID, String teamName)
     {
         this.teamID = teamID;
         this.teamName = teamName;
-        this.teamSchoolName = teamSchoolName;
     }
 
     /**
@@ -64,26 +66,6 @@ public class Team
     }
 
     /**
-     * Returns the name of the team's school.
-     *
-     * @return
-     */
-    public String getTeamSchoolName()
-    {
-        return teamSchoolName;
-    }
-
-    /**
-     * Sets the name of the team's school.
-     *
-     * @param teamSchoolName
-     */
-    public void setTeamSchoolName(String teamSchoolName)
-    {
-        this.teamSchoolName = teamSchoolName;
-    }
-
-    /**
      * Returns the amount of goals scored by the team.
      *
      * @return
@@ -101,6 +83,106 @@ public class Team
     public void setTeamGoalsScored(int teamGoalsScored)
     {
         this.teamGoalsScored = teamGoalsScored;
+    }
+
+    /**
+     * Returns the amount of goals scored against the team.
+     *
+     * @return
+     */
+    public int getTeamGoalsScoredAgainst()
+    {
+        return teamGoalsScoredAgainst;
+    }
+
+    /**
+     * Sets the amount of goals scored against the team.
+     *
+     * @param teamGoalsScoredAgainst
+     */
+    public void setTeamGoalsScoredAgainst(int teamGoalsScoredAgainst)
+    {
+        this.teamGoalsScoredAgainst = teamGoalsScoredAgainst;
+    }
+
+    /**
+     * Returns the amount of games played by the team.
+     *
+     * @return
+     */
+    public int getTeamGamesPlayed()
+    {
+        return teamGamesPlayed;
+    }
+
+    /**
+     * Sets the amount of games played by the team.
+     *
+     * @param teamGamesPlayed
+     */
+    public void setTeamGamesPlayed(int teamGamesPlayed)
+    {
+        this.teamGamesPlayed = teamGamesPlayed;
+    }
+
+    /**
+     * Returns the amount of games won by the team.
+     *
+     * @return
+     */
+    public int getTeamGamesWon()
+    {
+        return teamGamesWon;
+    }
+
+    /**
+     * Sets the amount of games won by the team.
+     *
+     * @param teamGamesWon
+     */
+    public void setTeamGamesWon(int teamGamesWon)
+    {
+        this.teamGamesWon = teamGamesWon;
+    }
+
+    /**
+     * Returns the amount of games lost by the team.
+     *
+     * @return
+     */
+    public int getTeamGamesLost()
+    {
+        return teamGamesLost;
+    }
+
+    /**
+     * Sets the amount of games lost by the team.
+     *
+     * @param teamGamesLost
+     */
+    public void setTeamGamesLost(int teamGamesLost)
+    {
+        this.teamGamesLost = teamGamesLost;
+    }
+
+    /**
+     * Returns the amount of games played by the team that resulted in a draw.
+     *
+     * @return
+     */
+    public int getTeamGamesDraw()
+    {
+        return teamGamesDraw;
+    }
+
+    /**
+     * Sets the amount of games played by the team that resulted in a draw.
+     *
+     * @param teamGamesDraw
+     */
+    public void setTeamGamesDraw(int teamGamesDraw)
+    {
+        this.teamGamesDraw = teamGamesDraw;
     }
 
     /**

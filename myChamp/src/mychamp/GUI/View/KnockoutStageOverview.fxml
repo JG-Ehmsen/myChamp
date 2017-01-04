@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="582.0" prefWidth="990.0" style="-fx-background-color: Black;" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView layoutX="14.0" layoutY="40.0" prefHeight="98.0" prefWidth="292.0">
+        <columns>
+          <TableColumn prefWidth="187.0" text="Team" />
+          <TableColumn prefWidth="69.0" text="Result" />
+            <TableColumn prefWidth="35.0" text="Adv." />
+        </columns>
+      </TableView>
+      <Label layoutX="14.0" layoutY="14.0" text="Quarter finals match 1 " textFill="WHITE" />
+      <TableView layoutX="14.0" layoutY="179.0" prefHeight="98.0" prefWidth="292.0">
+         <columns>
+            <TableColumn prefWidth="187.0" text="Team" />
+            <TableColumn prefWidth="69.0" text="Result" />
+            <TableColumn prefWidth="35.0" text="Adv." />
+         </columns>
+      </TableView>
+      <Label layoutX="14.0" layoutY="155.0" text="Quarter finals match 2" textFill="WHITE" />
+      <TableView layoutX="14.0" layoutY="320.0" prefHeight="98.0" prefWidth="292.0">
+         <columns>
+            <TableColumn prefWidth="187.0" text="Team" />
+            <TableColumn prefWidth="69.0" text="Result" />
+            <TableColumn prefWidth="35.0" text="Adv." />
+         </columns>
+      </TableView>
+      <Label layoutX="16.0" layoutY="298.0" text="Quarter finals match 3" textFill="WHITE" />
+      <TableView layoutX="14.0" layoutY="464.0" prefHeight="98.0" prefWidth="292.0">
+         <columns>
+            <TableColumn prefWidth="187.0" text="Team" />
+            <TableColumn prefWidth="69.0" text="Result" />
+            <TableColumn prefWidth="35.0" text="Adv." />
+         </columns>
+      </TableView>
+      <Label layoutX="14.0" layoutY="441.0" text="Quarter finals match 14" textFill="WHITE" />
+      <TableView layoutX="360.0" layoutY="105.0" prefHeight="98.0" prefWidth="292.0">
+         <columns>
+            <TableColumn prefWidth="187.0" text="Team" />
+            <TableColumn prefWidth="69.0" text="Result" />
+            <TableColumn prefWidth="35.0" text="Adv." />
+         </columns>
+      </TableView>
+      <Label layoutX="358.0" layoutY="81.0" text="Semi-finals match 1 " textFill="WHITE" />
+      <TableView layoutX="360.0" layoutY="408.0" prefHeight="98.0" prefWidth="292.0">
+         <columns>
+            <TableColumn prefWidth="187.0" text="Team" />
+            <TableColumn prefWidth="69.0" text="Result" />
+            <TableColumn prefWidth="35.0" text="Adv." />
+         </columns>
+      </TableView>
+      <Label layoutX="360.0" layoutY="387.0" text="Semi-finals match 2" textFill="WHITE" />
+      <TableView layoutX="710.0" layoutY="56.0" prefHeight="98.0" prefWidth="260.0">
+         <columns>
+            <TableColumn prefWidth="187.0" text="Team" />
+            <TableColumn prefWidth="69.0" text="Result" />
+         </columns>
+      </TableView>
+      <Label layoutX="710.0" layoutY="32.0" text="Final stage" textFill="WHITE" />
+      <Label layoutX="710.0" layoutY="204.0" text="Final Ranking of" textFill="WHITE" />
+      <Label layoutX="812.0" layoutY="204.0" text="Tournament name:" textFill="WHITE" />
+      <TableView layoutX="712.0" layoutY="228.0" prefHeight="333.0" prefWidth="260.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="#Ranking" />
+          <TableColumn prefWidth="184.0" text="Team" />
+        </columns>
+      </TableView>
+      <ImageView fitHeight="175.0" fitWidth="248.0" layoutX="384.0" layoutY="208.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Assets/football-manager-14-logo1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="74.0" fitWidth="346.0" layoutX="335.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../../Assets/Skærmbillede%202017-01-03%20kl.%2017.43.07.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

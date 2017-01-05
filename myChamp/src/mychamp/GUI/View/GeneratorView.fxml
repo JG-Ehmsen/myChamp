@@ -35,7 +35,7 @@
                               <ComboBox layoutX="6.0" layoutY="196.0" maxHeight="25.0" maxWidth="160.0" minHeight="25.0" minWidth="160.0" prefWidth="150.0" promptText="No. of groups" style="-fx-background-color: white;" />
                               <Label layoutX="14.0" layoutY="161.0" text="Selected" textFill="WHITE" />
                               <Button fx:id="btnBack" layoutX="7.0" layoutY="269.0" minHeight="25.0" minWidth="50.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="25.0" prefWidth="50.0" style="-fx-background-color: white;" text="Back" />
-                              <Button layoutX="117.0" layoutY="269.0" minHeight="25.0" minWidth="50.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="50.0" style="-fx-background-color: white;" text="Next" />
+                              <Button fx:id="btnNext" layoutX="117.0" layoutY="269.0" minHeight="25.0" minWidth="50.0" mnemonicParsing="false" onAction="#handleNext" prefHeight="25.0" prefWidth="50.0" style="-fx-background-color: white;" text="Next" />
                               <ComboBox layoutX="7.0" layoutY="129.0" maxHeight="25.0" maxWidth="160.0" minHeight="25.0" minWidth="160.0" prefWidth="150.0" promptText="Tournament form" style="-fx-background-color: white;" />
                               <Label layoutX="14.0" layoutY="228.0" text="Not Available" textFill="WHITE" />
                            </children>
@@ -44,7 +44,7 @@
                            <children>
                               <ImageView fitHeight="281.0" fitWidth="391.0" layoutX="12.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@../../../../Assets/ultimate-challenge-logo1.png" />
+                                    <Image url="file:/Users/Kristoffers/Desktop/School/Projects/myChampGit/myChamp/Assets/ultimate-challenge-logo1.png" />
                                  </image>
                               </ImageView>
                            </children>

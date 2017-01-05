@@ -88,7 +88,6 @@ public class MainViewController implements Initializable
         Stage dialogStage = new Stage();
         dialogStage.initOwner(primaryStage);
         dialogStage.initModality(Modality.WINDOW_MODAL);
-        dialogStage.initOwner(primaryStage);
         Scene scene = new Scene(page);
         dialogStage.setScene(scene);
         dialogStage.setTitle("MyChamp - Create new tournament");

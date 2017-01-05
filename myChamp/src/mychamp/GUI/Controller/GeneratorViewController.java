@@ -31,6 +31,8 @@ public class GeneratorViewController implements Initializable
     private Window generatorStage;
     @FXML
     private Button btnBack;
+    @FXML
+    private Button btnNext;
 
     /**
      * Initializes the controller class.
@@ -41,6 +43,12 @@ public class GeneratorViewController implements Initializable
         // TODO
     }
 
+    /**
+     * Runs the showFrontView method and closes the GeneratorView.
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void handleBack(ActionEvent event) throws IOException
     {
@@ -51,7 +59,22 @@ public class GeneratorViewController implements Initializable
         stage.close();
     }
 
+    @FXML
+    private void handleNext(ActionEvent event) throws IOException
+    {
+        showTeamsAddView();
 
+        // Closes the primary stage
+        Stage stage = (Stage) btnNext.getScene().getWindow();
+        stage.close();
+    }
+
+    /**
+     * Loads the FrontView (MainView) FXML file.
+     *
+     * @param title
+     * @throws IOException
+     */
     private void showFrontView() throws IOException
     {
         FXMLLoader loader = new FXMLLoader();
@@ -62,10 +85,26 @@ public class GeneratorViewController implements Initializable
         Stage dialogStage = new Stage();
         dialogStage.initOwner(generatorStage);
         dialogStage.initModality(Modality.WINDOW_MODAL);
-        dialogStage.initOwner(generatorStage);
         Scene scene = new Scene(page);
         dialogStage.setScene(scene);
         dialogStage.setTitle("MyChamp");
+
+        dialogStage.show();
+    }
+
+    private void showTeamsAddView() throws IOException
+    {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(MyChamp.class.getResource("GUI/View/TeamsAddView.fxml"));
+        AnchorPane page = (AnchorPane) loader.load();
+        TeamsAddViewController controller = loader.getController();
+
+        Stage dialogStage = new Stage();
+        dialogStage.initOwner(generatorStage);
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        Scene scene = new Scene(page);
+        dialogStage.setScene(scene);
+        dialogStage.setTitle("MyChamp - Add Teams");
 
         dialogStage.show();
     }

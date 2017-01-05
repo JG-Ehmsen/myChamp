@@ -21,7 +21,7 @@ public class MyChamp extends Application
     @Override
     public void start(Stage stage) throws Exception
     {
-        Parent root = FXMLLoader.load(getClass().getResource("GUI/View/TeamsAddView.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("GUI/View/FrontView.fxml"));
         
         Scene scene = new Scene(root);
         

@@ -5,6 +5,9 @@
  */
 package mychamp.BLL;
 
+import java.io.IOException;
+import java.util.List;
+import mychamp.BE.Team;
 import mychamp.DAL.FileManager;
 
 /**
@@ -28,5 +31,10 @@ public class TeamManager
     public void sendTeamInfo(String teamName)
     {
         fileManager.saveTeam(teamName);
+    }
+    
+    public List<Team> getAllTeams() throws IOException
+    {
+        return fileManager.getTeams();
     }
 }

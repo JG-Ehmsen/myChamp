@@ -19,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import mychamp.GUI.Model.Model;
 import mychamp.MyChamp;
 
 /**
@@ -28,6 +29,7 @@ import mychamp.MyChamp;
  */
 public class MainViewController implements Initializable
 {
+    Model model = new Model();
 
     private Window primaryStage;
     @FXML
@@ -55,7 +57,7 @@ public class MainViewController implements Initializable
     @FXML
     private void handleNewTournament(ActionEvent event) throws IOException
     {
-        showGeneratorView();
+        model.changeView("MyChamp - Create tournament", "GUI/View/GeneratorView.fxml");
 
         // Closes the primary stage
         Stage stage = (Stage) btnNew.getScene().getWindow();
@@ -71,30 +73,7 @@ public class MainViewController implements Initializable
     private void handleSeeHistory(ActionEvent event)
     {
     }
-
-    /**
-     * Loads the FXML file to create a new tournament (GeneratorView.fxml)
-     *
-     * @param title
-     * @throws IOException
-     */
-    private void showGeneratorView() throws IOException
-    {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MyChamp.class.getResource("GUI/View/GeneratorView.fxml"));
-        AnchorPane page = (AnchorPane) loader.load();
-        GeneratorViewController controller = loader.getController();
-
-        Stage dialogStage = new Stage();
-        dialogStage.initOwner(primaryStage);
-        dialogStage.initModality(Modality.WINDOW_MODAL);
-        Scene scene = new Scene(page);
-        dialogStage.setScene(scene);
-        dialogStage.setTitle("MyChamp - Create new tournament");
-
-        dialogStage.show();
-    }
-
+    
     @FXML
     private void CloseAction(ActionEvent event)
     {

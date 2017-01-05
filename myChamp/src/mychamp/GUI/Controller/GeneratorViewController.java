@@ -10,15 +10,11 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import mychamp.MyChamp;
+import mychamp.GUI.Model.Model;
 
 /**
  * FXML Controller class
@@ -27,6 +23,7 @@ import mychamp.MyChamp;
  */
 public class GeneratorViewController implements Initializable
 {
+    Model model = new Model();
 
     private Window generatorStage;
     @FXML
@@ -44,7 +41,7 @@ public class GeneratorViewController implements Initializable
     }
 
     /**
-     * Runs the showFrontView method and closes the GeneratorView.
+     * Runs the changeView method and closes the GeneratorView.
      *
      * @param event
      * @throws IOException
@@ -52,7 +49,7 @@ public class GeneratorViewController implements Initializable
     @FXML
     private void handleBack(ActionEvent event) throws IOException
     {
-        showFrontView();
+        model.changeView("MyChamp", "GUI/View/FrontView.fxml");
 
         // Closes the primary stage
         Stage stage = (Stage) btnBack.getScene().getWindow();
@@ -62,51 +59,7 @@ public class GeneratorViewController implements Initializable
     @FXML
     private void handleNext(ActionEvent event) throws IOException
     {
-        showTeamsAddView();
-
-        // Closes the primary stage
-        Stage stage = (Stage) btnNext.getScene().getWindow();
-        stage.close();
+        model.changeView("MyChamp - Add Teams", "GUI/View/TeamsAddView.fxml");
     }
-
-    /**
-     * Loads the FrontView (MainView) FXML file.
-     *
-     * @param title
-     * @throws IOException
-     */
-    private void showFrontView() throws IOException
-    {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MyChamp.class.getResource("GUI/View/FrontView.fxml"));
-        AnchorPane page = (AnchorPane) loader.load();
-        MainViewController controller = loader.getController();
-
-        Stage dialogStage = new Stage();
-        dialogStage.initOwner(generatorStage);
-        dialogStage.initModality(Modality.WINDOW_MODAL);
-        Scene scene = new Scene(page);
-        dialogStage.setScene(scene);
-        dialogStage.setTitle("MyChamp");
-
-        dialogStage.show();
-    }
-
-    private void showTeamsAddView() throws IOException
-    {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MyChamp.class.getResource("GUI/View/TeamsAddView.fxml"));
-        AnchorPane page = (AnchorPane) loader.load();
-        TeamsAddViewController controller = loader.getController();
-
-        Stage dialogStage = new Stage();
-        dialogStage.initOwner(generatorStage);
-        dialogStage.initModality(Modality.WINDOW_MODAL);
-        Scene scene = new Scene(page);
-        dialogStage.setScene(scene);
-        dialogStage.setTitle("MyChamp - Add Teams");
-
-        dialogStage.show();
-    }
-
+    
 }

@@ -19,10 +19,18 @@ public class Team
      * @param teamID, the ID of the team.
      * @param teamName, the name of the team.
      */
-    public Team(int teamID, String teamName)
+    public Team(int teamID, String teamName, int gamesPlayed, int gamesWon, int gamesDraw, int gamesLost, int goalsScored, int goalsAgainst)
+            
+
     {
         this.teamID = teamID;
         this.teamName = teamName;
+        this.teamGamesPlayed = gamesPlayed;
+        this.teamGamesWon = gamesWon;
+        this.teamGamesDraw = gamesDraw;
+        this.teamGamesLost = gamesLost;
+        this.teamGoalsScored = goalsScored;
+        this.teamGoalsScoredAgainst = goalsAgainst;
     }
 
     /**

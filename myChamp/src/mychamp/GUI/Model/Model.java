@@ -12,7 +12,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import mychamp.GUI.Controller.MainViewController;
 import mychamp.MyChamp;
 
 /**

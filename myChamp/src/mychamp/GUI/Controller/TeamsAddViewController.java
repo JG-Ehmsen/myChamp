@@ -7,13 +7,17 @@ package mychamp.GUI.Controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
+import mychamp.BE.Team;
 import mychamp.GUI.Model.TeamParser;
 
 /**
@@ -26,7 +30,7 @@ public class TeamsAddViewController implements Initializable
     private TeamParser teamParser = TeamParser.getInstance();
     
     @FXML
-    private TableView<?> clnJoiningTeams;
+    private TableColumn<Team, String> clnJoiningTeams;
     @FXML
     private TextField txtFldTeamName;
     @FXML
@@ -43,6 +47,8 @@ public class TeamsAddViewController implements Initializable
     private Button btnBack;
     @FXML
     private Button btnEditNoOfTeams;
+    @FXML
+    private TableView<Team> tblSignedTeams;
 
     /**
      * Initializes the controller class.
@@ -50,7 +56,7 @@ public class TeamsAddViewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
+        populateList();
     }    
 
     
@@ -58,6 +64,33 @@ public class TeamsAddViewController implements Initializable
     private void handleAddTeam(ActionEvent event)
     {
         teamParser.addTeam(txtFldTeamName.getText());
+        txtFldTeamName.clear();
+        populateList();
     }
+
+    @FXML
+    private void handleRemoveSignedTeam(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void handleBackToPrevious(ActionEvent event)
+    {
+    }
+
+    @FXML
+    private void handleEditAmountTeams(ActionEvent event)
+    {
+    }
+    
+    private void populateList()
+    {
+        clnJoiningTeams.setCellValueFactory(new PropertyValueFactory("teamName"));
+        tblSignedTeams.setItems(teamParser.loadTeamsIntoViewer());
+        
+    }
+    
+    
+    
     
 }

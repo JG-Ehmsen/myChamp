@@ -10,34 +10,26 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import mychamp.GUI.Model.Model;
-import mychamp.MyChamp;
 
 /**
  * FXML Controller class
  *
- * @author jeppe
+ * @author Kristoffers
  */
-public class MainViewController implements Initializable
+public class GeneratorViewController implements Initializable
 {
     Model model = new Model();
 
-    private Window primaryStage;
+    private Window generatorStage;
     @FXML
-    private Button btnNew;
-
-    private Stage window;
-    private Parent root;
-    Scene scene;
+    private Button btnBack;
+    @FXML
+    private Button btnNext;
 
     /**
      * Initializes the controller class.
@@ -49,34 +41,25 @@ public class MainViewController implements Initializable
     }
 
     /**
-     * Runs the showGeneratorView method and closes the primary stage.
+     * Runs the changeView method and closes the GeneratorView.
      *
      * @param event
      * @throws IOException
      */
     @FXML
-    private void handleNewTournament(ActionEvent event) throws IOException
+    private void handleBack(ActionEvent event) throws IOException
     {
-        model.changeView("MyChamp - Create tournament", "GUI/View/GeneratorView.fxml");
+        model.changeView("MyChamp", "GUI/View/FrontView.fxml");
 
         // Closes the primary stage
-        Stage stage = (Stage) btnNew.getScene().getWindow();
+        Stage stage = (Stage) btnBack.getScene().getWindow();
         stage.close();
     }
 
     @FXML
-    private void handleContinueTournament(ActionEvent event)
+    private void handleNext(ActionEvent event) throws IOException
     {
-    }
-
-    @FXML
-    private void handleSeeHistory(ActionEvent event)
-    {
+        model.changeView("MyChamp - Add Teams", "GUI/View/TeamsAddView.fxml");
     }
     
-    @FXML
-    private void CloseAction(ActionEvent event)
-    {
-    }
-
 }

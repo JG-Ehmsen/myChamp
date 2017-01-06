@@ -117,6 +117,12 @@ public class TeamsAddViewController implements Initializable
         
     }
     
+    public void setInformation(String tournamentTitle, String noOfTeams)
+    {
+        this.lblTournamentName.setText(tournamentTitle);
+        this.lblCountDown.setText(noOfTeams);
+    }
+    
     
     
     

@@ -7,6 +7,8 @@ package mychamp.GUI.Controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -22,6 +24,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import mychamp.BE.Result;
+import mychamp.BE.Team;
+import mychamp.GUI.Model.TeamParser;
 import mychamp.MyChamp;
 
 
@@ -40,7 +44,9 @@ public class ManagerViewController implements Initializable
     @FXML
     private ComboBox<String> cbGroup;
     @FXML
-    private ComboBox<String> cbTeam;
+    private ComboBox<Team> cbTeam;
+    
+    TeamParser teamParser = new TeamParser();
 
     /**
      * Initializes the controller class.
@@ -54,8 +60,24 @@ public class ManagerViewController implements Initializable
 
 
     @FXML
-    private void removeTeamTourGo(ActionEvent event)
+    private void removeTeamTourGo(String remove_Controller, Team team) throws IOException
     {
+            //load the fxml file and creat a new stage for the popup dialog.
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(MyChamp.class.getResource("GUI/View/RemoveTeam.fxml"));
+            AnchorPane page = (AnchorPane) loader.load();
+            //ResultManagerController controller = loader.getController();
+            //controller.setResult(result);
+            
+            // Create the dialog stage.
+            Stage dialogStage = new Stage();
+            dialogStage.setTitle(remove_Controller);
+            dialogStage.initModality(Modality.WINDOW_MODAL);
+            dialogStage.initOwner(primaryStage);
+            Scene scene = new Scene(page);
+            dialogStage.setScene(scene);
+            
+            dialogStage.showAndWait();
     }
 
     private void showResultManagerWindow(String result_Manager, Result result)
@@ -108,7 +130,11 @@ public class ManagerViewController implements Initializable
     
     private void fillComboBoxTeam()
     {
-        //ObservableList<String> comboItems =
-                //FXCollections.observableArrayList("",)
+        List<Team> teamList = new ArrayList();
+        teamList = teamParser.getTeams();
+        ObservableList<Team> comboItems =
+                FXCollections.observableArrayList(teamList);
+        cbTeam.setItems(comboItems);
+        cbTeam.getSelectionModel().selectFirst();
     }
 }

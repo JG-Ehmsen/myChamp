@@ -6,16 +6,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="200.0" prefWidth="400.0" style="-fx-background-color: black;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.60" fx:controller="mychamp.GUI.Controller.RemoveTeamController">
+<AnchorPane id="AnchorPane" prefHeight="200.0" prefWidth="400.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mychamp.GUI.Controller.RemoveTeamController">
    <children>
-      <ComboBox layoutX="30.0" layoutY="75.0" prefWidth="150.0" AnchorPane.leftAnchor="30.0" />
+      <ComboBox fx:id="removeTeam" layoutX="30.0" layoutY="75.0" prefWidth="150.0" AnchorPane.leftAnchor="30.0" />
       <Label layoutX="30.0" layoutY="14.0" text="Remove team" textFill="WHITE" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="15.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="271.0" layoutY="75.0" mnemonicParsing="false" text="Remove" AnchorPane.rightAnchor="30.0" />
-      <Button layoutX="315.0" layoutY="148.0" mnemonicParsing="false" text="Close" AnchorPane.rightAnchor="30.0" />
+      <Button fx:id="btnRemove" layoutX="271.0" layoutY="75.0" mnemonicParsing="false" text="Remove" AnchorPane.rightAnchor="30.0" />
+      <Button fx:id="btnClose" layoutX="315.0" layoutY="148.0" mnemonicParsing="false" text="Close" AnchorPane.rightAnchor="30.0" />
    </children>
 </AnchorPane>

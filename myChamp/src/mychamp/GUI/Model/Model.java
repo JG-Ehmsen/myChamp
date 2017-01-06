@@ -19,6 +19,7 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import mychamp.BE.Team;
 import mychamp.BLL.TeamManager;
+import mychamp.GUI.Controller.TeamsAddViewController;
 import mychamp.MyChamp;
 
 /**
@@ -56,6 +57,25 @@ public class Model
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MyChamp.class.getResource(path));
         AnchorPane page = (AnchorPane) loader.load();
+
+        Stage dialogStage = new Stage();
+        dialogStage.initOwner(generatorStage);
+        dialogStage.initModality(Modality.WINDOW_MODAL);
+        Scene scene = new Scene(page);
+        dialogStage.setScene(scene);
+        dialogStage.setTitle(title);
+
+        dialogStage.show();
+    }
+    
+    public void loadTeamAddView(String title, String path, String tournamentTitle, String noOfTeams) throws IOException
+    {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(MyChamp.class.getResource(path));
+        AnchorPane page = (AnchorPane) loader.load();
+        TeamsAddViewController controller = loader.getController();
+        controller.setInformation(tournamentTitle, noOfTeams);
+        
 
         Stage dialogStage = new Stage();
         dialogStage.initOwner(generatorStage);

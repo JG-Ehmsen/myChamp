@@ -6,6 +6,7 @@
 package mychamp.GUI.Model;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -59,4 +60,8 @@ public class TeamParser
         teamManager.removeTeamInfo(teamId);
     }
     
+    public List<Team> getTeams()
+    {
+        return teamManager.getTeams();
+    }
 }

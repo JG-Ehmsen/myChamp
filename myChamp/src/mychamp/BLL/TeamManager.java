@@ -51,4 +51,16 @@ public class TeamManager
         }
        
     }
+    
+    public List<Team> getTeams()
+    {
+        try
+        {
+            return fileManager.getTeams();
+        } catch (IOException ex)
+        {
+            Logger.getLogger(TeamManager.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        return null;
+    }
 }

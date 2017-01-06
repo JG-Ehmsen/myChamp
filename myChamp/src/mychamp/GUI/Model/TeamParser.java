@@ -6,10 +6,14 @@
 package mychamp.GUI.Model;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import mychamp.BE.Team;
 import mychamp.BLL.TeamManager;
 
@@ -49,5 +53,15 @@ public class TeamParser
             Logger.getLogger(TeamParser.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    public void removeTeam(int teamId)
+    {
+        teamManager.removeTeamInfo(teamId);
+    }
+    
+    public List<Team> getTeams()
+    {
+        return teamManager.getTeams();
     }
 }

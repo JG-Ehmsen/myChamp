@@ -7,6 +7,8 @@ package mychamp.BLL;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import mychamp.BE.Team;
 import mychamp.DAL.FileManager;
 
@@ -36,5 +38,29 @@ public class TeamManager
     public List<Team> getAllTeams() throws IOException
     {
         return fileManager.getTeams();
+    }
+
+    public void removeTeamInfo(int teamId)
+    {
+        try
+        {
+            fileManager.clearTeam(teamId);
+        } catch (IOException ex)
+        {
+            Logger.getLogger(TeamManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+    }
+    
+    public List<Team> getTeams()
+    {
+        try
+        {
+            return fileManager.getTeams();
+        } catch (IOException ex)
+        {
+            Logger.getLogger(TeamManager.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+        return null;
     }
 }

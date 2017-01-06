@@ -15,19 +15,21 @@
           <TableColumn fx:id="clnJoiningTeams" prefWidth="199.0" text="Joining teams" />
         </columns>
       </TableView>
-      <TextField fx:id="txtFldTeamName" layoutX="15.0" layoutY="104.0" />
-      <Label layoutX="15.0" layoutY="81.0" text="Sign in team here" textFill="WHITE" />
-      <Button fx:id="btnAddTeam" layoutX="14.0" layoutY="137.0" mnemonicParsing="false" onAction="#handleAddTeam" style="-fx-background-color: white;" text="Add team" />
+      <TextField fx:id="txtFldTeamName" layoutX="15.0" layoutY="93.0" />
+      <Label layoutX="15.0" layoutY="69.0" text="Sign in team here" textFill="WHITE" />
+      <Button fx:id="btnAddTeam" layoutX="17.0" layoutY="137.0" mnemonicParsing="false" onAction="#handleAddTeam" style="-fx-background-color: white;" text="Add team" />
       <Button fx:id="btnRemoveTeam" layoutX="107.0" layoutY="137.0" mnemonicParsing="false" onAction="#handleRemoveSignedTeam" style="-fx-background-color: white;" text="Remove " />
       <Label layoutX="17.0" layoutY="179.0" text="Remining registration:" textFill="WHITE" />
       <Label layoutX="14.0" layoutY="234.0" text="Start tournament" textFill="WHITE" />
       <Button fx:id="btnReadyOrNot" layoutX="14.0" layoutY="260.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: white;" text="Not ready" />
-      <Label fx:id="lblCountDown" layoutX="67.0" layoutY="202.0" prefHeight="16.0" prefWidth="11.0" text="0" textFill="WHITE">
+      <Label fx:id="lblCountDown" alignment="CENTER" layoutX="58.0" layoutY="202.0" prefHeight="23.0" prefWidth="31.0" text="0" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Label fx:id="lblTournamentName" layoutX="17.0" layoutY="56.0" text="Tournament Name" textFill="WHITE" />
-      <Button fx:id="btnBack" layoutX="17.0" layoutY="16.0" mnemonicParsing="false" onAction="#handleBackToPrevious" style="-fx-background-color: white;" text="Back" />
+      <Label fx:id="lblTournamentName" layoutX="12.0" layoutY="24.0" text="Tournament Name" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
       <Button fx:id="btnEditNoOfTeams" layoutX="136.0" layoutY="201.0" mnemonicParsing="false" onAction="#handleEditAmountTeams" style="-fx-background-color: white;" text="Edit" />
    </children>
 </AnchorPane>

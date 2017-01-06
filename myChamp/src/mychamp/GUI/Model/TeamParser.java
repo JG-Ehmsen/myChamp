@@ -6,10 +6,13 @@
 package mychamp.GUI.Model;
 
 import java.io.IOException;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import mychamp.BE.Team;
 import mychamp.BLL.TeamManager;
 
@@ -50,4 +53,10 @@ public class TeamParser
         }
         return null;
     }
+
+    public void removeTeam(int teamId)
+    {
+        teamManager.removeTeamInfo(teamId);
+    }
+    
 }

@@ -8,10 +8,14 @@ package mychamp.GUI.Controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import mychamp.GUI.Model.Model;
@@ -30,6 +34,10 @@ public class GeneratorViewController implements Initializable
     private Button btnBack;
     @FXML
     private Button btnNext;
+    @FXML
+    private TextField txtFldTournamentTitle;
+    @FXML
+    private ComboBox<String> cBoxNoOfTeams;
 
     /**
      * Initializes the controller class.
@@ -37,7 +45,7 @@ public class GeneratorViewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
+        fillComboBox();
     }
 
     /**
@@ -59,7 +67,14 @@ public class GeneratorViewController implements Initializable
     @FXML
     private void handleNext(ActionEvent event) throws IOException
     {
-        model.changeView("MyChamp - Add Teams", "GUI/View/TeamsAddView.fxml");
+        model.loadTeamAddView("MyChamp - Add Teams", "GUI/View/TeamsAddView.fxml", txtFldTournamentTitle.getText(), cBoxNoOfTeams.getValue());
+
     }
     
+    private void fillComboBox() {
+        ObservableList<String> comboItems
+                = FXCollections.observableArrayList(" ", "12", "13", "14", "15", "16");
+        cBoxNoOfTeams.setItems(comboItems);
+        cBoxNoOfTeams.getSelectionModel().selectFirst();
+    }
 }

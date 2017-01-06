@@ -24,6 +24,8 @@ public class MyChamp extends Application
         Parent root = FXMLLoader.load(getClass().getResource("GUI/View/FrontView.fxml"));
 
         Scene scene = new Scene(root);
+        
+        stage.setTitle("MyChamp");
 
         stage.setScene(scene);
         stage.show();

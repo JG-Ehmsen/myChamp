@@ -131,7 +131,7 @@ public class ManagerViewController implements Initializable
     private void fillComboBoxTeam()
     {
         List<Team> teamList = new ArrayList();
-        teamList = teamParser.getTeams();
+        teamList = teamParser.getAllTeams();
         ObservableList<Team> comboItems =
                 FXCollections.observableArrayList(teamList);
         cbTeam.setItems(comboItems);

@@ -56,7 +56,7 @@ public class RemoveTeamController implements Initializable
     private void fillComboBoxRemoveTeam()
     {
         List<Team> teamList = new ArrayList();
-        teamList = teamParser.getTeams();
+        teamList = teamParser.getAllTeams();
         ObservableList<Team> comboItems = 
                 FXCollections.observableArrayList(teamList);
         removeTeam.setItems(comboItems);

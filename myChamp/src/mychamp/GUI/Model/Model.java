@@ -6,12 +6,14 @@
 package mychamp.GUI.Model;
 
 import java.io.IOException;
+import java.util.LinkedList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import mychamp.BE.Team;
 import mychamp.MyChamp;
 
 /**
@@ -20,6 +22,7 @@ import mychamp.MyChamp;
  */
 public class Model
 {
+
     public Window generatorStage;
 
     /**
@@ -42,6 +45,11 @@ public class Model
         dialogStage.setTitle(title);
 
         dialogStage.show();
+    }
+
+    public void shuffleTeams()
+    {
+        LinkedList lnkList = new LinkedList();
     }
 
 }

@@ -145,4 +145,24 @@ public class FileManager
         return new Team(teamId, teamNameString, gamesPlayed, gamesWon, gamesDraw, gamesLost, goalsScored, goalsAgainst);
 
     }
+
+    public void clearTeam(int id) throws IOException
+    {
+        try(RandomAccessFile raf = new RandomAccessFile(new File("teams.txt"), "rw"))
+        {
+            for (int pos = INT_SIZE; pos < raf.length(); pos += RECORD_SIZE_TEAMS)
+            {
+                raf.seek(pos);
+                int teamId = raf.readInt();
+                if(teamId == id)
+                {
+                    raf.seek(pos);
+                    Integer nullId = -1;
+                    raf.writeInt(nullId);
+                    raf.write(new byte[RECORD_SIZE_TEAMS - INT_SIZE]);
+                }
+                
+            }
+        }
+    }
 }

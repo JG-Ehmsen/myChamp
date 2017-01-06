@@ -60,8 +60,13 @@ public class TeamParser
         teamManager.removeTeamInfo(teamId);
     }
     
-    public List<Team> getTeams()
+    public List<Team> getAllTeams()
     {
-        return teamManager.getTeams();
+        try {
+            return teamManager.getAllTeams();
+        } catch (IOException ex) {
+            Logger.getLogger(TeamParser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return null;
     }
 }

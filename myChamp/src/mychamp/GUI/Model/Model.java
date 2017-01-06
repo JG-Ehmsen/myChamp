@@ -6,7 +6,11 @@
 package mychamp.GUI.Model;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Queue;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -14,6 +18,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import mychamp.BE.Team;
+import mychamp.BLL.TeamManager;
 import mychamp.MyChamp;
 
 /**
@@ -23,7 +28,22 @@ import mychamp.MyChamp;
 public class Model
 {
 
+    TeamManager teamManager = TeamManager.getInstance();
+
+    List<Team> shuffleTeams = new ArrayList();
+    Queue<Team> teamQueue;
+
+    private static Model instance;
+
     public Window generatorStage;
+
+    public static Model getInstance()
+    {
+        if (instance == null) {
+            instance = new Model();
+        }
+        return instance;
+    }
 
     /**
      * Loads the FrontView (MainView) FXML file.
@@ -47,9 +67,42 @@ public class Model
         dialogStage.show();
     }
 
-    public void shuffleTeams()
+    private void shuffleTeams() throws IOException
     {
-        LinkedList lnkList = new LinkedList();
+        shuffleTeams = teamManager.getAllTeams();
+        Collections.shuffle(shuffleTeams);
+
+        teamQueue = new LinkedList(shuffleTeams);
+    }
+
+    // retrieves and removes the head team from our queue
+    private Team dequeueTeam()
+    {
+        return teamQueue.remove();
+    }
+
+    public void sortTeamsIntoGroups()
+    {
+        List<Team> group1 = new ArrayList();
+        List<Team> group2 = new ArrayList();
+        List<Team> group3 = new ArrayList();
+        List<Team> group4 = new ArrayList();
+
+        int groupCounter = 1;
+
+        while (teamQueue.peek() != null) {
+            if (groupCounter == 1) {
+                group1.add(dequeueTeam());
+            } else if (groupCounter == 2) {
+                group2.add(dequeueTeam());
+            } else if (groupCounter == 3) {
+                group3.add(dequeueTeam());
+            } else {
+                group4.add(dequeueTeam());
+                groupCounter = 0;
+            }
+            groupCounter++;
+        }
     }
 
 }

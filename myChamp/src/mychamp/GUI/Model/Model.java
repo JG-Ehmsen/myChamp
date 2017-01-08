@@ -45,6 +45,11 @@ public class Model
         }
         return instance;
     }
+    
+    private Model()
+    {
+        
+    }
 
     /**
      * Loads the FrontView (MainView) FXML file.

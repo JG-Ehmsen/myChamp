@@ -24,6 +24,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import mychamp.BE.Team;
 import mychamp.GUI.Model.Model;
@@ -36,9 +37,10 @@ import mychamp.GUI.Model.TeamParser;
  */
 public class TeamsAddViewController implements Initializable
 {
-    Model model = new Model();
+
+    private Model model = Model.getInstance();
     private TeamParser teamParser = TeamParser.getInstance();
-    
+
     @FXML
     private TableColumn<Team, String> clnJoiningTeams;
     @FXML
@@ -58,6 +60,11 @@ public class TeamsAddViewController implements Initializable
     @FXML
     private TableView<Team> tblSignedTeams;
 
+    private int maxNumOfTeams = 0;
+    private int currentNumOfTeams = 0;
+    private String noOfTeams = null;
+    private boolean canStartTournament = false;
+
     /**
      * Initializes the controller class.
      */
@@ -65,79 +72,124 @@ public class TeamsAddViewController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         populateList();
-    }    
 
-    
+    }
+
     @FXML
     private void handleAddTeam(ActionEvent event)
     {
         teamParser.addTeam(txtFldTeamName.getText());
         txtFldTeamName.clear();
         populateList();
+        updateCounter();
     }
 
     @FXML
     private void handleRemoveSignedTeam(ActionEvent event)
     {
-        
-        if(tblSignedTeams.getSelectionModel().getSelectedItem() == null || tblSignedTeams.getItems() == null)
+
+        if (tblSignedTeams.getSelectionModel().getSelectedItem() == null || tblSignedTeams.getItems() == null)
         {
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("No Selection");
             alert.setHeaderText("No Team Selected");
             alert.setContentText("Please select a Team");
-            
-            alert.showAndWait();
-        }else 
-        {
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Delete Confirmation");
-        alert.setHeaderText(null);
-        alert.setContentText("Are you sure you want to remove team?");
-            
-        Optional<ButtonType> result = alert.showAndWait();
-        
-        if(result.get() == ButtonType.OK)
-        {
-        int Id = tblSignedTeams.getSelectionModel().getSelectedItem().getTeamID();
-        teamParser.removeTeam(Id);
-        populateList();
-        }
-        }
-        
-    }
 
+            alert.showAndWait();
+        } else
+        {
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Delete Confirmation");
+            alert.setHeaderText(null);
+            alert.setContentText("Are you sure you want to remove team?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.get() == ButtonType.OK)
+            {
+                int Id = tblSignedTeams.getSelectionModel().getSelectedItem().getTeamID();
+                teamParser.removeTeam(Id);
+                populateList();
+            }
+        }
+        updateCounter();
+
+    }
 
     @FXML
     private void handleEditAmountTeams(ActionEvent event)
     {
     }
-    
+
     private void populateList()
     {
         clnJoiningTeams.setCellValueFactory(new PropertyValueFactory("teamName"));
         tblSignedTeams.setItems(teamParser.loadTeamsIntoViewer());
-        
+
     }
-    
+
     public void setInformation(String tournamentTitle, String noOfTeams)
     {
         this.lblTournamentName.setText(tournamentTitle);
-        this.lblCountDown.setText(noOfTeams);
+        this.noOfTeams = noOfTeams;
+        updateCounter();
+
     }
 
     @FXML
     private void handleStartTournament(ActionEvent event) throws IOException
     {
-        String tournamentTitle = lblTournamentName.getText();
-        model.changeView("Tournament " + tournamentTitle, "GUI/View/GroupStageOverview.fxml");
+        if (canStartTournament == true)
+        {
+            String tournamentTitle = lblTournamentName.getText();
+            model.changeView("Tournament " + tournamentTitle, "GUI/View/GroupStageOverview.fxml");
 
-        // Closes the primary stage
-        Stage stage = (Stage) btnReadyOrNot.getScene().getWindow();
-        stage.close();
+            // Closes the primary stage
+            Stage stage = (Stage) btnReadyOrNot.getScene().getWindow();
+            stage.close();
+        } else
+        {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Cannot Start Tournament");
+            alert.setHeaderText("Team Amount Error");
+            alert.setContentText("Please Adjust Team Roster");
+
+            alert.showAndWait();
+        }
     }
-    
-    
-    
-    
+
+    private void updateCounter()
+    {
+        String stringMaxNumOfTeams;
+        String stringCurrentNumOfTeams;
+
+        currentNumOfTeams = tblSignedTeams.getItems().size();
+        maxNumOfTeams = Integer.parseInt(noOfTeams);
+
+        if (currentNumOfTeams == maxNumOfTeams)
+        {
+            btnReadyOrNot.setText("Ready");
+            btnReadyOrNot.setDisable(false);
+            btnAddTeam.setDisable(true);
+            lblCountDown.setTextFill(Color.web("#7CFC00"));
+        } else if (currentNumOfTeams > maxNumOfTeams)
+        {
+            btnReadyOrNot.setText("Not Ready");
+            btnReadyOrNot.setDisable(true);
+            btnAddTeam.setDisable(true);
+            lblCountDown.setTextFill(Color.web("#8B0000"));
+        } else if (currentNumOfTeams < maxNumOfTeams)
+        {
+            btnReadyOrNot.setText("Not Ready");
+            btnReadyOrNot.setDisable(true);
+            btnAddTeam.setDisable(false);
+            lblCountDown.setTextFill(Color.web("#FFFFF0"));
+        }
+        
+
+        stringMaxNumOfTeams = Integer.toString(maxNumOfTeams);
+        stringCurrentNumOfTeams = Integer.toString(currentNumOfTeams);
+        lblCountDown.setText(stringCurrentNumOfTeams + " / " + stringMaxNumOfTeams);
+    }
+
 }

@@ -25,7 +25,7 @@ import mychamp.GUI.Model.Model;
  */
 public class MainViewController implements Initializable
 {
-    Model model = new Model();
+    Model model = Model.getInstance();
 
     private Window primaryStage;
     @FXML

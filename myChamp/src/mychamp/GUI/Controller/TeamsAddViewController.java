@@ -24,7 +24,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import mychamp.BE.Team;
+import mychamp.GUI.Model.Model;
 import mychamp.GUI.Model.TeamParser;
 
 /**
@@ -34,6 +36,7 @@ import mychamp.GUI.Model.TeamParser;
  */
 public class TeamsAddViewController implements Initializable
 {
+    Model model = new Model();
     private TeamParser teamParser = TeamParser.getInstance();
     
     @FXML
@@ -121,6 +124,17 @@ public class TeamsAddViewController implements Initializable
     {
         this.lblTournamentName.setText(tournamentTitle);
         this.lblCountDown.setText(noOfTeams);
+    }
+
+    @FXML
+    private void handleStartTournament(ActionEvent event) throws IOException
+    {
+        String tournamentTitle = lblTournamentName.getText();
+        model.changeView("Tournament " + tournamentTitle, "GUI/View/GroupStageOverview.fxml");
+
+        // Closes the primary stage
+        Stage stage = (Stage) btnReadyOrNot.getScene().getWindow();
+        stage.close();
     }
     
     

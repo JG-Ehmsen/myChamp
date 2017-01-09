@@ -7,6 +7,8 @@ package mychamp.GUI.Controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -34,8 +36,9 @@ import mychamp.GUI.Model.TeamParser;
  */
 public class TeamsAddViewController implements Initializable
 {
+
     private TeamParser teamParser = TeamParser.getInstance();
-    
+
     @FXML
     private TableColumn<Team, String> clnJoiningTeams;
     @FXML
@@ -62,62 +65,81 @@ public class TeamsAddViewController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         populateList();
-    }    
+    }
 
-    
     @FXML
     private void handleAddTeam(ActionEvent event)
     {
-        teamParser.addTeam(txtFldTeamName.getText());
-        txtFldTeamName.clear();
-        populateList();
+        boolean canAddTeam = true;
+        for (Team team : tblSignedTeams.getItems())
+        {
+            if (team.getTeamName().equalsIgnoreCase(txtFldTeamName.getText()))
+            {
+                System.out.println(team.getTeamName() + " : " + txtFldTeamName.getText());
+                canAddTeam = false;
+                Alert alert = new Alert(AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setContentText("Name already taken. Please write a different name");
+                alert.show();
+            }
+        }
+        if (txtFldTeamName.getText().isEmpty())
+        {
+            canAddTeam = false;
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Error");
+            alert.setContentText("No name added. Please write a different name");
+            alert.show();
+        }
+        else if (canAddTeam == true)
+        {
+            teamParser.addTeam(txtFldTeamName.getText());
+            txtFldTeamName.clear();
+            populateList();
+        }
     }
 
     @FXML
     private void handleRemoveSignedTeam(ActionEvent event)
     {
-        
-        if(tblSignedTeams.getSelectionModel().getSelectedItem() == null || tblSignedTeams.getItems() == null)
+
+        if (tblSignedTeams.getSelectionModel().getSelectedItem() == null || tblSignedTeams.getItems() == null)
         {
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("No Selection");
             alert.setHeaderText("No Team Selected");
             alert.setContentText("Please select a Team");
-            
-            alert.showAndWait();
-        }else 
-        {
-        Alert alert = new Alert(AlertType.CONFIRMATION);
-        alert.setTitle("Delete Confirmation");
-        alert.setHeaderText(null);
-        alert.setContentText("Are you sure you want to remove team?");
-            
-        Optional<ButtonType> result = alert.showAndWait();
-        
-        if(result.get() == ButtonType.OK)
-        {
-        int Id = tblSignedTeams.getSelectionModel().getSelectedItem().getTeamID();
-        teamParser.removeTeam(Id);
-        populateList();
-        }
-        }
-        
-    }
 
+            alert.showAndWait();
+        } else
+        {
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Delete Confirmation");
+            alert.setHeaderText(null);
+            alert.setContentText("Are you sure you want to remove team?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.get() == ButtonType.OK)
+            {
+                int Id = tblSignedTeams.getSelectionModel().getSelectedItem().getTeamID();
+                teamParser.removeTeam(Id);
+                populateList();
+            }
+        }
+
+    }
 
     @FXML
     private void handleEditAmountTeams(ActionEvent event)
     {
     }
-    
+
     private void populateList()
     {
         clnJoiningTeams.setCellValueFactory(new PropertyValueFactory("teamName"));
         tblSignedTeams.setItems(teamParser.loadTeamsIntoViewer());
-        
+
     }
-    
-    
-    
-    
+
 }

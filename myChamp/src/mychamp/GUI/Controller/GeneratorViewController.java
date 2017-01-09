@@ -11,7 +11,9 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import mychamp.GUI.Model.Model;
@@ -30,6 +32,8 @@ public class GeneratorViewController implements Initializable
     private Button btnBack;
     @FXML
     private Button btnNext;
+    @FXML
+    private TextField txtFldTournamentName;
 
     /**
      * Initializes the controller class.
@@ -59,7 +63,15 @@ public class GeneratorViewController implements Initializable
     @FXML
     private void handleNext(ActionEvent event) throws IOException
     {
+        if (!txtFldTournamentName.getText().isEmpty())
+        {
         model.changeView("MyChamp - Add Teams", "GUI/View/TeamsAddView.fxml");
+        } else {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error");
+            alert.setContentText("No name added. Please write a different name");
+            alert.show();
+        }
     }
     
 }

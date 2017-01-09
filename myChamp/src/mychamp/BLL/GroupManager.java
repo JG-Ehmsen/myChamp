@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mychamp.BLL;
 
 import java.io.IOException;
@@ -17,10 +12,6 @@ import mychamp.BE.Team;
 import mychamp.DAL.FileManager;
 import mychamp.GUI.Model.Model;
 
-/**
- *
- * @author Kristoffers
- */
 public class GroupManager
 {
 

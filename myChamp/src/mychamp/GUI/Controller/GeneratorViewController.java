@@ -31,7 +31,6 @@ public class GeneratorViewController implements Initializable
     @FXML
     private ComboBox<String> cBoxNoOfTeams;
 
-
     /**
      * Initializes the controller class.
      */
@@ -65,14 +64,17 @@ public class GeneratorViewController implements Initializable
         {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("No Selection");
-            alert.setHeaderText("Some fileds has not been selected");
-            alert.setContentText("Please fill in all fields");
+            alert.setContentText("Some fields have not been filled. Please fill in all fields");
 
             alert.showAndWait();
+        } else
+        {
+            model.loadTeamAddView("MyChamp - Add Teams", "GUI/View/TeamsAddView.fxml", txtFldTournamentTitle.getText(), cBoxNoOfTeams.getValue());
+
+            // Closes the primary stage
+            Stage stage = (Stage) btnBack.getScene().getWindow();
+            stage.close();
         }
-        
-        else
-        model.loadTeamAddView("MyChamp - Add Teams", "GUI/View/TeamsAddView.fxml", txtFldTournamentTitle.getText(), cBoxNoOfTeams.getValue());
     }
 
     private void fillComboBox()
@@ -81,5 +83,5 @@ public class GeneratorViewController implements Initializable
                 = FXCollections.observableArrayList(null, "12", "13", "14", "15", "16");
         cBoxNoOfTeams.setItems(comboItems);
         cBoxNoOfTeams.getSelectionModel().selectFirst();
-    }  
+    }
 }

@@ -2,8 +2,6 @@ package mychamp.GUI.Controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -78,7 +76,9 @@ public class TeamsAddViewController implements Initializable
                 alert.setContentText("Name already taken. Please write a different name");
                 alert.show();
             }
+
         }
+
         if (txtFldTeamName.getText().isEmpty())
         {
             canAddTeam = false;
@@ -92,7 +92,7 @@ public class TeamsAddViewController implements Initializable
             txtFldTeamName.clear();
             populateList();
         }
-
+        updateCounter();
     }
 
     @FXML
@@ -103,7 +103,6 @@ public class TeamsAddViewController implements Initializable
         {
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("No Selection");
-            alert.setHeaderText("No Team Selected");
             alert.setContentText("Please select a Team");
 
             alert.showAndWait();
@@ -111,7 +110,6 @@ public class TeamsAddViewController implements Initializable
         {
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("Delete Confirmation");
-            alert.setHeaderText(null);
             alert.setContentText("Are you sure you want to remove team?");
 
             Optional<ButtonType> result = alert.showAndWait();
@@ -138,6 +136,8 @@ public class TeamsAddViewController implements Initializable
 
     private void populateList()
     {
+        txtFldTeamName.requestFocus();
+
         clnJoiningTeams.setCellValueFactory(new PropertyValueFactory("teamName"));
         tblSignedTeams.setItems(teamParser.loadTeamsIntoViewer());
     }
@@ -155,6 +155,7 @@ public class TeamsAddViewController implements Initializable
     {
         //Sorts the teams into groups when the specified number of teams have joined.
         model.sortTeamsIntoGroups();
+        model.sendGroupInfo();
 
         String tournamentTitle = lblTournamentName.getText();
         model.changeView("Tournament " + tournamentTitle, "GUI/View/GroupStageOverview.fxml");

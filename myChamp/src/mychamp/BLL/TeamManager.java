@@ -11,6 +11,7 @@ public class TeamManager
 {
 
     private static TeamManager instance;
+
     FileManager fileManager = FileManager.getInstance();
 
     public static TeamManager getInstance()
@@ -48,5 +49,4 @@ public class TeamManager
         }
 
     }
-
 }

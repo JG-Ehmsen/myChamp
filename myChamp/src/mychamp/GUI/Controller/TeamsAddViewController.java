@@ -67,7 +67,6 @@ public class TeamsAddViewController implements Initializable
         populateList();
     }    
 
-    
     @FXML
     private void handleAddTeam(ActionEvent event)
     {
@@ -107,7 +106,6 @@ public class TeamsAddViewController implements Initializable
         
     }
 
-
     @FXML
     private void handleEditAmountTeams(ActionEvent event)
     {
@@ -131,13 +129,11 @@ public class TeamsAddViewController implements Initializable
     {
         String tournamentTitle = lblTournamentName.getText();
         model.changeView("Tournament " + tournamentTitle, "GUI/View/GroupStageOverview.fxml");
-
+        
         // Closes the primary stage
         Stage stage = (Stage) btnReadyOrNot.getScene().getWindow();
         stage.close();
     }
-    
-    
-    
+      
     
 }

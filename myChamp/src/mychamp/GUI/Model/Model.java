@@ -37,7 +37,7 @@ public class Model
     private static Model instance;
 
     public Window generatorStage;
-
+    
     public static Model getInstance()
     {
         if (instance == null) {
@@ -82,8 +82,11 @@ public class Model
         dialogStage.initModality(Modality.WINDOW_MODAL);
         Scene scene = new Scene(page);
         dialogStage.setScene(scene);
-        dialogStage.setTitle(title);
-
+        
+        
+        
+        //dialogStage.setTitle(title);
+        
         dialogStage.show();
     }
 

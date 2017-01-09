@@ -31,6 +31,7 @@ public class GeneratorViewController implements Initializable
     @FXML
     private ComboBox<String> cBoxNoOfTeams;
 
+
     /**
      * Initializes the controller class.
      */
@@ -72,7 +73,6 @@ public class GeneratorViewController implements Initializable
         
         else
         model.loadTeamAddView("MyChamp - Add Teams", "GUI/View/TeamsAddView.fxml", txtFldTournamentTitle.getText(), cBoxNoOfTeams.getValue());
-
     }
 
     private void fillComboBox()

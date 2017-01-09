@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" minHeight="300.0" minWidth="400.0" prefHeight="300.0" prefWidth="400.0" style="-fx-background-color: Black;" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mychamp.GUI.Controller.TeamsAddViewController">
+<AnchorPane id="AnchorPane" minHeight="300.0" minWidth="400.0" prefHeight="300.0" prefWidth="400.0" style="-fx-background-color: Black;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mychamp.GUI.Controller.TeamsAddViewController">
    <children>
       <TableView fx:id="tblSignedTeams" layoutX="200.0" layoutY="16.0" prefHeight="272.0" prefWidth="187.0">
         <columns>
@@ -21,8 +21,8 @@
       <Button fx:id="btnRemoveTeam" layoutX="107.0" layoutY="137.0" mnemonicParsing="false" onAction="#handleRemoveSignedTeam" style="-fx-background-color: white;" text="Remove " />
       <Label layoutX="17.0" layoutY="179.0" text="Remining registration:" textFill="WHITE" />
       <Label layoutX="14.0" layoutY="234.0" text="Start tournament" textFill="WHITE" />
-      <Button fx:id="btnReadyOrNot" layoutX="14.0" layoutY="260.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: white;" text="Not ready" />
-      <Label fx:id="lblCountDown" layoutX="67.0" layoutY="202.0" prefHeight="16.0" prefWidth="11.0" text="0" textFill="WHITE">
+      <Button fx:id="btnReadyOrNot" layoutX="14.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleStartTournament" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: white;" text="Not ready" />
+      <Label fx:id="lblCountDown" alignment="CENTER" layoutX="21.0" layoutY="202.0" prefHeight="27.0" prefWidth="100.0" text="0" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font></Label>

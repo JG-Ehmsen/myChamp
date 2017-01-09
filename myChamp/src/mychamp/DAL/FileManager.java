@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mychamp.DAL;
 
 import java.io.File;
@@ -15,10 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import mychamp.BE.Team;
 
-/**
- *
- * @author Fjord82
- */
 public class FileManager
 {
 
@@ -37,6 +28,11 @@ public class FileManager
             instance = new FileManager();
         }
         return instance;
+    }
+
+    private FileManager()
+    {
+
     }
 
     public void saveTeam(String teamName)
@@ -97,7 +93,7 @@ public class FileManager
         }
     }
 
-    public List<Team> getTeams() throws FileNotFoundException, IOException
+    public List<Team> getAllTeams() throws FileNotFoundException, IOException
     {
         try (RandomAccessFile raf = new RandomAccessFile(new File("teams.txt"), "r"))
         {
@@ -120,8 +116,8 @@ public class FileManager
 
     private Team getOneTeam(RandomAccessFile raf) throws IOException
     {
-        
-        if(raf.getFilePointer() == 0)
+
+        if (raf.getFilePointer() == 0)
         {
             raf.seek(INT_SIZE);
         }
@@ -130,7 +126,7 @@ public class FileManager
         byte[] teamName = new byte[TEAM_NAME_SIZE];
         raf.read(teamName);
         String teamNameString = new String(teamName).trim();
-        
+
         int gamesPlayed = raf.readInt();
         int gamesWon = raf.readInt();
         int gamesDraw = raf.readInt();
@@ -138,7 +134,7 @@ public class FileManager
         int goalsScored = raf.readInt();
         int goalsAgainst = raf.readInt();
 
-        if(teamId == -1)
+        if (teamId == -1)
         {
             return null;
         }
@@ -148,21 +144,22 @@ public class FileManager
 
     public void clearTeam(int id) throws IOException
     {
-        try(RandomAccessFile raf = new RandomAccessFile(new File("teams.txt"), "rw"))
+        try (RandomAccessFile raf = new RandomAccessFile(new File("teams.txt"), "rw"))
         {
             for (int pos = INT_SIZE; pos < raf.length(); pos += RECORD_SIZE_TEAMS)
             {
                 raf.seek(pos);
                 int teamId = raf.readInt();
-                if(teamId == id)
+                if (teamId == id)
                 {
                     raf.seek(pos);
                     Integer nullId = -1;
                     raf.writeInt(nullId);
                     raf.write(new byte[RECORD_SIZE_TEAMS - INT_SIZE]);
                 }
-                
+
             }
         }
+
     }
 }

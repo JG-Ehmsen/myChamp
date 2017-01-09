@@ -1,26 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mychamp.GUI.Model;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import mychamp.BE.Team;
 import mychamp.BLL.TeamManager;
 
-/**
- *
- * @author Fjord82
- */
 public class TeamParser
 {
 
@@ -60,8 +48,13 @@ public class TeamParser
         teamManager.removeTeamInfo(teamId);
     }
     
-    public List<Team> getTeams()
+    public List<Team> getAllTeams()
     {
-        return teamManager.getTeams();
+        try {
+            return teamManager.getAllTeams();
+        } catch (IOException ex) {
+            Logger.getLogger(TeamParser.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    return null;
     }
 }

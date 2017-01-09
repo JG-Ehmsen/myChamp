@@ -1,21 +1,26 @@
 package mychamp.GUI.Controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 import mychamp.BE.Team;
 import mychamp.GUI.Model.Model;
 
-public class GroupStageOverviewController implements Initializable {
+public class GroupStageOverviewController implements Initializable
+{
 
     private Model model = Model.getInstance();
-            
+
     @FXML
     private TableView<Team> groupATblVw;
     @FXML
@@ -32,31 +37,45 @@ public class GroupStageOverviewController implements Initializable {
     private TableView<Team> groupDTblVw;
     @FXML
     private TableColumn<Team, String> groupDClmn;
+    @FXML
+    private Button btnGoToMatchList;
 
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb)
+    {
         populateList();
-        }    
-    
-    private void populateList() {
+    }
+
+    @FXML
+    private void handleGoToMatchList(ActionEvent event) throws IOException
+    {
+        model.changeView("Upcoming Matches & Resultlist ", "GUI/View/RootLayoutMatchList.fxml");
+
+        // Closes the primary stage
+        Stage stage = (Stage) btnGoToMatchList.getScene().getWindow();
+        stage.close();
+    }
+
+    private void populateList()
+    {
         groupAClmn.setCellValueFactory(new PropertyValueFactory("teamName"));
         ObservableList<Team> groupA = FXCollections.observableArrayList(model.getGroupA());
         groupATblVw.setItems(groupA);
-        
+
         groupBClmn.setCellValueFactory(new PropertyValueFactory("teamName"));
         ObservableList<Team> groupB = FXCollections.observableArrayList(model.getGroupB());
         groupBTblVw.setItems(groupB);
-        
+
         groupCClmn.setCellValueFactory(new PropertyValueFactory("teamName"));
         ObservableList<Team> groupC = FXCollections.observableArrayList(model.getGroupC());
         groupCTblVw.setItems(groupC);
-        
+
         groupDClmn.setCellValueFactory(new PropertyValueFactory("teamName"));
         ObservableList<Team> groupD = FXCollections.observableArrayList(model.getGroupD());
         groupDTblVw.setItems(groupD);
     }
-    
+
 }

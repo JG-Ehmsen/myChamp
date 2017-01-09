@@ -15,10 +15,16 @@ public class TeamManager
 
     public static TeamManager getInstance()
     {
-        if (instance == null) {
+        if (instance == null)
+        {
             instance = new TeamManager();
         }
         return instance;
+    }
+
+    private TeamManager()
+    {
+
     }
 
     public void sendTeamInfo(String teamName)
@@ -33,12 +39,14 @@ public class TeamManager
 
     public void removeTeamInfo(int teamId)
     {
-        try {
+        try
+        {
             fileManager.clearTeam(teamId);
-        } catch (IOException ex) {
+        } catch (IOException ex)
+        {
             Logger.getLogger(TeamManager.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
-    
+
 }

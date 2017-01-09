@@ -15,6 +15,7 @@ import mychamp.GUI.Model.Model;
 
 public class MainViewController implements Initializable
 {
+
     Model model = Model.getInstance();
 
     private Window primaryStage;
@@ -33,7 +34,6 @@ public class MainViewController implements Initializable
         // TODO
     }
 
-   
     @FXML
     private void handleNewTournament(ActionEvent event) throws IOException
     {
@@ -48,10 +48,8 @@ public class MainViewController implements Initializable
     private void handleContinueTournament(ActionEvent event) throws IOException
     {
         model.changeView("MyChamp - Continue tournament", "GUI/View/GroupStageOverview.fxml");
-        
+
         Stage stage = (Stage) btnContinue.getScene().getWindow();
         stage.close();
     }
-
-
 }

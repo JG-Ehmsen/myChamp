@@ -12,9 +12,8 @@ public class TeamManager
 {
 
     private static TeamManager instance;
-    
+
     FileManager fileManager = FileManager.getInstance();
-    
 
     public static TeamManager getInstance()
     {
@@ -23,21 +22,26 @@ public class TeamManager
         }
         return instance;
     }
-    private TeamManager(){
+
+    private TeamManager()
+    {
+
     }
+
     public void sendTeamInfo(String teamName)
     {
         fileManager.saveTeam(teamName);
     }
-    
-    public void sendGroupInfo(List<Team> group){
+
+    public void sendGroupInfo(List<Team> group)
+    {
         try {
             fileManager.saveGroup(group);
         } catch (IOException ex) {
             Logger.getLogger(TeamManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-  
+
     public List<Team> getAllTeams() throws IOException
     {
         return fileManager.getAllTeams();
@@ -52,8 +56,4 @@ public class TeamManager
         }
 
     }
-
-    
-    
-    
 }

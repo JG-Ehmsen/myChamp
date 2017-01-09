@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" maxWidth="400.0" prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: Black;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.60" fx:controller="mychamp.GUI.Controller.ManagerViewController">
+<AnchorPane id="AnchorPane" maxWidth="400.0" prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: Black;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mychamp.GUI.View.ManagerViewController">
    <children>
       <ImageView fitHeight="80.0" fitWidth="175.0" layoutX="286.0" pickOnBounds="true" preserveRatio="true">
          <image>

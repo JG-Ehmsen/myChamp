@@ -52,7 +52,7 @@ public class GroupStageOverviewController implements Initializable
     @FXML
     private void handleGoToMatchList(ActionEvent event) throws IOException
     {
-        model.changeView("Upcoming Matches & Resultlist ", "GUI/View/RootLayoutMatchList.fxml");
+        model.changeView("Upcoming Matches & Resultlist ", "GUI/View/MatchListSchedule.fxml");
 
         // Closes the primary stage
         Stage stage = (Stage) btnGoToMatchList.getScene().getWindow();

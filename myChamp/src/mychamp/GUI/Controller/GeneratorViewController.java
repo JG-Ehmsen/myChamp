@@ -60,16 +60,17 @@ public class GeneratorViewController implements Initializable
     @FXML
     private void handleNext(ActionEvent event) throws IOException
     {
-        if (cBoxNoOfTeams.getValue() == null)
+        if (cBoxNoOfTeams.getValue() == null || txtFldTournamentTitle.getText().equals("") || txtFldTournamentTitle.getText() == null)
         {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("No Selection");
-            alert.setHeaderText("No Tournament Size Selected");
-            alert.setContentText("Please select a Tournament Size");
+            alert.setHeaderText("Some fileds has not been selected");
+            alert.setContentText("Please fill in all fields");
 
             alert.showAndWait();
         }
-        else if (cBoxNoOfTeams.getValue() != null)
+        
+        else
         model.loadTeamAddView("MyChamp - Add Teams", "GUI/View/TeamsAddView.fxml", txtFldTournamentTitle.getText(), cBoxNoOfTeams.getValue());
 
     }
@@ -80,5 +81,5 @@ public class GeneratorViewController implements Initializable
                 = FXCollections.observableArrayList(null, "12", "13", "14", "15", "16");
         cBoxNoOfTeams.setItems(comboItems);
         cBoxNoOfTeams.getSelectionModel().selectFirst();
-    }
+    }  
 }

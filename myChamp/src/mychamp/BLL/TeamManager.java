@@ -17,7 +17,8 @@ public class TeamManager
 
     public static TeamManager getInstance()
     {
-        if (instance == null) {
+        if (instance == null)
+        {
             instance = new TeamManager();
         }
         return instance;
@@ -35,9 +36,11 @@ public class TeamManager
 
     public void sendGroupInfo(List<Team> group)
     {
-        try {
+        try
+        {
             fileManager.saveGroup(group);
-        } catch (IOException ex) {
+        } catch (IOException ex)
+        {
             Logger.getLogger(TeamManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -49,9 +52,11 @@ public class TeamManager
 
     public void removeTeamInfo(int teamId)
     {
-        try {
+        try
+        {
             fileManager.clearTeam(teamId);
-        } catch (IOException ex) {
+        } catch (IOException ex)
+        {
             Logger.getLogger(TeamManager.class.getName()).log(Level.SEVERE, null, ex);
         }
 

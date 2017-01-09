@@ -67,8 +67,10 @@ public class TeamsAddViewController implements Initializable
     private void handleAddTeam(ActionEvent event)
     {
         boolean canAddTeam = true;
-        for (Team team : tblSignedTeams.getItems()) {
-            if (team.getTeamName().equalsIgnoreCase(txtFldTeamName.getText())) {
+        for (Team team : tblSignedTeams.getItems())
+        {
+            if (team.getTeamName().equalsIgnoreCase(txtFldTeamName.getText()))
+            {
                 System.out.println(team.getTeamName() + " : " + txtFldTeamName.getText());
                 canAddTeam = false;
                 Alert alert = new Alert(AlertType.WARNING);
@@ -77,13 +79,16 @@ public class TeamsAddViewController implements Initializable
                 alert.show();
             }
         }
-        if (txtFldTeamName.getText().isEmpty()) {
+
+        if (txtFldTeamName.getText().isEmpty())
+        {
             canAddTeam = false;
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("Error");
             alert.setContentText("No name added. Please write a different name");
             alert.show();
-        } else if (canAddTeam == true) {
+        } else if (canAddTeam == true)
+        {
             teamParser.addTeam(txtFldTeamName.getText());
             txtFldTeamName.clear();
             populateList();
@@ -95,14 +100,16 @@ public class TeamsAddViewController implements Initializable
     private void handleRemoveSignedTeam(ActionEvent event)
     {
 
-        if (tblSignedTeams.getSelectionModel().getSelectedItem() == null || tblSignedTeams.getItems() == null) {
+        if (tblSignedTeams.getSelectionModel().getSelectedItem() == null || tblSignedTeams.getItems() == null)
+        {
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("No Selection");
             alert.setHeaderText("No Team Selected");
             alert.setContentText("Please select a Team");
 
             alert.showAndWait();
-        } else {
+        } else
+        {
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("Delete Confirmation");
             alert.setHeaderText(null);
@@ -110,7 +117,8 @@ public class TeamsAddViewController implements Initializable
 
             Optional<ButtonType> result = alert.showAndWait();
 
-            if (result.get() == ButtonType.OK) {
+            if (result.get() == ButtonType.OK)
+            {
                 int Id = tblSignedTeams.getSelectionModel().getSelectedItem().getTeamID();
                 teamParser.removeTeam(Id);
                 populateList();
@@ -167,18 +175,21 @@ public class TeamsAddViewController implements Initializable
         currentNumOfTeams = tblSignedTeams.getItems().size();
         maxNumOfTeams = Integer.parseInt(noOfTeams);
 
-        if (currentNumOfTeams == maxNumOfTeams) {
+        if (currentNumOfTeams == maxNumOfTeams)
+        {
             btnReadyOrNot.setText("Ready");
             btnReadyOrNot.setDisable(false);
             btnAddTeam.setDisable(true);
             lblCountDown.setTextFill(Color.web("#7CFC00"));
 
-        } else if (currentNumOfTeams > maxNumOfTeams) {
+        } else if (currentNumOfTeams > maxNumOfTeams)
+        {
             btnReadyOrNot.setText("Not Ready");
             btnReadyOrNot.setDisable(true);
             btnAddTeam.setDisable(true);
             lblCountDown.setTextFill(Color.web("#8B0000"));
-        } else if (currentNumOfTeams < maxNumOfTeams) {
+        } else if (currentNumOfTeams < maxNumOfTeams)
+        {
             btnReadyOrNot.setText("Not Ready");
             btnReadyOrNot.setDisable(true);
             btnAddTeam.setDisable(false);

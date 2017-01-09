@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mychamp.GUI.Controller;
 
 import java.io.IOException;
@@ -18,11 +13,6 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import mychamp.GUI.Model.Model;
 
-/**
- * FXML Controller class
- *
- * @author jeppe
- */
 public class MainViewController implements Initializable
 {
     Model model = Model.getInstance();
@@ -34,22 +24,16 @@ public class MainViewController implements Initializable
     private Stage window;
     private Parent root;
     Scene scene;
+    @FXML
+    private Button btnContinue;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
         // TODO
     }
 
-    /**
-     * Runs the showGeneratorView method and closes the primary stage.
-     *
-     * @param event
-     * @throws IOException
-     */
+   
     @FXML
     private void handleNewTournament(ActionEvent event) throws IOException
     {
@@ -61,18 +45,13 @@ public class MainViewController implements Initializable
     }
 
     @FXML
-    private void handleContinueTournament(ActionEvent event)
+    private void handleContinueTournament(ActionEvent event) throws IOException
     {
+        model.changeView("MyChamp - Continue tournament", "GUI/View/GroupStageOverview.fxml");
+        
+        Stage stage = (Stage) btnContinue.getScene().getWindow();
+        stage.close();
     }
 
-    @FXML
-    private void handleSeeHistory(ActionEvent event)
-    {
-    }
-    
-    @FXML
-    private void CloseAction(ActionEvent event)
-    {
-    }
 
 }

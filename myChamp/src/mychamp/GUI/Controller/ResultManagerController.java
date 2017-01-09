@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mychamp.GUI.Controller;
 
 import java.net.URL;
@@ -16,11 +11,6 @@ import javafx.stage.Stage;
 import mychamp.BE.Result;
 import mychamp.BLL.ResultManager;
 
-/**
- * FXML Controller class
- *
- * @author jonas
- */
 public class ResultManagerController implements Initializable
 {
     private ResultManager resultManager = ResultManager.getInstance();
@@ -33,9 +23,6 @@ public class ResultManagerController implements Initializable
     @FXML
     private TextField tfScoreTeam2;
 
-    /**
-     * Initializes the controller class.
-     */
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {

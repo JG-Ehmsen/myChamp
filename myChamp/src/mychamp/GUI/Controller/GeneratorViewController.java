@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mychamp.GUI.Controller;
 
 import java.io.IOException;
@@ -21,11 +16,6 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import mychamp.GUI.Model.Model;
 
-/**
- * FXML Controller class
- *
- * @author Kristoffers
- */
 public class GeneratorViewController implements Initializable
 {
 
@@ -86,7 +76,7 @@ public class GeneratorViewController implements Initializable
     private void fillComboBox()
     {
         ObservableList<String> comboItems
-                = FXCollections.observableArrayList(null, "12", "13", "14", "15", "16");
+                = FXCollections.observableArrayList("12", "13", "14", "15", "16");
         cBoxNoOfTeams.setItems(comboItems);
         cBoxNoOfTeams.getSelectionModel().selectFirst();
     }

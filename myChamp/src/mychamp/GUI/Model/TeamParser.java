@@ -24,6 +24,10 @@ public class TeamParser
         return instance;
     }
 
+    private TeamParser()
+    {
+    }
+
     public void addTeam(String teamName)
     {
         teamManager.sendTeamInfo(teamName);
@@ -31,7 +35,7 @@ public class TeamParser
 
     public ObservableList<Team> loadTeamsIntoViewer()
     {
-        
+
         try
         {
             ObservableList<Team> teamLibrary = FXCollections.observableArrayList(teamManager.getAllTeams());
@@ -47,14 +51,16 @@ public class TeamParser
     {
         teamManager.removeTeamInfo(teamId);
     }
-    
+
     public List<Team> getAllTeams()
     {
-        try {
+        try
+        {
             return teamManager.getAllTeams();
-        } catch (IOException ex) {
+        } catch (IOException ex)
+        {
             Logger.getLogger(TeamParser.class.getName()).log(Level.SEVERE, null, ex);
         }
-    return null;
+        return null;
     }
 }

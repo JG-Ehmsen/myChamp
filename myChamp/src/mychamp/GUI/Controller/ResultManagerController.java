@@ -13,8 +13,9 @@ import mychamp.BLL.ResultManager;
 
 public class ResultManagerController implements Initializable
 {
+
     private ResultManager resultManager = ResultManager.getInstance();
-    private Result currentResult=null;
+    private Result currentResult = null;
 
     @FXML
     private Button closeBtnresultManager;
@@ -27,7 +28,7 @@ public class ResultManagerController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         // TODO
-    }    
+    }
 
     @FXML
     private void btnCloseResultManager(ActionEvent event)
@@ -39,10 +40,6 @@ public class ResultManagerController implements Initializable
     @FXML
     private void btnSaveResultManager(ActionEvent event)
     {
-        if(currentResult==null)
-        {
-            
-        }
     }
-    
+
 }

@@ -26,6 +26,7 @@ public class TeamsAddViewController implements Initializable
 {
 
     private Model model = Model.getInstance();
+
     private TeamParser teamParser = TeamParser.getInstance();
 
     @FXML
@@ -58,15 +59,39 @@ public class TeamsAddViewController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         populateList();
-
     }
 
     @FXML
     private void handleAddTeam(ActionEvent event)
     {
-        teamParser.addTeam(txtFldTeamName.getText());
-        txtFldTeamName.clear();
-        populateList();
+        boolean canAddTeam = true;
+        for (Team team : tblSignedTeams.getItems())
+        {
+            if (team.getTeamName().equalsIgnoreCase(txtFldTeamName.getText()))
+            {
+                System.out.println(team.getTeamName() + " : " + txtFldTeamName.getText());
+                canAddTeam = false;
+                Alert alert = new Alert(AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setContentText("Name already taken. Please write a different name");
+                alert.show();
+            }
+
+        }
+
+        if (txtFldTeamName.getText().isEmpty())
+        {
+            canAddTeam = false;
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Error");
+            alert.setContentText("No name added. Please write a different name");
+            alert.show();
+        } else if (canAddTeam == true)
+        {
+            teamParser.addTeam(txtFldTeamName.getText());
+            txtFldTeamName.clear();
+            populateList();
+        }
         updateCounter();
     }
 
@@ -78,7 +103,6 @@ public class TeamsAddViewController implements Initializable
         {
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("No Selection");
-            alert.setHeaderText("No Team Selected");
             alert.setContentText("Please select a Team");
 
             alert.showAndWait();
@@ -86,7 +110,6 @@ public class TeamsAddViewController implements Initializable
         {
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("Delete Confirmation");
-            alert.setHeaderText(null);
             alert.setContentText("Are you sure you want to remove team?");
 
             Optional<ButtonType> result = alert.showAndWait();
@@ -98,6 +121,7 @@ public class TeamsAddViewController implements Initializable
                 populateList();
             }
         }
+
         updateCounter();
 
     }
@@ -112,9 +136,10 @@ public class TeamsAddViewController implements Initializable
 
     private void populateList()
     {
+        txtFldTeamName.requestFocus();
+
         clnJoiningTeams.setCellValueFactory(new PropertyValueFactory("teamName"));
         tblSignedTeams.setItems(teamParser.loadTeamsIntoViewer());
-
     }
 
     public void setInformation(String tournamentTitle, String noOfTeams)
@@ -130,6 +155,7 @@ public class TeamsAddViewController implements Initializable
     {
         //Sorts the teams into groups when the specified number of teams have joined.
         model.sortTeamsIntoGroups();
+        model.sendGroupInfo();
 
         String tournamentTitle = lblTournamentName.getText();
         model.changeView("Tournament " + tournamentTitle, "GUI/View/GroupStageOverview.fxml");
@@ -173,5 +199,4 @@ public class TeamsAddViewController implements Initializable
         stringCurrentNumOfTeams = Integer.toString(currentNumOfTeams);
         lblCountDown.setText(stringCurrentNumOfTeams + " / " + stringMaxNumOfTeams);
     }
-
 }

@@ -119,6 +119,7 @@ public class TeamsAddViewController implements Initializable {
     private void handleStartTournament(ActionEvent event) throws IOException {
         //Sorts the teams into groups when the specified number of teams have joined.
         model.sortTeamsIntoGroups();
+        model.sendGroupInfo();
         
         String tournamentTitle = lblTournamentName.getText();
         model.changeView("Tournament " + tournamentTitle, "GUI/View/GroupStageOverview.fxml");

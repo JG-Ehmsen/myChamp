@@ -6,12 +6,15 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import mychamp.BE.Team;
 import mychamp.DAL.FileManager;
+import mychamp.GUI.Model.Model;
 
 public class TeamManager
 {
 
     private static TeamManager instance;
+    
     FileManager fileManager = FileManager.getInstance();
+    
 
     public static TeamManager getInstance()
     {
@@ -20,12 +23,21 @@ public class TeamManager
         }
         return instance;
     }
-
+    private TeamManager(){
+    }
     public void sendTeamInfo(String teamName)
     {
         fileManager.saveTeam(teamName);
     }
-
+    
+    public void sendGroupInfo(List<Team> group){
+        try {
+            fileManager.saveGroup(group);
+        } catch (IOException ex) {
+            Logger.getLogger(TeamManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+  
     public List<Team> getAllTeams() throws IOException
     {
         return fileManager.getAllTeams();
@@ -40,5 +52,8 @@ public class TeamManager
         }
 
     }
+
+    
+    
     
 }

@@ -144,5 +144,14 @@ public class Model {
     public List<Team> getGroupD() {
         return groupD;
     }
-
+    
+    
+    public void sendGroupInfo(){
+      
+            teamManager.sendGroupInfo(groupA);
+            teamManager.sendGroupInfo(groupB);
+            teamManager.sendGroupInfo(groupC);
+            teamManager.sendGroupInfo(groupD);
+    }
+    
 }

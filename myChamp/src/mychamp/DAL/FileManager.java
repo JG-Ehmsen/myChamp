@@ -29,7 +29,8 @@ public class FileManager
 
     public static FileManager getInstance()
     {
-        if (instance == null) {
+        if (instance == null)
+        {
             instance = new FileManager();
         }
         return instance;
@@ -51,8 +52,10 @@ public class FileManager
         int goalsScored = 0;
         int goalsAgainst = 0;
 
-        try (RandomAccessFile teamRAF = new RandomAccessFile(new File("teams.txt"), "rw")) {
-            if (teamRAF.length() == 0) {
+        try (RandomAccessFile teamRAF = new RandomAccessFile(new File("teams.txt"), "rw"))
+        {
+            if (teamRAF.length() == 0)
+            {
                 teamRAF.writeInt(1);
                 teamRAF.seek(0);
             }
@@ -71,7 +74,8 @@ public class FileManager
             teamRAF.writeInt(goalsScored);
             teamRAF.writeInt(goalsAgainst);
 
-        } catch (IOException ex) {
+        } catch (IOException ex)
+        {
             Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -80,8 +84,10 @@ public class FileManager
     {
         int nextGroupId;
 
-        try (RandomAccessFile groupRAF = new RandomAccessFile(new File("groups.txt"), "rw")) {
-            if (groupRAF.length() == 0) {
+        try (RandomAccessFile groupRAF = new RandomAccessFile(new File("groups.txt"), "rw"))
+        {
+            if (groupRAF.length() == 0)
+            {
                 groupRAF.writeInt(1);
                 groupRAF.seek(0);
             }
@@ -93,7 +99,8 @@ public class FileManager
             groupRAF.seek(groupRAF.length());
             //groupRAF.writeInt(nextGroupId);
 
-            for (int i = 0; i < groupArray.size(); i++) {
+            for (int i = 0; i < groupArray.size(); i++)
+            {
                 groupRAF.writeInt(i);
 
             }
@@ -106,7 +113,8 @@ public class FileManager
         String file = "";
         int recordSize = 0;
 
-        switch (fileType) {
+        switch (fileType)
+        {
             case "team":
                 file = "teams.txt";
                 recordSize = RECORD_SIZE_TEAMS;
@@ -121,11 +129,14 @@ public class FileManager
                 break;
         }
 
-        try (RandomAccessFile raf = new RandomAccessFile(new File(file), "r")) {
-            for (long i = 0; i < raf.length(); i += recordSize) {
+        try (RandomAccessFile raf = new RandomAccessFile(new File(file), "rw"))
+        {
+            for (long i = 0; i < raf.length(); i += recordSize)
+            {
                 raf.seek(i);
                 int Id = raf.readInt();
-                if (Id == -1) {
+                if (Id == -1)
+                {
                     return i;
                 }
 
@@ -137,13 +148,16 @@ public class FileManager
 
     public List<Team> getAllTeams() throws FileNotFoundException, IOException
     {
-        try (RandomAccessFile raf = new RandomAccessFile(new File("teams.txt"), "r")) {
+        try (RandomAccessFile raf = new RandomAccessFile(new File("teams.txt"), "rw"))
+        {
             List<Team> listOfTeams = new ArrayList<>();
 
-            while (raf.getFilePointer() < raf.length()) {
+            while (raf.getFilePointer() < raf.length())
+            {
                 Team team = getOneTeam(raf);
 
-                if (team != null) {
+                if (team != null)
+                {
                     listOfTeams.add(team);
                 }
 
@@ -156,7 +170,8 @@ public class FileManager
     private Team getOneTeam(RandomAccessFile raf) throws IOException
     {
 
-        if (raf.getFilePointer() == 0) {
+        if (raf.getFilePointer() == 0)
+        {
             raf.seek(INT_SIZE);
         }
         int teamId = raf.readInt();
@@ -172,7 +187,8 @@ public class FileManager
         int goalsScored = raf.readInt();
         int goalsAgainst = raf.readInt();
 
-        if (teamId == -1) {
+        if (teamId == -1)
+        {
             return null;
         }
         return new Team(teamId, teamNameString, gamesPlayed, gamesWon, gamesDraw, gamesLost, goalsScored, goalsAgainst);
@@ -181,11 +197,14 @@ public class FileManager
 
     public void clearTeam(int id) throws IOException
     {
-        try (RandomAccessFile raf = new RandomAccessFile(new File("teams.txt"), "rw")) {
-            for (int pos = INT_SIZE; pos < raf.length(); pos += RECORD_SIZE_TEAMS) {
+        try (RandomAccessFile raf = new RandomAccessFile(new File("teams.txt"), "rw"))
+        {
+            for (int pos = INT_SIZE; pos < raf.length(); pos += RECORD_SIZE_TEAMS)
+            {
                 raf.seek(pos);
                 int teamId = raf.readInt();
-                if (teamId == id) {
+                if (teamId == id)
+                {
                     raf.seek(pos);
                     Integer nullId = -1;
                     raf.writeInt(nullId);

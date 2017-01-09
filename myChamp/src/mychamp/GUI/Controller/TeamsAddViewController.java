@@ -2,6 +2,8 @@ package mychamp.GUI.Controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -26,6 +28,7 @@ public class TeamsAddViewController implements Initializable
 {
 
     private Model model = Model.getInstance();
+
     private TeamParser teamParser = TeamParser.getInstance();
 
     @FXML
@@ -58,16 +61,38 @@ public class TeamsAddViewController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         populateList();
-
     }
 
     @FXML
     private void handleAddTeam(ActionEvent event)
     {
-        teamParser.addTeam(txtFldTeamName.getText());
-        txtFldTeamName.clear();
-        populateList();
-        updateCounter();
+        boolean canAddTeam = true;
+        for (Team team : tblSignedTeams.getItems())
+        {
+            if (team.getTeamName().equalsIgnoreCase(txtFldTeamName.getText()))
+            {
+                System.out.println(team.getTeamName() + " : " + txtFldTeamName.getText());
+                canAddTeam = false;
+                Alert alert = new Alert(AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setContentText("Name already taken. Please write a different name");
+                alert.show();
+            }
+        }
+        if (txtFldTeamName.getText().isEmpty())
+        {
+            canAddTeam = false;
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Error");
+            alert.setContentText("No name added. Please write a different name");
+            alert.show();
+        } else if (canAddTeam == true)
+        {
+            teamParser.addTeam(txtFldTeamName.getText());
+            txtFldTeamName.clear();
+            populateList();
+        }
+
     }
 
     @FXML
@@ -98,6 +123,7 @@ public class TeamsAddViewController implements Initializable
                 populateList();
             }
         }
+
         updateCounter();
 
     }
@@ -114,7 +140,6 @@ public class TeamsAddViewController implements Initializable
     {
         clnJoiningTeams.setCellValueFactory(new PropertyValueFactory("teamName"));
         tblSignedTeams.setItems(teamParser.loadTeamsIntoViewer());
-
     }
 
     public void setInformation(String tournamentTitle, String noOfTeams)
@@ -173,5 +198,4 @@ public class TeamsAddViewController implements Initializable
         stringCurrentNumOfTeams = Integer.toString(currentNumOfTeams);
         lblCountDown.setText(stringCurrentNumOfTeams + " / " + stringMaxNumOfTeams);
     }
-
 }

@@ -1,23 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mychamp.BLL;
 
 import java.io.IOException;
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import mychamp.BE.Team;
 import mychamp.DAL.FileManager;
 
-/**
- *
- * @author Fjord82
- */
 public class TeamManager
 {
 
@@ -26,10 +15,16 @@ public class TeamManager
 
     public static TeamManager getInstance()
     {
-        if (instance == null) {
+        if (instance == null)
+        {
             instance = new TeamManager();
         }
         return instance;
+    }
+
+    private TeamManager()
+    {
+
     }
 
     public void sendTeamInfo(String teamName)
@@ -44,12 +39,14 @@ public class TeamManager
 
     public void removeTeamInfo(int teamId)
     {
-        try {
+        try
+        {
             fileManager.clearTeam(teamId);
-        } catch (IOException ex) {
+        } catch (IOException ex)
+        {
             Logger.getLogger(TeamManager.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
-    
+
 }

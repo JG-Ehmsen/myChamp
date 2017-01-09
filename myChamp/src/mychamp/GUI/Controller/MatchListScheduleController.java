@@ -22,8 +22,8 @@ import mychamp.GUI.Model.Model;
  */
 public class MatchListScheduleController implements Initializable
 {
-    Model model = new Model();
-    
+
+    Model model = Model.getInstance();
 
     @FXML
     private Button btnGoToTable;
@@ -36,17 +36,17 @@ public class MatchListScheduleController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         // TODO
-    }    
+    }
 
     @FXML
     private void handleGoToTable(ActionEvent event) throws IOException
     {
-       
+
         model.changeView("Tournament " + lblTournamentName, "GUI/View/GroupStageOverview.fxml");
 
         // Closes the primary stage
         Stage stage = (Stage) btnGoToTable.getScene().getWindow();
         stage.close();
     }
-    
+
 }

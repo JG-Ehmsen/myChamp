@@ -162,5 +162,14 @@ public class Model
     {
         return groupD;
     }
-
+    
+    
+    public void sendGroupInfo(){
+      
+            teamManager.sendGroupInfo(groupA);
+            teamManager.sendGroupInfo(groupB);
+            teamManager.sendGroupInfo(groupC);
+            teamManager.sendGroupInfo(groupD);
+    }
+    
 }

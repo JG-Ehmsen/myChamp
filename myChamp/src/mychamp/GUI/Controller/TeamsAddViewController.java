@@ -79,6 +79,7 @@ public class TeamsAddViewController implements Initializable
                 alert.show();
             }
         }
+
         if (txtFldTeamName.getText().isEmpty())
         {
             canAddTeam = false;
@@ -155,6 +156,7 @@ public class TeamsAddViewController implements Initializable
     {
         //Sorts the teams into groups when the specified number of teams have joined.
         model.sortTeamsIntoGroups();
+        model.sendGroupInfo();
 
         String tournamentTitle = lblTournamentName.getText();
         model.changeView("Tournament " + tournamentTitle, "GUI/View/GroupStageOverview.fxml");

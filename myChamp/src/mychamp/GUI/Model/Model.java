@@ -19,7 +19,8 @@ import mychamp.BLL.TeamManager;
 import mychamp.GUI.Controller.TeamsAddViewController;
 import mychamp.MyChamp;
 
-public class Model {
+public class Model
+{
 
     TeamManager teamManager = TeamManager.getInstance();
 
@@ -35,18 +36,23 @@ public class Model {
 
     public Window stage;
 
-    public static Model getInstance() {
-        if (instance == null) {
+    public static Model getInstance()
+    {
+
+        if (instance == null)
+        {
             instance = new Model();
         }
         return instance;
     }
 
-    private Model() {
+    private Model()
+    {
 
     }
 
-    public void changeView(String title, String path) throws IOException {
+    public void changeView(String title, String path) throws IOException
+    {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MyChamp.class.getResource(path));
         AnchorPane page = (AnchorPane) loader.load();
@@ -60,9 +66,10 @@ public class Model {
 
         dialogStage.show();
     }
- 
+
     //this method can be re-written using the one above, so we dont have repeat of the same code
-    public void loadTeamAddView(String title, String path, String tournamentTitle, String noOfTeams) throws IOException {
+    public void loadTeamAddView(String title, String path, String tournamentTitle, String noOfTeams) throws IOException
+    {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MyChamp.class.getResource(path));
         AnchorPane page = (AnchorPane) loader.load();
@@ -74,8 +81,8 @@ public class Model {
         dialogStage.initModality(Modality.WINDOW_MODAL);
         Scene scene = new Scene(page);
         dialogStage.setScene(scene);
-        dialogStage.setTitle(title);
 
+        //dialogStage.setTitle(title);
         dialogStage.show();
     }
 
@@ -83,7 +90,8 @@ public class Model {
      * Shuffles all teams stored in the random access file and puts them in a
      * new linked list.
      */
-    private void shuffleTeams() throws IOException {
+    private void shuffleTeams() throws IOException
+    {
         shuffleTeams = teamManager.getAllTeams();
         Collections.shuffle(shuffleTeams);
 
@@ -93,20 +101,25 @@ public class Model {
     /**
      * Retrieves and removes the head team from our queue.
      */
-    private Team dequeueTeam() {
+    private Team dequeueTeam()
+    {
         return teamQueue.remove();
     }
-    
+
     /**
-     * Sorts the teams in the queue into one of four groups. 
+     * Sorts the teams in the queue into one of four groups.
      */
-    public void sortTeamsIntoGroups() {
-        try {
+    public void sortTeamsIntoGroups()
+    {
+        try
+        {
             shuffleTeams();
             int groupCounter = 1;
-            
-            while (teamQueue.peek() != null) {
-                switch (groupCounter) {
+
+            while (teamQueue.peek() != null)
+            {
+                switch (groupCounter)
+                {
                     case 1:
                         groupA.add(dequeueTeam());
                         break;
@@ -123,26 +136,40 @@ public class Model {
                 }
                 groupCounter++;
             }
-        } catch (IOException ex) {
+        } catch (IOException ex)
+        {
             Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
     //Getters for group which will show which teams are in each group.
-    public List<Team> getGroupA() {
+    public List<Team> getGroupA()
+    {
         return groupA;
     }
 
-    public List<Team> getGroupB() {
+    public List<Team> getGroupB()
+    {
         return groupB;
     }
 
-    public List<Team> getGroupC() {
+    public List<Team> getGroupC()
+    {
         return groupC;
     }
 
-    public List<Team> getGroupD() {
+    public List<Team> getGroupD()
+    {
         return groupD;
     }
-
+    
+    
+    public void sendGroupInfo(){
+      
+            teamManager.sendGroupInfo(groupA);
+            teamManager.sendGroupInfo(groupB);
+            teamManager.sendGroupInfo(groupC);
+            teamManager.sendGroupInfo(groupD);
+    }
+    
 }

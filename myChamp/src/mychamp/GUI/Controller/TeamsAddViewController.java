@@ -2,6 +2,8 @@ package mychamp.GUI.Controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -22,9 +24,11 @@ import mychamp.BE.Team;
 import mychamp.GUI.Model.Model;
 import mychamp.GUI.Model.TeamParser;
 
-public class TeamsAddViewController implements Initializable {
+public class TeamsAddViewController implements Initializable
+{
 
     private Model model = Model.getInstance();
+
     private TeamParser teamParser = TeamParser.getInstance();
 
     @FXML
@@ -54,30 +58,58 @@ public class TeamsAddViewController implements Initializable {
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
+    public void initialize(URL url, ResourceBundle rb)
+    {
         populateList();
+    }
+
+    @FXML
+    private void handleAddTeam(ActionEvent event)
+    {
+        boolean canAddTeam = true;
+        for (Team team : tblSignedTeams.getItems())
+        {
+            if (team.getTeamName().equalsIgnoreCase(txtFldTeamName.getText()))
+            {
+                System.out.println(team.getTeamName() + " : " + txtFldTeamName.getText());
+                canAddTeam = false;
+                Alert alert = new Alert(AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setContentText("Name already taken. Please write a different name");
+                alert.show();
+            }
+        }
+
+        if (txtFldTeamName.getText().isEmpty())
+        {
+            canAddTeam = false;
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("Error");
+            alert.setContentText("No name added. Please write a different name");
+            alert.show();
+        } else if (canAddTeam == true)
+        {
+            teamParser.addTeam(txtFldTeamName.getText());
+            txtFldTeamName.clear();
+            populateList();
+        }
 
     }
 
     @FXML
-    private void handleAddTeam(ActionEvent event) {
-        teamParser.addTeam(txtFldTeamName.getText());
-        txtFldTeamName.clear();
-        populateList();
-        updateCounter();
-    }
+    private void handleRemoveSignedTeam(ActionEvent event)
+    {
 
-    @FXML
-    private void handleRemoveSignedTeam(ActionEvent event) {
-
-        if (tblSignedTeams.getSelectionModel().getSelectedItem() == null || tblSignedTeams.getItems() == null) {
+        if (tblSignedTeams.getSelectionModel().getSelectedItem() == null || tblSignedTeams.getItems() == null)
+        {
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("No Selection");
             alert.setHeaderText("No Team Selected");
             alert.setContentText("Please select a Team");
 
             alert.showAndWait();
-        } else {
+        } else
+        {
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("Delete Confirmation");
             alert.setHeaderText(null);
@@ -85,30 +117,34 @@ public class TeamsAddViewController implements Initializable {
 
             Optional<ButtonType> result = alert.showAndWait();
 
-            if (result.get() == ButtonType.OK) {
+            if (result.get() == ButtonType.OK)
+            {
                 int Id = tblSignedTeams.getSelectionModel().getSelectedItem().getTeamID();
                 teamParser.removeTeam(Id);
                 populateList();
             }
         }
+
         updateCounter();
 
     }
 
     //Returns to previous window so user can change the number of teams in the tournament
     @FXML
-    private void handleEditAmountTeams(ActionEvent event) {
+    private void handleEditAmountTeams(ActionEvent event)
+    {
         Stage stage = (Stage) btnEditNoOfTeams.getScene().getWindow();
         stage.close();
     }
 
-    private void populateList() {
+    private void populateList()
+    {
         clnJoiningTeams.setCellValueFactory(new PropertyValueFactory("teamName"));
         tblSignedTeams.setItems(teamParser.loadTeamsIntoViewer());
-
     }
 
-    public void setInformation(String tournamentTitle, String noOfTeams) {
+    public void setInformation(String tournamentTitle, String noOfTeams)
+    {
         this.lblTournamentName.setText(tournamentTitle);
         this.noOfTeams = noOfTeams;
         updateCounter();
@@ -116,10 +152,12 @@ public class TeamsAddViewController implements Initializable {
     }
 
     @FXML
-    private void handleStartTournament(ActionEvent event) throws IOException {
+    private void handleStartTournament(ActionEvent event) throws IOException
+    {
         //Sorts the teams into groups when the specified number of teams have joined.
         model.sortTeamsIntoGroups();
-        
+        model.sendGroupInfo();
+
         String tournamentTitle = lblTournamentName.getText();
         model.changeView("Tournament " + tournamentTitle, "GUI/View/GroupStageOverview.fxml");
 
@@ -129,25 +167,29 @@ public class TeamsAddViewController implements Initializable {
 
     }
 
-    private void updateCounter() {
+    private void updateCounter()
+    {
         String stringMaxNumOfTeams;
         String stringCurrentNumOfTeams;
 
         currentNumOfTeams = tblSignedTeams.getItems().size();
         maxNumOfTeams = Integer.parseInt(noOfTeams);
 
-        if (currentNumOfTeams == maxNumOfTeams) {
+        if (currentNumOfTeams == maxNumOfTeams)
+        {
             btnReadyOrNot.setText("Ready");
             btnReadyOrNot.setDisable(false);
             btnAddTeam.setDisable(true);
             lblCountDown.setTextFill(Color.web("#7CFC00"));
 
-        } else if (currentNumOfTeams > maxNumOfTeams) {
+        } else if (currentNumOfTeams > maxNumOfTeams)
+        {
             btnReadyOrNot.setText("Not Ready");
             btnReadyOrNot.setDisable(true);
             btnAddTeam.setDisable(true);
             lblCountDown.setTextFill(Color.web("#8B0000"));
-        } else if (currentNumOfTeams < maxNumOfTeams) {
+        } else if (currentNumOfTeams < maxNumOfTeams)
+        {
             btnReadyOrNot.setText("Not Ready");
             btnReadyOrNot.setDisable(true);
             btnAddTeam.setDisable(false);
@@ -158,5 +200,4 @@ public class TeamsAddViewController implements Initializable {
         stringCurrentNumOfTeams = Integer.toString(currentNumOfTeams);
         lblCountDown.setText(stringCurrentNumOfTeams + " / " + stringMaxNumOfTeams);
     }
-
 }

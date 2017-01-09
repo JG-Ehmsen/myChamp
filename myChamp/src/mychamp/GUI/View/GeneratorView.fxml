@@ -9,51 +9,48 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mychamp.GUI.Controller.GeneratorViewController">
-   <children>
-      <SplitPane dividerPositions="0.20351758793969849" layoutX="-2.0" layoutY="-2.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-        <items>
-          <AnchorPane minHeight="80.0" minWidth="0.0" prefHeight="80.0" prefWidth="598.0" style="-fx-background-color: black;">
-               <children>
-                  <ImageView fitHeight="80.0" fitWidth="175.0" layoutX="-1.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0">
-                     <image>
-                        <Image url="@../../../../Assets/football-manager-14-logo1.png" />
-                     </image>
-                  </ImageView>
-               </children>
-            </AnchorPane>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
-               <children>
-                  <SplitPane dividerPositions="0.29797979797979796" layoutY="-2.0" prefHeight="313.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                    <items>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: black;">
-                           <children>
-                              <TextField fx:id="txtFldTournamentTitle" layoutX="6.0" layoutY="30.0" maxHeight="25.0" maxWidth="160.0" minHeight="25.0" minWidth="160.0" />
-                              <Label layoutX="6.0" layoutY="14.0" text="Tournament title" textFill="WHITE" />
-                              <ComboBox fx:id="cBoxNoOfTeams" layoutX="6.0" layoutY="91.0" maxHeight="25.0" maxWidth="160.0" minHeight="25.0" minWidth="160.0" prefWidth="150.0" promptText="No. of teams" style="-fx-background-color: white;" visibleRowCount="14" />
-                              <Label layoutX="6.0" layoutY="75.0" text="Select no. of teams" textFill="WHITE" />
-                              <ComboBox layoutX="6.0" layoutY="196.0" maxHeight="25.0" maxWidth="160.0" minHeight="25.0" minWidth="160.0" prefWidth="150.0" promptText="No. of groups" style="-fx-background-color: white;" />
-                              <Label layoutX="6.0" layoutY="138.0" text="Select tournament form" textFill="WHITE" />
-                              <Button fx:id="btnBack" layoutX="7.0" layoutY="269.0" minHeight="25.0" minWidth="50.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="25.0" prefWidth="50.0" style="-fx-background-color: white;" text="Back" />
-                              <Button fx:id="btnNext" layoutX="117.0" layoutY="269.0" minHeight="25.0" minWidth="50.0" mnemonicParsing="false" onAction="#handleNext" prefHeight="25.0" prefWidth="50.0" style="-fx-background-color: white;" text="Next" />
-                              <ComboBox layoutX="6.0" layoutY="154.0" maxHeight="25.0" maxWidth="160.0" minHeight="25.0" minWidth="160.0" prefWidth="150.0" promptText="Tournament form" style="-fx-background-color: white;" />
-                              <Label layoutX="14.0" layoutY="228.0" text="Not Available" textFill="WHITE" />
-                           </children>
-                        </AnchorPane>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: black;">
-                           <children>
-                              <ImageView fitHeight="281.0" fitWidth="391.0" layoutX="12.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="file:/Users/Kristoffers/Desktop/School/Projects/myChampGit/myChamp/Assets/ultimate-challenge-logo1.png" />
-                                 </image>
-                              </ImageView>
-                           </children>
-                        </AnchorPane>
-                    </items>
-                  </SplitPane>
-               </children>
-            </AnchorPane>
-        </items>
-      </SplitPane>
-   </children>
+<AnchorPane id="AnchorPane" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mychamp.GUI.Controller.GeneratorViewController">
+    <children>
+        <SplitPane dividerPositions="0.20351758793969849" layoutX="-2.0" layoutY="-2.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <items>
+                <AnchorPane minHeight="80.0" minWidth="0.0" prefHeight="80.0" prefWidth="598.0" style="-fx-background-color: black;">
+                    <children>
+                        <ImageView fitHeight="80.0" fitWidth="175.0" layoutX="-1.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true" AnchorPane.leftAnchor="20.0" AnchorPane.topAnchor="10.0">
+                            <image>
+                                <Image url="@../../../../Assets/football-manager-14-logo1.png" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                    <children>
+                        <SplitPane dividerPositions="0.29797979797979796" layoutY="-2.0" prefHeight="313.0" prefWidth="598.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <items>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: black;">
+                                    <children>
+
+                                        <TextField fx:id="txtFldTournamentTitle" layoutX="6.0" layoutY="30.0" maxHeight="25.0" maxWidth="160.0" minHeight="25.0" minWidth="160.0" />
+                                        <Label layoutX="6.0" layoutY="14.0" text="Tournament title" textFill="WHITE" />
+                                        <ComboBox fx:id="cBoxNoOfTeams" layoutX="6.0" layoutY="91.0" maxHeight="25.0" maxWidth="160.0" minHeight="25.0" minWidth="160.0" prefWidth="150.0" promptText="No. of teams" style="-fx-background-color: white;" visibleRowCount="14" />
+                                        <Label layoutX="6.0" layoutY="75.0" text="Select no. of teams" textFill="WHITE" />
+                                        <Button fx:id="btnBack" layoutX="7.0" layoutY="269.0" minHeight="25.0" minWidth="50.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="25.0" prefWidth="50.0" style="-fx-background-color: white;" text="Back" />
+                                        <Button fx:id="btnNext" layoutX="117.0" layoutY="269.0" minHeight="25.0" minWidth="50.0" mnemonicParsing="false" onAction="#handleNext" prefHeight="25.0" prefWidth="50.0" style="-fx-background-color: white;" text="Next" />
+                                    </children>
+                                </AnchorPane>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: black;">
+                                    <children>
+                                        <ImageView fitHeight="281.0" fitWidth="391.0" layoutX="12.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
+                                            <image>
+                                                <Image url="file:/Users/Kristoffers/Desktop/School/Projects/myChampGit/myChamp/Assets/ultimate-challenge-logo1.png" />
+                                            </image>
+                                        </ImageView>
+                                    </children>
+                                </AnchorPane>
+                            </items>
+                        </SplitPane>
+                    </children>
+                </AnchorPane>
+            </items>
+        </SplitPane>
+    </children>
 </AnchorPane>

@@ -39,10 +39,6 @@ public class ResultManagerController implements Initializable
     @FXML
     private void btnSaveResultManager(ActionEvent event)
     {
-        if(currentResult==null)
-        {
-            
-        }
     }
     
 }

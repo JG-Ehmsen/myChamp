@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mychamp.GUI.Controller;
 
 import java.io.IOException;
@@ -10,7 +5,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -28,13 +22,6 @@ import mychamp.BE.Team;
 import mychamp.GUI.Model.TeamParser;
 import mychamp.MyChamp;
 
-
-
-/**
- * FXML Controller class
- *
- * @author jonas
- */
 public class ManagerViewController implements Initializable
 {
     private Window primaryStage;
@@ -56,7 +43,6 @@ public class ManagerViewController implements Initializable
     {
         // TODO
     }    
-
 
 
     @FXML

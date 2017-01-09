@@ -1,17 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mychamp.GUI.Controller;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,11 +22,6 @@ import mychamp.BE.Team;
 import mychamp.GUI.Model.Model;
 import mychamp.GUI.Model.TeamParser;
 
-/**
- * FXML Controller class
- *
- * @author Fjord82
- */
 public class TeamsAddViewController implements Initializable
 {
 
@@ -63,7 +50,6 @@ public class TeamsAddViewController implements Initializable
     private int maxNumOfTeams = 0;
     private int currentNumOfTeams = 0;
     private String noOfTeams = null;
-    private boolean canStartTournament = false;
 
     /**
      * Initializes the controller class.
@@ -116,9 +102,12 @@ public class TeamsAddViewController implements Initializable
 
     }
 
+    //Returns to previous window so user can change the number of teams in the tournament
     @FXML
     private void handleEditAmountTeams(ActionEvent event)
     {
+        Stage stage = (Stage) btnEditNoOfTeams.getScene().getWindow();
+        stage.close();
     }
 
     private void populateList()
@@ -139,23 +128,16 @@ public class TeamsAddViewController implements Initializable
     @FXML
     private void handleStartTournament(ActionEvent event) throws IOException
     {
-        if (canStartTournament == true)
-        {
-            String tournamentTitle = lblTournamentName.getText();
-            model.changeView("Tournament " + tournamentTitle, "GUI/View/GroupStageOverview.fxml");
+        //Sorts the teams into groups when the specified number of teams have joined.
+        model.sortTeamsIntoGroups();
 
-            // Closes the primary stage
-            Stage stage = (Stage) btnReadyOrNot.getScene().getWindow();
-            stage.close();
-        } else
-        {
-            Alert alert = new Alert(AlertType.WARNING);
-            alert.setTitle("Cannot Start Tournament");
-            alert.setHeaderText("Team Amount Error");
-            alert.setContentText("Please Adjust Team Roster");
+        String tournamentTitle = lblTournamentName.getText();
+        model.changeView("Tournament " + tournamentTitle, "GUI/View/GroupStageOverview.fxml");
 
-            alert.showAndWait();
-        }
+        // Closes the primary stage
+        Stage stage = (Stage) btnReadyOrNot.getScene().getWindow();
+        stage.close();
+
     }
 
     private void updateCounter()
@@ -172,6 +154,7 @@ public class TeamsAddViewController implements Initializable
             btnReadyOrNot.setDisable(false);
             btnAddTeam.setDisable(true);
             lblCountDown.setTextFill(Color.web("#7CFC00"));
+
         } else if (currentNumOfTeams > maxNumOfTeams)
         {
             btnReadyOrNot.setText("Not Ready");
@@ -185,7 +168,6 @@ public class TeamsAddViewController implements Initializable
             btnAddTeam.setDisable(false);
             lblCountDown.setTextFill(Color.web("#FFFFF0"));
         }
-        
 
         stringMaxNumOfTeams = Integer.toString(maxNumOfTeams);
         stringCurrentNumOfTeams = Integer.toString(currentNumOfTeams);

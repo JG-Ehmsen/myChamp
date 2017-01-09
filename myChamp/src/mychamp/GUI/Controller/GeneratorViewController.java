@@ -37,6 +37,7 @@ public class GeneratorViewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        txtFldTournamentTitle.setPromptText("Tournament title");
         fillComboBox();
     }
 
@@ -76,7 +77,7 @@ public class GeneratorViewController implements Initializable
     private void fillComboBox()
     {
         ObservableList<String> comboItems
-                = FXCollections.observableArrayList("12", "13", "14", "15", "16");
+                = FXCollections.observableArrayList(null, "12", "13", "14", "15", "16");
         cBoxNoOfTeams.setItems(comboItems);
         cBoxNoOfTeams.getSelectionModel().selectFirst();
     }

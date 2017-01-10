@@ -9,6 +9,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import mychamp.GUI.Model.Model;
@@ -37,7 +39,21 @@ public class MainViewController implements Initializable
     @FXML
     private void handleNewTournament(ActionEvent event) throws IOException
     {
-        model.changeView("MyChamp - Create tournament", "GUI/View/GeneratorView.fxml");
+        newTournament();
+    }
+
+    @FXML
+    private void newTourPressed(KeyEvent event) throws IOException
+    {
+        if (event.getCode() == KeyCode.ENTER)
+        {
+            newTournament();
+        }
+    }
+
+    private void newTournament() throws IOException
+    {
+        model.changeView("MyChamp - Create tournament", "GUI/View/GeneratorView.fxml", "Generator", "null", "null");
 
         // Closes the primary stage
         Stage stage = (Stage) btnNew.getScene().getWindow();
@@ -47,7 +63,21 @@ public class MainViewController implements Initializable
     @FXML
     private void handleContinueTournament(ActionEvent event) throws IOException
     {
-        model.changeView("MyChamp - Continue tournament", "GUI/View/GroupStageOverview.fxml");
+        contTournament();
+    }
+
+    @FXML
+    private void contTourPressed(KeyEvent event) throws IOException
+    {
+        if (event.getCode() == KeyCode.ENTER)
+        {
+            contTournament();
+        }
+    }
+
+    private void contTournament() throws IOException
+    {
+        model.changeView("MyChamp - Continue tournament", "GUI/View/GroupStageOverview.fxml", "GroupStageOverview", "null", "null");
 
         Stage stage = (Stage) btnContinue.getScene().getWindow();
         stage.close();

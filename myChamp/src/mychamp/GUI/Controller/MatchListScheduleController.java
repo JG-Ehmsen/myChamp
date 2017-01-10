@@ -46,7 +46,7 @@ public class MatchListScheduleController implements Initializable
     @FXML
     private void handleGoToManagerView(ActionEvent event) throws IOException
     {
-        model.changeView("ManagerView - Update Tournament ", "GUI/View/ManagerView.fxml");
+        model.changeView("ManagerView - Update Tournament ", "GUI/View/ManagerView.fxml", "ManagerView", "null", "null");
 
         // Closes the primary stage
         Stage stage = (Stage) btnUpdateTour.getScene().getWindow();

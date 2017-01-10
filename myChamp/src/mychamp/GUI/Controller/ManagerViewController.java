@@ -49,56 +49,10 @@ public class ManagerViewController implements Initializable
         fillComboBoxTeam();
     }
 
-    private void removeTeamTour() throws IOException
-    {
-        /* //load the fxml file and creat a new stage for the popup dialog.
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MyChamp.class.getResource("GUI/View/RemoveTeam.fxml"));
-        AnchorPane page = (AnchorPane) loader.load();
-        //ResultManagerController controller = loader.getController();
-        //controller.setResult(result);
-
-        // Create the dialog stage.
-        Stage dialogStage = new Stage();
-        //dialogStage.setTitle(remove_Controller);
-        dialogStage.initModality(Modality.WINDOW_MODAL);
-        dialogStage.initOwner(primaryStage);
-        Scene scene = new Scene(page);
-        dialogStage.setScene(scene);
-
-        dialogStage.showAndWait();*/
-    }
-
-    private void showResultManagerWindow() throws IOException
-    {
-        /*try
-        {
-            //load the fxml file and creat a new stage for the popup dialog.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MyChamp.class.getResource("GUI/View/ResultManager.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
-            //ResultManagerController controller = loader.getController();
-            //controller.setResult(result);
-
-            // Create the dialog stage.
-            Stage dialogStage = new Stage();
-            //dialogStage.setTitle(result_Manager);
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(primaryStage);
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
-
-            dialogStage.showAndWait();
-        } catch (IOException e)
-        {
-            e.printStackTrace();
-        }*/
-    }
-
     private void fillComboBoxRound()
     {
         ObservableList<String> comboItems
-                = FXCollections.observableArrayList(null, "1", "2", "3", "4", "5", "6", "7", "8", "9");
+                = FXCollections.observableArrayList(null, "1", "2", "3", "4", "5", "6", "Quarter-finals", "Semi-finals", "Final");
         cbRound.setItems(comboItems);
         cbRound.getSelectionModel().selectFirst();
     }
@@ -116,7 +70,7 @@ public class ManagerViewController implements Initializable
         List<Team> teamList = new ArrayList();
         teamList = teamParser.getAllTeams();
         ObservableList<Team> comboItems
-                = FXCollections.observableArrayList(teamList);
+                = FXCollections.observableArrayList();
         cbTeam.setItems(comboItems);
         cbTeam.getSelectionModel().selectFirst();
     }

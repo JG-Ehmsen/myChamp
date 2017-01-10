@@ -38,7 +38,7 @@ public class RemoveTeamController implements Initializable
     }
 
     @FXML
-    private void btnCloseRemoveView(ActionEvent event)
+    private void handleCloseView(ActionEvent event)
     {
         Stage stage = (Stage) btnClose.getScene().getWindow();
         stage.close();
@@ -53,7 +53,8 @@ public class RemoveTeamController implements Initializable
         removeTeam.setItems(comboItems);
         removeTeam.getSelectionModel().selectFirst();
     }
-
+    
+    @FXML
     private void removeTeamFromTournament(ActionEvent event)
     {
         if (removeTeam.getSelectionModel().getSelectedItem() == null || removeTeam.getItems() == null)
@@ -81,4 +82,6 @@ public class RemoveTeamController implements Initializable
 
         }
     }
+    
+    
 }

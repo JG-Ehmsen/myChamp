@@ -12,6 +12,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import mychamp.GUI.Model.Model;
@@ -50,7 +52,7 @@ public class GeneratorViewController implements Initializable
     @FXML
     private void handleBack(ActionEvent event) throws IOException
     {
-        model.changeView("MyChamp", "GUI/View/FrontView.fxml");
+        model.changeView("MyChamp", "GUI/View/FrontView.fxml", "FrontView", "null", "null");
 
         // Closes the primary stage
         Stage stage = (Stage) btnBack.getScene().getWindow();
@@ -60,16 +62,21 @@ public class GeneratorViewController implements Initializable
     @FXML
     private void handleNext(ActionEvent event) throws IOException
     {
+        goToAddTeamView();
+    }
+
+    private void goToAddTeamView() throws IOException
+    {
         if (cBoxNoOfTeams.getValue() == null || txtFldTournamentTitle.getText().equals("") || txtFldTournamentTitle.getText() == null)
         {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("No Selection");
-            alert.setContentText("Some fields have not been filled. Please fill in all fields");
+            alert.setContentText("Some fields have not been filled. Please fill in all fields.");
 
             alert.showAndWait();
         } else
         {
-            model.loadTeamAddView("MyChamp - Add Teams", "GUI/View/TeamsAddView.fxml", txtFldTournamentTitle.getText(), cBoxNoOfTeams.getValue());
+            model.changeView("MyChamp - Add Teams", "GUI/View/TeamsAddView.fxml", "TeamAddView", txtFldTournamentTitle.getText(), cBoxNoOfTeams.getValue());
 
             // Closes the primary stage
             Stage stage = (Stage) btnBack.getScene().getWindow();
@@ -83,5 +90,23 @@ public class GeneratorViewController implements Initializable
                 = FXCollections.observableArrayList(null, "12", "13", "14", "15", "16");
         cBoxNoOfTeams.setItems(comboItems);
         cBoxNoOfTeams.getSelectionModel().selectFirst();
+    }
+
+    @FXML
+    private void tourTitlePressed(KeyEvent event)
+    {
+        if (event.getCode() == KeyCode.ENTER)
+        {
+            cBoxNoOfTeams.requestFocus();
+        }
+    }
+
+    @FXML
+    private void noOfTeamsPressed(KeyEvent event) throws IOException
+    {
+        if (event.getCode() == KeyCode.ENTER)
+        {
+            goToAddTeamView();
+        }
     }
 }

@@ -9,15 +9,15 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" maxWidth="400.0" prefHeight="400.0" prefWidth="400.0" style="-fx-background-color: Black;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mychamp.GUI.View.ManagerViewController">
+<AnchorPane id="AnchorPane" maxWidth="400.0" prefHeight="336.0" prefWidth="400.0" style="-fx-background-color: Black;" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mychamp.GUI.Controller.ManagerViewController">
    <children>
       <ImageView fitHeight="80.0" fitWidth="175.0" layoutX="286.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../Assets/football-manager-14-logo1.png" />
          </image>
       </ImageView>
-      <ComboBox fx:id="cbRound" layoutX="30.0" layoutY="68.0" prefWidth="150.0" AnchorPane.leftAnchor="30.0" />
-      <ComboBox fx:id="cbGroup" layoutX="30.0" layoutY="138.0" prefWidth="150.0" AnchorPane.leftAnchor="30.0" />
+      <ComboBox fx:id="cbRound" layoutX="30.0" layoutY="68.0" prefWidth="150.0" promptText="Select round" AnchorPane.leftAnchor="30.0" />
+      <ComboBox fx:id="cbGroup" layoutX="30.0" layoutY="138.0" prefWidth="150.0" promptText="Select group" AnchorPane.leftAnchor="30.0" />
       <ComboBox fx:id="cbTeam" layoutX="30.0" layoutY="214.0" prefWidth="150.0" AnchorPane.leftAnchor="30.0" />
       <Label layoutX="29.0" layoutY="40.0" text="Round" textFill="WHITE" AnchorPane.leftAnchor="30.0">
          <font>
@@ -34,13 +34,14 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="311.0" layoutY="263.0" mnemonicParsing="false" onAction="#managerGo" text="Go" />
-      <Separator layoutY="305.0" prefHeight="0.0" prefWidth="400.0" />
-      <Label layoutX="30.0" layoutY="323.0" text="Remove team from tournament" textFill="WHITE" AnchorPane.leftAnchor="30.0">
+      <Button fx:id="btnHandleResult" layoutX="330.0" layoutY="214.0" mnemonicParsing="false" onAction="#handleGoToResultManager" text="Go" AnchorPane.rightAnchor="30.0" />
+      <Separator layoutY="241.0" prefHeight="23.0" prefWidth="400.0" />
+      <Label layoutX="30.0" layoutY="264.0" text="Remove team from tournament" textFill="WHITE" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="30.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button layoutX="311.0" layoutY="361.0" mnemonicParsing="false" onAction="#removeTeamTourGo" text="Go" />
+      <Button fx:id="btnRemoveWndw" layoutX="334.0" layoutY="296.0" mnemonicParsing="false" onAction="#handleRemoveWndw" text="Go" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="30.0" />
+      <Button fx:id="btnBack" layoutX="30.0" layoutY="296.0" mnemonicParsing="false" onAction="#handleBackButton" text="Back" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="30.0" />
    </children>
 </AnchorPane>

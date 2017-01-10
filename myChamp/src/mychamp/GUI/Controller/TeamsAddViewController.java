@@ -29,10 +29,10 @@ import mychamp.GUI.Model.TeamParser;
 public class TeamsAddViewController implements Initializable
 {
 
-    private Model model = Model.getInstance();
+    private Model model = Model.getInstance(); // Gets the singleton instance of 'Model'.
 
-    private TeamParser teamParser = TeamParser.getInstance();
-    private GroupParser groupParser=GroupParser.getInstance();
+    private TeamParser teamParser = TeamParser.getInstance(); // Gets the singleton instance of 'TeamParser'.
+    private GroupParser groupParser = GroupParser.getInstance();
 
     @FXML
     private TableColumn<Team, String> clnJoiningTeams;
@@ -53,9 +53,7 @@ public class TeamsAddViewController implements Initializable
     @FXML
     private TableView<Team> tblSignedTeams;
 
-    private int maxNumOfTeams = 0;
-    private int currentNumOfTeams = 0;
-    private String noOfTeams = null;
+    private String noOfTeams = null; // The max nr of teams in string form.
 
     /**
      * Initializes the controller class.
@@ -76,22 +74,11 @@ public class TeamsAddViewController implements Initializable
         });
     }
 
-    private void populateList()
-    {
-        txtFldTeamName.focusTraversableProperty();
-
-        clnJoiningTeams.setCellValueFactory(new PropertyValueFactory("teamName"));
-        tblSignedTeams.setItems(teamParser.loadTeamsIntoViewer());
-    }
-
-    public void setInformation(String tournamentTitle, String noOfTeams)
-    {
-        this.lblTournamentName.setText(tournamentTitle);
-        this.noOfTeams = noOfTeams;
-        updateCounter();
-
-    }
-
+    /**
+     * Runs the sendTeamName method.
+     *
+     * @param event
+     */
     @FXML
     private void handleAddTeam(ActionEvent event)
     {
@@ -101,12 +88,43 @@ public class TeamsAddViewController implements Initializable
     @FXML
     private void handleEnterPressed(KeyEvent event)
     {
-        if (event.getCode() == KeyCode.ENTER)
+        if (event.getCode() == KeyCode.ENTER && !btnAddTeam.isDisabled())
         {
             sendTeamNames();
         }
     }
 
+    /**
+     * Sets the cell value factory for the table view containing signed up
+     * teams, and loads teams that have previously been added into it.
+     */
+    private void populateList()
+    {
+        clnJoiningTeams.setCellValueFactory(new PropertyValueFactory("teamName"));
+        tblSignedTeams.setItems(teamParser.loadTeamsIntoViewer());
+    }
+
+    /**
+     * Asks for the title of the tournament, along with the max number of teams
+     * in string form, before setting a label in the view with the tournament
+     * title and setting the 'noOfTeams' variable to the max number of teams.
+     *
+     * @param tournamentTitle
+     * @param noOfTeams
+     */
+    public void setInformation(String tournamentTitle, String noOfTeams)
+    {
+        this.lblTournamentName.setText(tournamentTitle);
+        this.noOfTeams = noOfTeams;
+        updateCounter();
+
+    }
+
+    /**
+     * Checks to see if the name that has currently been written is already in
+     * use, or if nothing has been written at all. If not, adds a new team,
+     * refreshes the table and updates the counter.
+     */
     private void sendTeamNames()
     {
         boolean canAddTeam = true;
@@ -137,8 +155,14 @@ public class TeamsAddViewController implements Initializable
             populateList();
         }
         updateCounter();
+        txtFldTeamName.requestFocus();
     }
 
+    /**
+     * Runs the removeSigneTeam method.
+     *
+     * @param event
+     */
     @FXML
     private void handleRemoveSignedTeam(ActionEvent event)
     {
@@ -155,6 +179,44 @@ public class TeamsAddViewController implements Initializable
         }
     }
 
+    /**
+     * Runs the changeView method and closes this stage.
+     *
+     * @param event
+     * @throws IOException
+     */
+    @FXML
+    private void handleEditAmountTeams(ActionEvent event) throws IOException
+    {
+        model.changeView("MyChamp - Create tournament", "GUI/View/GeneratorView.fxml", "Generator", null, null);
+
+        Stage stage = (Stage) btnEditNoOfTeams.getScene().getWindow();
+        stage.close();
+    }
+
+    @FXML
+    private void handleStartTournament(ActionEvent event) throws IOException
+    {
+        //Sorts the teams into groups when the specified number of teams have joined.
+        groupParser.sortTeamsIntoGroups();
+        groupParser.sendGroupInfo();
+
+        String tournamentTitle = lblTournamentName.getText();
+        model.changeView("Tournament " + tournamentTitle, "GUI/View/GroupStageOverview.fxml", "GroupStageOverview", null, null);
+
+        // Closes the primary stage
+        Stage stage = (Stage) btnReadyOrNot.getScene().getWindow();
+        stage.close();
+
+    }
+
+    /**
+     * Gets information about the currently selected team in the list, and
+     * deletes if. Produces an error message if no team has been selected. Also
+     * asks for confirmation before deleting. The request is then relayed
+     * downwards through the layers. Finally calls a request to update the
+     * counter.
+     */
     private void removeSignedTeam()
     {
         if (tblSignedTeams.getSelectionModel().getSelectedItem() == null || tblSignedTeams.getItems() == null)
@@ -177,40 +239,23 @@ public class TeamsAddViewController implements Initializable
                 int Id = tblSignedTeams.getSelectionModel().getSelectedItem().getTeamID();
                 teamParser.removeTeam(Id);
                 populateList();
+                tblSignedTeams.getSelectionModel().select(0);
             }
         }
 
         updateCounter();
     }
 
-    //Returns to previous window so user can change the number of teams in the tournament
-    @FXML
-    private void handleEditAmountTeams(ActionEvent event)
-    {
-        Stage stage = (Stage) btnEditNoOfTeams.getScene().getWindow();
-        stage.close();
-    }
-
-    @FXML
-    private void handleStartTournament(ActionEvent event) throws IOException
-    {
-        //Sorts the teams into groups when the specified number of teams have joined.
-        groupParser.sortTeamsIntoGroups();
-        groupParser.sendGroupInfo();
-
-        String tournamentTitle = lblTournamentName.getText();
-        model.changeView("Tournament " + tournamentTitle, "GUI/View/GroupStageOverview.fxml", "GroupStageOverview", "null", "null");
-
-        // Closes the primary stage
-        Stage stage = (Stage) btnReadyOrNot.getScene().getWindow();
-        stage.close();
-
-    }
-
+    /**
+     * Updates the counter for the amount of teams added/maximum team capacity,
+     * and disables buttons accordingly.
+     */
     private void updateCounter()
     {
-        String stringMaxNumOfTeams;
-        String stringCurrentNumOfTeams;
+        String stringMaxNumOfTeams; // The integer 'maxNumOfTeams' parsed to a string.
+        String stringCurrentNumOfTeams; // The integer 'currentNumOfTeams' parsed to a string.
+        int maxNumOfTeams = 0; // An integer representing the maximum number of teams in a tournament.
+        int currentNumOfTeams = 0; // An integer representing the currently added number of teams in a tournament.
 
         currentNumOfTeams = tblSignedTeams.getItems().size();
         maxNumOfTeams = Integer.parseInt(noOfTeams);

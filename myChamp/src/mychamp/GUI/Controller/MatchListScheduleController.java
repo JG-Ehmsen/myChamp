@@ -17,7 +17,11 @@ public class MatchListScheduleController implements Initializable
 
     @FXML
     private Button btnGoToTable;
+
     private Object lblTournamentName;
+
+    @FXML
+    private Button btnUpdateTour;
 
     /**
      * Initializes the controller class.
@@ -28,14 +32,36 @@ public class MatchListScheduleController implements Initializable
         // TODO
     }
 
+    /**
+     * Runs the changeView method and closes this stage.
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void handleGoToTable(ActionEvent event) throws IOException
     {
 
-        model.changeView("Tournament " + lblTournamentName, "GUI/View/GroupStageOverview.fxml", "GroupStageOverview", "null", "null");
+        model.changeView("Tournament " + lblTournamentName, "GUI/View/GroupStageOverview.fxml", "GroupStageOverview", null, null);
 
         // Closes the primary stage
         Stage stage = (Stage) btnGoToTable.getScene().getWindow();
+        stage.close();
+    }
+
+    /**
+     * Runs the changeView method and closes this stage.
+     *
+     * @param event
+     * @throws IOException
+     */
+    @FXML
+    private void handleGoToManagerView(ActionEvent event) throws IOException
+    {
+        model.changeView("ManagerView - Update Tournament ", "GUI/View/ManagerView.fxml", "ManagerView", null, null);
+
+        // Closes the primary stage
+        Stage stage = (Stage) btnUpdateTour.getScene().getWindow();
         stage.close();
     }
 

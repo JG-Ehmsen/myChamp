@@ -9,21 +9,19 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
-import mychamp.BE.Result;
 import mychamp.BE.Team;
+import mychamp.GUI.Model.Model;
 import mychamp.GUI.Model.TeamParser;
-import mychamp.MyChamp;
 
 public class ManagerViewController implements Initializable
 {
+
+    private Model model = Model.getInstance();
 
     private Window primaryStage;
 
@@ -32,9 +30,17 @@ public class ManagerViewController implements Initializable
     @FXML
     private ComboBox<String> cbGroup;
     @FXML
-    private ComboBox<Team> cbTeam;
+    private ComboBox<String> cbTeam;
 
     TeamParser teamParser = TeamParser.getInstance();
+    private Button btnBackMatchlist;
+    @FXML
+    private Button btnRemoveWndw;
+    @FXML
+    private Button btnHandleResult;
+    private Object team;
+    @FXML
+    private Button btnBack;
 
     /**
      * Initializes the controller class.
@@ -42,85 +48,86 @@ public class ManagerViewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
+        fillComboBoxRound();
+        fillComboBoxGroup();
+        fillComboBoxTeam();
     }
 
-    @FXML
-    private void removeTeamTourGo(String remove_Controller, Team team) throws IOException
-    {
-        //load the fxml file and creat a new stage for the popup dialog.
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MyChamp.class.getResource("GUI/View/RemoveTeam.fxml"));
-        AnchorPane page = (AnchorPane) loader.load();
-        //ResultManagerController controller = loader.getController();
-        //controller.setResult(result);
-
-        // Create the dialog stage.
-        Stage dialogStage = new Stage();
-        dialogStage.setTitle(remove_Controller);
-        dialogStage.initModality(Modality.WINDOW_MODAL);
-        dialogStage.initOwner(primaryStage);
-        Scene scene = new Scene(page);
-        dialogStage.setScene(scene);
-
-        dialogStage.showAndWait();
-    }
-
-    private void showResultManagerWindow(String result_Manager, Result result)
-    {
-        try
-        {
-            //load the fxml file and creat a new stage for the popup dialog.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MyChamp.class.getResource("GUI/View/ResultManager.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
-            //ResultManagerController controller = loader.getController();
-            //controller.setResult(result);
-
-            // Create the dialog stage.
-            Stage dialogStage = new Stage();
-            dialogStage.setTitle(result_Manager);
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(primaryStage);
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
-
-            dialogStage.showAndWait();
-        } catch (IOException e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    private void managerGo(ActionEvent event)
-    {
-        showResultManagerWindow("New ResultManager", null);
-    }
-
+    /**
+     * Populates the combo box with the rounds.
+     */
     private void fillComboBoxRound()
     {
         ObservableList<String> comboItems
-                = FXCollections.observableArrayList("", "1", "2", "3", "4", "5", "6", "7", "8", "9");
+                = FXCollections.observableArrayList(null, "1", "2", "3", "4", "5", "6", "Quarter-finals", "Semi-finals", "Final");
         cbRound.setItems(comboItems);
         cbRound.getSelectionModel().selectFirst();
     }
 
+    /**
+     * Populates the combo box with the groups.
+     */
     private void fillComboBoxGroup()
     {
         ObservableList<String> comboItems
-                = FXCollections.observableArrayList("", "A", "B", "C", "D");
+                = FXCollections.observableArrayList(null, "A", "B", "C", "D");
         cbGroup.setItems(comboItems);
         cbGroup.getSelectionModel().selectFirst();
     }
 
+    /**
+     * Populates the combo box with the teams.
+     */
     private void fillComboBoxTeam()
     {
-        List<Team> teamList = new ArrayList();
-        teamList = teamParser.getAllTeams();
-        ObservableList<Team> comboItems
-                = FXCollections.observableArrayList(teamList);
+        List<Team> teamList = teamParser.getAllTeams();
+        List<String> teamNameList = new ArrayList();
+        for (Team team : teamList)
+        {
+            teamNameList.add(team.getTeamName());
+        }
+        ObservableList<String> comboItems = FXCollections.observableArrayList(teamNameList);
         cbTeam.setItems(comboItems);
         cbTeam.getSelectionModel().selectFirst();
+    }
+
+    /**
+     * Runs the changeView method.
+     *
+     * @param event
+     * @throws IOException
+     */
+    @FXML
+    private void handleRemoveWndw(ActionEvent event) throws IOException
+    {
+        model.changeView("Remove team ", "GUI/View/RemoveTeam.fxml", "RemoveTeam", null, null);
+    }
+
+    /**
+     * Runs the changeView method.
+     *
+     * @param event
+     * @throws IOException
+     */
+    @FXML
+    private void handleGoToResultManager(ActionEvent event) throws IOException
+    {
+        model.changeView("Update Result ", "GUI/View/ResultManager.fxml", "ResultManager", null, null);
+    }
+
+    /**
+     * Runs the changeView method and closes this stage.
+     *
+     * @param event
+     * @throws IOException
+     */
+    @FXML
+    private void handleBackButton(ActionEvent event) throws IOException
+    {
+        model.changeView("Upcoming Matches & Results ", "GUI/View/MatchListSchedule.fxml", "MatchListSchedule", null, null);
+
+        // Closes the primary stage
+        Stage stage = (Stage) btnBack.getScene().getWindow();
+        stage.close();
     }
 }

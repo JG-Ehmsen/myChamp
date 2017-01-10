@@ -40,6 +40,12 @@ public class MainViewController implements Initializable
         // TODO
     }
 
+    /**
+     * Runs the newTournament method.
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void handleNewTournament(ActionEvent event) throws IOException
     {
@@ -55,15 +61,27 @@ public class MainViewController implements Initializable
         }
     }
 
+    /**
+     * Runs the changeView method and closes this stage.
+     *
+     * @param event
+     * @throws IOException
+     */
     private void newTournament() throws IOException
     {
-        model.changeView("MyChamp - Create tournament", "GUI/View/GeneratorView.fxml", "Generator", "null", "null");
+        model.changeView("MyChamp - Create tournament", "GUI/View/GeneratorView.fxml", "Generator", null, null);
 
         // Closes the primary stage
         Stage stage = (Stage) btnNew.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * Runs the contTournament method.
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void handleContinueTournament(ActionEvent event) throws IOException
     {
@@ -80,12 +98,19 @@ public class MainViewController implements Initializable
         }
     }
 
+    /**
+     * Runs the changeView method and closes this stage.
+     *
+     * @param event
+     * @throws IOException
+     */
     private void contTournament() throws IOException
     {
         if (groupParser.getIsContTour() == true)
         {
 
-            model.changeView("MyChamp - Continue tournament", "GUI/View/GroupStageOverview.fxml", "GroupStageOverview", "null", "null");
+        model.changeView("MyChamp - Continue tournament", "GUI/View/GroupStageOverview.fxml", "GroupStageOverview", null, null);
+
 
             Stage stage = (Stage) btnContinue.getScene().getWindow();
             stage.close();

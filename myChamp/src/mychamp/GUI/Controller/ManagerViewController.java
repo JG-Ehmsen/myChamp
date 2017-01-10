@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.stage.Stage;
 import javafx.stage.Window;
 import mychamp.BE.Team;
 import mychamp.GUI.Model.Model;
@@ -38,6 +39,8 @@ public class ManagerViewController implements Initializable
     @FXML
     private Button btnHandleResult;
     private Object team;
+    @FXML
+    private Button btnBack;
 
     /**
      * Initializes the controller class.
@@ -89,5 +92,15 @@ public class ManagerViewController implements Initializable
     private void handleGoToResultManager(ActionEvent event) throws IOException
     {
         model.changeView("Update Result ", "GUI/View/ResultManager.fxml", "ResultManager", null, null);
+    }
+
+    @FXML
+    private void handleBackButton(ActionEvent event) throws IOException
+    {
+        model.changeView("Upcoming Matches & Results ", "GUI/View/MatchListSchedule.fxml", "MatchListSchedule", null, null);
+
+        // Closes the primary stage
+        Stage stage = (Stage) btnBack.getScene().getWindow();
+        stage.close();
     }
 }

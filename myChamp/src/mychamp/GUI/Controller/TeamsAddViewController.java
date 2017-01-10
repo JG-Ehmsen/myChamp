@@ -186,8 +186,10 @@ public class TeamsAddViewController implements Initializable
 
     //Returns to previous window so user can change the number of teams in the tournament
     @FXML
-    private void handleEditAmountTeams(ActionEvent event)
+    private void handleEditAmountTeams(ActionEvent event) throws IOException
     {
+        model.changeView("MyChamp - Create tournament", "GUI/View/GeneratorView.fxml", "Generator", null, null);
+
         Stage stage = (Stage) btnEditNoOfTeams.getScene().getWindow();
         stage.close();
     }
@@ -200,7 +202,7 @@ public class TeamsAddViewController implements Initializable
         model.sendGroupInfo();
         
         String tournamentTitle = lblTournamentName.getText();
-        model.changeView("Tournament " + tournamentTitle, "GUI/View/GroupStageOverview.fxml", "GroupStageOverview", "null", "null");
+        model.changeView("Tournament " + tournamentTitle, "GUI/View/GroupStageOverview.fxml", "GroupStageOverview", null, null);
 
         // Closes the primary stage
         Stage stage = (Stage) btnReadyOrNot.getScene().getWindow();

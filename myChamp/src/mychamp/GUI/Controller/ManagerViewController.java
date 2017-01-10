@@ -9,22 +9,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import javafx.stage.Window;
-import mychamp.BE.Result;
 import mychamp.BE.Team;
+import mychamp.GUI.Model.Model;
 import mychamp.GUI.Model.TeamParser;
-import mychamp.MyChamp;
 
 public class ManagerViewController implements Initializable
 {
+
+    private Model model = Model.getInstance();
 
     private Window primaryStage;
 
@@ -33,13 +29,15 @@ public class ManagerViewController implements Initializable
     @FXML
     private ComboBox<String> cbGroup;
     @FXML
-    private ComboBox<Team> cbTeam;
+    private ComboBox<String> cbTeam;
 
     TeamParser teamParser = TeamParser.getInstance();
-    @FXML
     private Button btnBackMatchlist;
     @FXML
     private Button btnRemoveWndw;
+    @FXML
+    private Button btnHandleResult;
+    private Object team;
 
     /**
      * Initializes the controller class.
@@ -47,59 +45,15 @@ public class ManagerViewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        // TODO
-    }
-
-    private void removeTeamTour() throws IOException
-    {
-        //load the fxml file and creat a new stage for the popup dialog.
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MyChamp.class.getResource("GUI/View/RemoveTeam.fxml"));
-        AnchorPane page = (AnchorPane) loader.load();
-        //ResultManagerController controller = loader.getController();
-        //controller.setResult(result);
-
-        // Create the dialog stage.
-        Stage dialogStage = new Stage();
-        //dialogStage.setTitle(remove_Controller);
-        dialogStage.initModality(Modality.WINDOW_MODAL);
-        dialogStage.initOwner(primaryStage);
-        Scene scene = new Scene(page);
-        dialogStage.setScene(scene);
-
-        dialogStage.showAndWait();
-    }
-
-    private void showResultManagerWindow()
-    {
-        try
-        {
-            //load the fxml file and creat a new stage for the popup dialog.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MyChamp.class.getResource("GUI/View/ResultManager.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
-            //ResultManagerController controller = loader.getController();
-            //controller.setResult(result);
-
-            // Create the dialog stage.
-            Stage dialogStage = new Stage();
-            //dialogStage.setTitle(result_Manager);
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(primaryStage);
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
-
-            dialogStage.showAndWait();
-        } catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+        fillComboBoxRound();
+        fillComboBoxGroup();
+        fillComboBoxTeam();
     }
 
     private void fillComboBoxRound()
     {
         ObservableList<String> comboItems
-                = FXCollections.observableArrayList("", "1", "2", "3", "4", "5", "6", "7", "8", "9");
+                = FXCollections.observableArrayList(null, "1", "2", "3", "4", "5", "6", "Quarter-finals", "Semi-finals", "Final");
         cbRound.setItems(comboItems);
         cbRound.getSelectionModel().selectFirst();
     }
@@ -107,30 +61,33 @@ public class ManagerViewController implements Initializable
     private void fillComboBoxGroup()
     {
         ObservableList<String> comboItems
-                = FXCollections.observableArrayList("", "A", "B", "C", "D");
+                = FXCollections.observableArrayList(null, "A", "B", "C", "D");
         cbGroup.setItems(comboItems);
         cbGroup.getSelectionModel().selectFirst();
     }
 
     private void fillComboBoxTeam()
     {
-        List<Team> teamList = new ArrayList();
-        teamList = teamParser.getAllTeams();
-        ObservableList<Team> comboItems
-                = FXCollections.observableArrayList(teamList);
+        List<Team> teamList = teamParser.getAllTeams();
+        List<String> teamNameList = new ArrayList();
+        for (Team team : teamList)
+        {
+            teamNameList.add(team.getTeamName());
+        }
+        ObservableList<String> comboItems = FXCollections.observableArrayList(teamNameList);
         cbTeam.setItems(comboItems);
         cbTeam.getSelectionModel().selectFirst();
     }
 
     @FXML
-    private void handleBackMatchlist(ActionEvent event)
-    { 
-        showResultManagerWindow();
+    private void handleRemoveWndw(ActionEvent event) throws IOException
+    {
+        model.changeView("Remove team ", "GUI/View/RemoveTeam.fxml", "RemoveTeam", null, null);
     }
 
     @FXML
-    private void handleRemoveWndw(ActionEvent event) throws IOException
+    private void handleGoToResultManager(ActionEvent event) throws IOException
     {
-        removeTeamTour();
+        model.changeView("Update Result ", "GUI/View/ResultManager.fxml", "ResultManager", null, null);
     }
 }

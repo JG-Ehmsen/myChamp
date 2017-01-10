@@ -62,6 +62,8 @@ public class TeamsAddViewController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
         populateList();
+
+        //Puts the focus on the textfield.
         Platform.runLater(new Runnable()
         {
             @Override
@@ -70,6 +72,22 @@ public class TeamsAddViewController implements Initializable
                 txtFldTeamName.requestFocus();
             }
         });
+    }
+
+    private void populateList()
+    {
+        txtFldTeamName.focusTraversableProperty();
+
+        clnJoiningTeams.setCellValueFactory(new PropertyValueFactory("teamName"));
+        tblSignedTeams.setItems(teamParser.loadTeamsIntoViewer());
+    }
+
+    public void setInformation(String tournamentTitle, String noOfTeams)
+    {
+        this.lblTournamentName.setText(tournamentTitle);
+        this.noOfTeams = noOfTeams;
+        updateCounter();
+
     }
 
     @FXML
@@ -169,22 +187,6 @@ public class TeamsAddViewController implements Initializable
     {
         Stage stage = (Stage) btnEditNoOfTeams.getScene().getWindow();
         stage.close();
-    }
-
-    private void populateList()
-    {
-        txtFldTeamName.focusTraversableProperty();
-
-        clnJoiningTeams.setCellValueFactory(new PropertyValueFactory("teamName"));
-        tblSignedTeams.setItems(teamParser.loadTeamsIntoViewer());
-    }
-
-    public void setInformation(String tournamentTitle, String noOfTeams)
-    {
-        this.lblTournamentName.setText(tournamentTitle);
-        this.noOfTeams = noOfTeams;
-        updateCounter();
-
     }
 
     @FXML

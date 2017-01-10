@@ -90,6 +90,11 @@ public class GroupManager
                 }
                 groupCounter++;
             }
+            for (Team team : getGroupA())
+            {
+                System.out.println(team.getTeamID());
+                System.out.println(team.getTeamName());
+            }
         } catch (IOException ex)
         {
             Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
@@ -121,14 +126,27 @@ public class GroupManager
     {
         try
         {
-            fileManager.saveGroup(groupA);
-            fileManager.saveGroup(groupB);
-            fileManager.saveGroup(groupC);
-            fileManager.saveGroup(groupD);
+            fileManager.saveGroup(extractTeamIDs(groupA));
+            fileManager.saveGroup(extractTeamIDs(groupB));
+            fileManager.saveGroup(extractTeamIDs(groupC));
+            fileManager.saveGroup(extractTeamIDs(groupD));
+
         } catch (IOException ex)
         {
             Logger.getLogger(GroupManager.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private List<Integer> extractTeamIDs(List<Team> group)
+    {
+        List<Integer> groupWithTeamIDs = new ArrayList();
+        
+        for (Team team : group)
+        {
+            groupWithTeamIDs.add(team.getTeamID());
+        }
+        
+        return groupWithTeamIDs;
     }
 
 }

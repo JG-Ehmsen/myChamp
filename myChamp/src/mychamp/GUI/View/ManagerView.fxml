@@ -42,5 +42,6 @@
          </font>
       </Label>
       <Button fx:id="btnRemoveWndw" layoutX="312.0" layoutY="360.0" mnemonicParsing="false" onAction="#handleRemoveWndw" text="Go" />
+      <Button fx:id="btnBack" layoutX="29.0" layoutY="263.0" mnemonicParsing="false" onAction="#handleBack" text="Back" AnchorPane.leftAnchor="30.0" />
    </children>
 </AnchorPane>

@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.stage.Stage;
 import javafx.stage.Window;
 import mychamp.BE.Team;
 import mychamp.GUI.Model.Model;
@@ -37,6 +38,8 @@ public class ManagerViewController implements Initializable
     private Button btnRemoveWndw;
     @FXML
     private Button btnHandleResult;
+    @FXML
+    private Button btnBack;
 
     /**
      * Initializes the controller class.
@@ -47,52 +50,6 @@ public class ManagerViewController implements Initializable
         fillComboBoxRound();
         fillComboBoxGroup();
         fillComboBoxTeam();
-    }
-
-    private void removeTeamTour() throws IOException
-    {
-        /* //load the fxml file and creat a new stage for the popup dialog.
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MyChamp.class.getResource("GUI/View/RemoveTeam.fxml"));
-        AnchorPane page = (AnchorPane) loader.load();
-        //ResultManagerController controller = loader.getController();
-        //controller.setResult(result);
-
-        // Create the dialog stage.
-        Stage dialogStage = new Stage();
-        //dialogStage.setTitle(remove_Controller);
-        dialogStage.initModality(Modality.WINDOW_MODAL);
-        dialogStage.initOwner(primaryStage);
-        Scene scene = new Scene(page);
-        dialogStage.setScene(scene);
-
-        dialogStage.showAndWait();*/
-    }
-
-    private void showResultManagerWindow() throws IOException
-    {
-        /*try
-        {
-            //load the fxml file and creat a new stage for the popup dialog.
-            FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MyChamp.class.getResource("GUI/View/ResultManager.fxml"));
-            AnchorPane page = (AnchorPane) loader.load();
-            //ResultManagerController controller = loader.getController();
-            //controller.setResult(result);
-
-            // Create the dialog stage.
-            Stage dialogStage = new Stage();
-            //dialogStage.setTitle(result_Manager);
-            dialogStage.initModality(Modality.WINDOW_MODAL);
-            dialogStage.initOwner(primaryStage);
-            Scene scene = new Scene(page);
-            dialogStage.setScene(scene);
-
-            dialogStage.showAndWait();
-        } catch (IOException e)
-        {
-            e.printStackTrace();
-        }*/
     }
 
     private void fillComboBoxRound()
@@ -124,12 +81,21 @@ public class ManagerViewController implements Initializable
     @FXML
     private void handleRemoveWndw(ActionEvent event) throws IOException
     {
-        model.changeView("Remove team ", "GUI/View/RemoveTeam.fxml", "RemoveTeam", null, null);
+        model.changeView("Remove team", "GUI/View/RemoveTeam.fxml", "RemoveTeam", null, null);
     }
 
     @FXML
     private void handleGoToResultManager(ActionEvent event) throws IOException
     {
-        model.changeView("Update Result ", "GUI/View/ResultManager.fxml", "ResultManager", null, null);
+        model.changeView("Update Result", "GUI/View/ResultManager.fxml", "ResultManager", null, null);
+    }
+
+    @FXML
+    private void handleBack(ActionEvent event) throws IOException
+    {
+        model.changeView("Group stage", "GUI/View/GroupStageOverview.fxml", "GroupStageOverview", null, null);
+        
+        Stage stage = (Stage) btnBack.getScene().getWindow();
+        stage.close();
     }
 }

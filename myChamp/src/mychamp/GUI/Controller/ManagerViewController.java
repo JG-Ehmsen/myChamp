@@ -29,7 +29,7 @@ public class ManagerViewController implements Initializable
     @FXML
     private ComboBox<String> cbGroup;
     @FXML
-    private ComboBox<Team> cbTeam;
+    private ComboBox<String> cbTeam;
 
     TeamParser teamParser = TeamParser.getInstance();
     private Button btnBackMatchlist;
@@ -37,6 +37,7 @@ public class ManagerViewController implements Initializable
     private Button btnRemoveWndw;
     @FXML
     private Button btnHandleResult;
+    private Object team;
 
     /**
      * Initializes the controller class.
@@ -67,10 +68,13 @@ public class ManagerViewController implements Initializable
 
     private void fillComboBoxTeam()
     {
-        List<Team> teamList = new ArrayList();
-        teamList = teamParser.getAllTeams();
-        ObservableList<Team> comboItems
-                = FXCollections.observableArrayList();
+        List<Team> teamList = teamParser.getAllTeams();
+        List<String> teamNameList = new ArrayList();
+        for (Team team : teamList)
+        {
+            teamNameList.add(team.getTeamName());
+        }
+        ObservableList<String> comboItems = FXCollections.observableArrayList(teamNameList);
         cbTeam.setItems(comboItems);
         cbTeam.getSelectionModel().selectFirst();
     }

@@ -116,7 +116,7 @@ public class GroupStageOverviewController implements Initializable
     @FXML
     private void handleGoToMatchList(ActionEvent event) throws IOException
     {
-        model.changeView("Upcoming Matches & Resultlist ", "GUI/View/MatchListSchedule.fxml", "MatchListSchedule", "null", "null");
+        model.changeView("Upcoming Matches & Resultlist ", "GUI/View/MatchListSchedule.fxml", "MatchListSchedule", null, null);
 
         // Closes the primary stage
         Stage stage = (Stage) btnGoToMatchList.getScene().getWindow();
@@ -124,8 +124,8 @@ public class GroupStageOverviewController implements Initializable
     }
 
     private void populateList()
-    {   
-        
+    {
+
         groupAClmn.setCellValueFactory(new PropertyValueFactory("teamName"));
         gamesPlayedClmA.setCellValueFactory(new PropertyValueFactory("teamGamesPlayed"));
         gamesWonClmA.setCellValueFactory(new PropertyValueFactory("teamGamesWon"));

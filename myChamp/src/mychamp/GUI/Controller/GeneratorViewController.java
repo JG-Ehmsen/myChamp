@@ -52,7 +52,7 @@ public class GeneratorViewController implements Initializable
     @FXML
     private void handleBack(ActionEvent event) throws IOException
     {
-        model.changeView("MyChamp", "GUI/View/FrontView.fxml", "FrontView", "null", "null");
+        model.changeView("MyChamp", "GUI/View/FrontView.fxml", "FrontView", null, null);
 
         // Closes the primary stage
         Stage stage = (Stage) btnBack.getScene().getWindow();

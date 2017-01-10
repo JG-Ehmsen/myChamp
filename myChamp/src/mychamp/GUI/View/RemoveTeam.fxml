@@ -15,6 +15,6 @@
          </font>
       </Label>
       <Button fx:id="btnRemove" layoutX="271.0" layoutY="75.0" mnemonicParsing="false" onAction="#removeTeamFromTournament" text="Remove" AnchorPane.rightAnchor="30.0" />
-      <Button fx:id="btnClose" layoutX="315.0" layoutY="148.0" mnemonicParsing="false" text="Close" AnchorPane.rightAnchor="30.0" />
+      <Button fx:id="btnClose" layoutX="315.0" layoutY="148.0" mnemonicParsing="false" onAction="#handleCloseView" text="Close" AnchorPane.rightAnchor="30.0" />
    </children>
 </AnchorPane>

@@ -229,7 +229,5 @@ public class Team
     {
         this.teamGoalDifference = teamGoalDifference;
     }
-    
-    
 
 }

@@ -53,7 +53,7 @@ public class MainViewController implements Initializable
 
     private void newTournament() throws IOException
     {
-        model.changeView("MyChamp - Create tournament", "GUI/View/GeneratorView.fxml", "Generator", "null", "null");
+        model.changeView("MyChamp - Create tournament", "GUI/View/GeneratorView.fxml", "Generator", null, null);
 
         // Closes the primary stage
         Stage stage = (Stage) btnNew.getScene().getWindow();
@@ -77,7 +77,7 @@ public class MainViewController implements Initializable
 
     private void contTournament() throws IOException
     {
-        model.changeView("MyChamp - Continue tournament", "GUI/View/GroupStageOverview.fxml", "GroupStageOverview", "null", "null");
+        model.changeView("MyChamp - Continue tournament", "GUI/View/GroupStageOverview.fxml", "GroupStageOverview", null, null);
 
         Stage stage = (Stage) btnContinue.getScene().getWindow();
         stage.close();

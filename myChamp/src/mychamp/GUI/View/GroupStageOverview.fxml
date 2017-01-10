@@ -14,7 +14,7 @@
         <Label layoutX="334.0" layoutY="16.0" text="Standings after Round" textFill="WHITE" />
         <Label layoutX="497.0" layoutY="16.0" text="0" textFill="WHITE" />
         <Label layoutX="565.0" layoutY="16.0" text="0" textFill="WHITE" />
-        <TableView fx:id="groupATblVw" layoutX="15.0" layoutY="79.0" prefHeight="140.0" prefWidth="570.0">
+        <TableView fx:id="groupATblVw" layoutX="15.0" layoutY="79.0" prefHeight="140.0" prefWidth="570.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
             <columns>
                 <TableColumn minWidth="40.0" prefWidth="40.0" text="#" />
                 <TableColumn fx:id="groupAClmn" minWidth="210.0" prefWidth="210.0" text="Team" />
@@ -31,7 +31,7 @@
                 <Insets />
             </opaqueInsets>
         </TableView>
-        <TableView fx:id="groupBTblVw" layoutX="15.0" layoutY="248.0" prefHeight="140.0" prefWidth="570.0">
+        <TableView fx:id="groupBTblVw" layoutX="15.0" layoutY="248.0" prefHeight="140.0" prefWidth="570.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
             <columns>
                 <TableColumn minWidth="40.0" prefWidth="40.0" text="#" />
                 <TableColumn fx:id="groupBClmn" minWidth="210.0" prefWidth="210.0" text="Team" />
@@ -48,7 +48,7 @@
                 <Insets />
             </opaqueInsets>
         </TableView>
-        <TableView fx:id="groupCTblVw" layoutX="16.0" layoutY="415.0" prefHeight="140.0" prefWidth="570.0">
+        <TableView fx:id="groupCTblVw" layoutX="16.0" layoutY="415.0" prefHeight="140.0" prefWidth="570.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
             <columns>
                 <TableColumn minWidth="40.0" prefWidth="40.0" text="#" />
                 <TableColumn fx:id="groupCClmn" minWidth="210.0" prefWidth="210.0" text="Team" />
@@ -65,7 +65,7 @@
                 <Insets />
             </opaqueInsets>
         </TableView>
-        <TableView fx:id="groupDTblVw" layoutX="17.0" layoutY="583.0" prefHeight="140.0" prefWidth="570.0">
+        <TableView fx:id="groupDTblVw" layoutX="17.0" layoutY="583.0" prefHeight="140.0" prefWidth="570.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0">
             <columns>
                 <TableColumn minWidth="40.0" prefWidth="40.0" text="#" />
                 <TableColumn fx:id="groupDClmn" minWidth="210.0" prefWidth="210.0" text="Team" />
@@ -82,11 +82,11 @@
                 <Insets />
             </opaqueInsets>
         </TableView>
-        <Button layoutX="14.0" layoutY="19.0" mnemonicParsing="false" text="Save" />
+        <Button layoutX="14.0" layoutY="19.0" mnemonicParsing="false" text="Save" AnchorPane.leftAnchor="15.0" />
         <Button fx:id="btnGoToMatchList" layoutX="89.0" layoutY="19.0" mnemonicParsing="false" onAction="#handleGoToMatchList" text="Match Calender" />
-        <Label layoutX="14.0" layoutY="61.0" text="Group A" textFill="WHITE" />
-        <Label layoutX="13.0" layoutY="232.0" text="Group B" textFill="WHITE" />
-        <Label layoutX="14.0" layoutY="397.0" text="Group C" textFill="WHITE" />
-        <Label layoutX="16.0" layoutY="565.0" text="Group D" textFill="WHITE" />
+        <Label layoutX="14.0" layoutY="61.0" text="Group A" textFill="WHITE" AnchorPane.leftAnchor="15.0" />
+        <Label layoutX="13.0" layoutY="232.0" text="Group B" textFill="WHITE" AnchorPane.leftAnchor="15.0" />
+        <Label layoutX="14.0" layoutY="397.0" text="Group C" textFill="WHITE" AnchorPane.leftAnchor="15.0" />
+        <Label layoutX="16.0" layoutY="565.0" text="Group D" textFill="WHITE" AnchorPane.leftAnchor="15.0" />
     </children>
 </AnchorPane>

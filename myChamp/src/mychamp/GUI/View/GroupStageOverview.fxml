@@ -18,14 +18,14 @@
             <columns>
                 <TableColumn minWidth="40.0" prefWidth="40.0" text="#" />
                 <TableColumn fx:id="groupAClmn" minWidth="210.0" prefWidth="210.0" text="Team" />
-                <TableColumn minWidth="40.0" prefWidth="40.0" text="GP" />
-                <TableColumn minWidth="40.0" prefWidth="40.0" text="Won" />
-                <TableColumn minWidth="40.0" prefWidth="40.0" text="Draw" />
-                <TableColumn minWidth="40.0" prefWidth="40.0" text="Lost" />
-                <TableColumn minWidth="40.0" prefWidth="40.0" text="GF" />
-                <TableColumn minWidth="40.0" prefWidth="40.0" text="GA" />
-                <TableColumn minWidth="40.0" prefWidth="40.0" text="+/-" />
-                <TableColumn minWidth="40.0" prefWidth="40.0" text="P" />
+                <TableColumn fx:id="gamesPlayedClmA" minWidth="40.0" prefWidth="40.0" text="GP" />
+                <TableColumn fx:id="gamesWonClmA" minWidth="40.0" prefWidth="40.0" text="Won" />
+                <TableColumn fx:id="gamesDrawClmA" minWidth="40.0" prefWidth="40.0" text="Draw" />
+                <TableColumn fx:id="gamesLostClmA" minWidth="40.0" prefWidth="40.0" text="Lost" />
+                <TableColumn fx:id="goalsScoredClmA" minWidth="40.0" prefWidth="40.0" text="GF" />
+                <TableColumn fx:id="goalsScoredAgainstClmA" minWidth="40.0" prefWidth="40.0" text="GA" />
+                <TableColumn fx:id="differenceGoalsClmA" minWidth="40.0" prefWidth="40.0" text="+/-" />
+                <TableColumn fx:id="teamPointsClmA" minWidth="40.0" prefWidth="40.0" text="P" />
             </columns>
             <opaqueInsets>
                 <Insets />

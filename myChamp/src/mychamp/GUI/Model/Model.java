@@ -39,11 +39,19 @@ public class Model
 
     }
 
-    public void changeView(String title, String path) throws IOException
+    public void changeView(String title, String path, String type, String tournamentTitle, String noOfTeams) throws IOException
     {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(MyChamp.class.getResource(path));
         AnchorPane page = (AnchorPane) loader.load();
+
+        switch (type)
+        {
+            case "TeamAddView":
+                TeamsAddViewController controller = loader.getController();
+                controller.setInformation(tournamentTitle, noOfTeams);
+                break;
+        }
 
         Stage dialogStage = new Stage();
         dialogStage.initOwner(stage);
@@ -52,26 +60,6 @@ public class Model
         dialogStage.setScene(scene);
         dialogStage.setTitle(title);
 
-        dialogStage.show();
-    }
-
-    //this method can be re-written using the one above, so we dont have repeat of the same code
-    public void loadTeamAddView(String title, String path, String tournamentTitle, String noOfTeams) throws IOException
-    {
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(MyChamp.class.getResource(path));
-        AnchorPane page = (AnchorPane) loader.load();
-        TeamsAddViewController controller = loader.getController();
-        controller.setInformation(tournamentTitle, noOfTeams);
-
-        Stage dialogStage = new Stage();
-        dialogStage.initOwner(stage);
-        dialogStage.initModality(Modality.WINDOW_MODAL);
-        Scene scene = new Scene(page);
-        dialogStage.setScene(scene);
-        dialogStage.setTitle(title);
-
-        //dialogStage.setTitle(title);
         dialogStage.show();
     }
 

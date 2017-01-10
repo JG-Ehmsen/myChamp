@@ -39,6 +39,22 @@ public class GroupStageOverviewController implements Initializable
     private TableColumn<Team, String> groupDClmn;
     @FXML
     private Button btnGoToMatchList;
+    @FXML
+    private TableColumn<Team, ?> gamesPlayedClmA;
+    @FXML
+    private TableColumn<Team, String> gamesWonClmA;
+    @FXML
+    private TableColumn<Team, String> gamesDrawClmA;
+    @FXML
+    private TableColumn<Team, String> gamesLostClmA;
+    @FXML
+    private TableColumn<Team, ?> goalsScoredClmA;
+    @FXML
+    private TableColumn<Team, ?> goalsScoredAgainstClmA;
+    @FXML
+    private TableColumn<Team, ?> differenceGoalsClmA;
+    @FXML
+    private TableColumn<Team, ?> teamPointsClmA;
 
     /**
      * Initializes the controller class.
@@ -52,7 +68,7 @@ public class GroupStageOverviewController implements Initializable
     @FXML
     private void handleGoToMatchList(ActionEvent event) throws IOException
     {
-        model.changeView("Upcoming Matches & Resultlist ", "GUI/View/MatchListSchedule.fxml");
+        model.changeView("Upcoming Matches & Resultlist ", "GUI/View/MatchListSchedule.fxml", "MatchListSchedule", "null", "null");
 
         // Closes the primary stage
         Stage stage = (Stage) btnGoToMatchList.getScene().getWindow();
@@ -60,7 +76,7 @@ public class GroupStageOverviewController implements Initializable
     }
 
     private void populateList()
-    {
+    {   
         groupAClmn.setCellValueFactory(new PropertyValueFactory("teamName"));
         ObservableList<Team> groupA = FXCollections.observableArrayList(model.getGroupA());
         groupATblVw.setItems(groupA);

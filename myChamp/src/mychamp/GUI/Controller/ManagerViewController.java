@@ -12,6 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -35,6 +36,10 @@ public class ManagerViewController implements Initializable
     private ComboBox<Team> cbTeam;
 
     TeamParser teamParser = TeamParser.getInstance();
+    @FXML
+    private Button btnBackMatchlist;
+    @FXML
+    private Button btnRemoveWndw;
 
     /**
      * Initializes the controller class.
@@ -45,8 +50,7 @@ public class ManagerViewController implements Initializable
         // TODO
     }
 
-    @FXML
-    private void removeTeamTourGo(String remove_Controller, Team team) throws IOException
+    private void removeTeamTour() throws IOException
     {
         //load the fxml file and creat a new stage for the popup dialog.
         FXMLLoader loader = new FXMLLoader();
@@ -57,7 +61,7 @@ public class ManagerViewController implements Initializable
 
         // Create the dialog stage.
         Stage dialogStage = new Stage();
-        dialogStage.setTitle(remove_Controller);
+        //dialogStage.setTitle(remove_Controller);
         dialogStage.initModality(Modality.WINDOW_MODAL);
         dialogStage.initOwner(primaryStage);
         Scene scene = new Scene(page);
@@ -66,7 +70,7 @@ public class ManagerViewController implements Initializable
         dialogStage.showAndWait();
     }
 
-    private void showResultManagerWindow(String result_Manager, Result result)
+    private void showResultManagerWindow()
     {
         try
         {
@@ -79,7 +83,7 @@ public class ManagerViewController implements Initializable
 
             // Create the dialog stage.
             Stage dialogStage = new Stage();
-            dialogStage.setTitle(result_Manager);
+            //dialogStage.setTitle(result_Manager);
             dialogStage.initModality(Modality.WINDOW_MODAL);
             dialogStage.initOwner(primaryStage);
             Scene scene = new Scene(page);
@@ -90,12 +94,6 @@ public class ManagerViewController implements Initializable
         {
             e.printStackTrace();
         }
-    }
-
-    @FXML
-    private void managerGo(ActionEvent event)
-    {
-        showResultManagerWindow("New ResultManager", null);
     }
 
     private void fillComboBoxRound()
@@ -122,5 +120,17 @@ public class ManagerViewController implements Initializable
                 = FXCollections.observableArrayList(teamList);
         cbTeam.setItems(comboItems);
         cbTeam.getSelectionModel().selectFirst();
+    }
+
+    @FXML
+    private void handleBackMatchlist(ActionEvent event)
+    { 
+        showResultManagerWindow();
+    }
+
+    @FXML
+    private void handleRemoveWndw(ActionEvent event) throws IOException
+    {
+        removeTeamTour();
     }
 }

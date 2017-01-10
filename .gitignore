@@ -7,4 +7,6 @@
 *.ear
 /myChamp/dist/
 /myChamp/build/
+myChamp/nbproject/jfx-impl_backup.xml
+myChamp/nbproject/jfx-impl_backup_1.xml
 myChamp/nbproject/jfx-impl_backup_2.xml

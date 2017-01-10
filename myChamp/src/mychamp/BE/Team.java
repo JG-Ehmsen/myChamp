@@ -12,6 +12,7 @@ public class Team
     private int teamGamesLost = 0; // The amount of games lost by the team.
     private int teamGamesDraw = 0; // The amount of games played by the team that ended in a draw.
     private int teamPoints = 0; // The amount of points the team has earned.
+    private int teamGoalDifference = 0;
 
     /**
      * Creates a new 'Team' instance with the provided parameters.
@@ -218,5 +219,17 @@ public class Team
     {
         this.teamPoints = teamPoints;
     }
+
+    public int getTeamGoalDifference()
+    {
+        return teamGoalDifference;
+    }
+
+    public void setTeamGoalDifference(int teamGoalDifference)
+    {
+        this.teamGoalDifference = teamGoalDifference;
+    }
+    
+    
 
 }

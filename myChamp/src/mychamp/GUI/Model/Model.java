@@ -8,8 +8,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import mychamp.BLL.TeamManager;
-import java.util.List;
-import mychamp.BE.Team;
 import mychamp.BLL.GroupManager;
 import mychamp.GUI.Controller.TeamsAddViewController;
 import mychamp.MyChamp;
@@ -19,6 +17,8 @@ public class Model
 
     TeamManager teamManager = TeamManager.getInstance();
     GroupManager groupManager = GroupManager.getInstance();
+    
+ 
 
     private static Model instance;
 
@@ -73,34 +73,6 @@ public class Model
         dialogStage.show();
     }
 
-    public void sortTeamsIntoGroups()
-    {
-        groupManager.sortTeamsIntoGroups();
-    }
 
-    public void sendGroupInfo()
-    {
-        groupManager.sendGroupInfo();
-    }
-
-    public List<Team> getGroupA()
-    {
-        return groupManager.getGroupA();
-    }
-
-    public List<Team> getGroupB()
-    {
-        return groupManager.getGroupB();
-    }
-
-    public List<Team> getGroupC()
-    {
-        return groupManager.getGroupC();
-    }
-
-    public List<Team> getGroupD()
-    {
-        return groupManager.getGroupD();
-    }
 
 }

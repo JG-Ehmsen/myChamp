@@ -22,6 +22,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import mychamp.BE.Team;
+import mychamp.GUI.Model.GroupParser;
 import mychamp.GUI.Model.Model;
 import mychamp.GUI.Model.TeamParser;
 
@@ -31,6 +32,7 @@ public class TeamsAddViewController implements Initializable
     private Model model = Model.getInstance();
 
     private TeamParser teamParser = TeamParser.getInstance();
+    private GroupParser groupParser=GroupParser.getInstance();
 
     @FXML
     private TableColumn<Team, String> clnJoiningTeams;
@@ -193,8 +195,8 @@ public class TeamsAddViewController implements Initializable
     private void handleStartTournament(ActionEvent event) throws IOException
     {
         //Sorts the teams into groups when the specified number of teams have joined.
-        model.sortTeamsIntoGroups();
-        model.sendGroupInfo();
+        groupParser.sortTeamsIntoGroups();
+        groupParser.sendGroupInfo();
 
         String tournamentTitle = lblTournamentName.getText();
         model.changeView("Tournament " + tournamentTitle, "GUI/View/GroupStageOverview.fxml", "GroupStageOverview", "null", "null");

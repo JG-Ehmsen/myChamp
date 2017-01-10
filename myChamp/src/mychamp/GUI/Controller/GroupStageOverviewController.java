@@ -3,6 +3,8 @@ package mychamp.GUI.Controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,12 +16,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import mychamp.BE.Team;
+import mychamp.GUI.Model.GroupParser;
 import mychamp.GUI.Model.Model;
 
 public class GroupStageOverviewController implements Initializable
 {
 
     private Model model = Model.getInstance();
+    private GroupParser groupParser=GroupParser.getInstance();
 
     @FXML
     private TableView<Team> groupATblVw;
@@ -39,6 +43,7 @@ public class GroupStageOverviewController implements Initializable
     private TableColumn<Team, String> groupDClmn;
     @FXML
     private Button btnGoToMatchList;
+    
 
     /**
      * Initializes the controller class.
@@ -46,6 +51,7 @@ public class GroupStageOverviewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        model.getIsContTour();
         populateList();
     }
 
@@ -61,21 +67,47 @@ public class GroupStageOverviewController implements Initializable
 
     private void populateList()
     {
-        groupAClmn.setCellValueFactory(new PropertyValueFactory("teamName"));
-        ObservableList<Team> groupA = FXCollections.observableArrayList(model.getGroupA());
-        groupATblVw.setItems(groupA);
+        if (model.getIsContTour() == false)
+        {
+            groupAClmn.setCellValueFactory(new PropertyValueFactory("teamName"));
+            ObservableList<Team> groupA = FXCollections.observableArrayList(groupParser.getGroupA());
+            groupATblVw.setItems(groupA);
 
-        groupBClmn.setCellValueFactory(new PropertyValueFactory("teamName"));
-        ObservableList<Team> groupB = FXCollections.observableArrayList(model.getGroupB());
-        groupBTblVw.setItems(groupB);
+            groupBClmn.setCellValueFactory(new PropertyValueFactory("teamName"));
+            ObservableList<Team> groupB = FXCollections.observableArrayList(groupParser.getGroupB());
+            groupBTblVw.setItems(groupB);
 
-        groupCClmn.setCellValueFactory(new PropertyValueFactory("teamName"));
-        ObservableList<Team> groupC = FXCollections.observableArrayList(model.getGroupC());
-        groupCTblVw.setItems(groupC);
+            groupCClmn.setCellValueFactory(new PropertyValueFactory("teamName"));
+            ObservableList<Team> groupC = FXCollections.observableArrayList(groupParser.getGroupC());
+            groupCTblVw.setItems(groupC);
 
-        groupDClmn.setCellValueFactory(new PropertyValueFactory("teamName"));
-        ObservableList<Team> groupD = FXCollections.observableArrayList(model.getGroupD());
-        groupDTblVw.setItems(groupD);
+            groupDClmn.setCellValueFactory(new PropertyValueFactory("teamName"));
+            ObservableList<Team> groupD = FXCollections.observableArrayList(groupParser.getGroupD());
+            groupDTblVw.setItems(groupD);
+        } else
+        {
+            try
+            {
+                groupAClmn.setCellValueFactory(new PropertyValueFactory("teamName"));
+                ObservableList<Team> groupA = FXCollections.observableArrayList(groupParser.teamNamesInAGroup("GroupA"));
+                groupATblVw.setItems(groupA);
+                
+                groupBClmn.setCellValueFactory(new PropertyValueFactory("teamName"));
+                ObservableList<Team> groupB = FXCollections.observableArrayList(groupParser.teamNamesInAGroup("GroupB"));
+                groupBTblVw.setItems(groupB);
+                
+                groupCClmn.setCellValueFactory(new PropertyValueFactory("teamName"));
+                ObservableList<Team> groupC = FXCollections.observableArrayList(groupParser.teamNamesInAGroup("GroupC"));
+                groupCTblVw.setItems(groupC);
+                
+                groupDClmn.setCellValueFactory(new PropertyValueFactory("teamName"));
+                ObservableList<Team> groupD = FXCollections.observableArrayList(groupParser.teamNamesInAGroup("GroupD"));
+                groupDTblVw.setItems(groupD);
+            } catch (IOException ex)
+            {
+                Logger.getLogger(GroupStageOverviewController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 
 }

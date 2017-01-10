@@ -19,6 +19,8 @@ public class Model
 
     TeamManager teamManager = TeamManager.getInstance();
     GroupManager groupManager = GroupManager.getInstance();
+    
+    public boolean contTour = false;
 
     private static Model instance;
 
@@ -63,34 +65,15 @@ public class Model
         dialogStage.show();
     }
 
-    public void sortTeamsIntoGroups()
+
+    public boolean getIsContTour()
     {
-        groupManager.sortTeamsIntoGroups();
+        return contTour;
     }
 
-    public void sendGroupInfo()
+    public void setContTour(boolean contTour)
     {
-        groupManager.sendGroupInfo();
-    }
-
-    public List<Team> getGroupA()
-    {
-        return groupManager.getGroupA();
-    }
-
-    public List<Team> getGroupB()
-    {
-        return groupManager.getGroupB();
-    }
-
-    public List<Team> getGroupC()
-    {
-        return groupManager.getGroupC();
-    }
-
-    public List<Team> getGroupD()
-    {
-        return groupManager.getGroupD();
+        this.contTour = contTour;
     }
 
 }

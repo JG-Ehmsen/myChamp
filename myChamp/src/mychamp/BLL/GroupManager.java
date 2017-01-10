@@ -90,11 +90,7 @@ public class GroupManager
                 }
                 groupCounter++;
             }
-            for (Team team : getGroupA())
-            {
-                System.out.println(team.getTeamID());
-                System.out.println(team.getTeamName());
-            }
+   
         } catch (IOException ex)
         {
             Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
@@ -145,8 +141,11 @@ public class GroupManager
         {
             groupWithTeamIDs.add(team.getTeamID());
         }
-        
+  
         return groupWithTeamIDs;
     }
 
+    public List<Team> teamNamesInAGroup(String group) throws IOException{
+        return fileManager.getTeamsInGroup(group);
+    }
 }

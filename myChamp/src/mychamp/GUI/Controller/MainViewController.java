@@ -27,8 +27,10 @@ public class MainViewController implements Initializable
     private Stage window;
     private Parent root;
     Scene scene;
+
     @FXML
     private Button btnContinue;
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -64,6 +66,7 @@ public class MainViewController implements Initializable
     private void handleContinueTournament(ActionEvent event) throws IOException
     {
         contTournament();
+
     }
 
     @FXML
@@ -77,9 +80,13 @@ public class MainViewController implements Initializable
 
     private void contTournament() throws IOException
     {
+        model.setContTour(true);
         model.changeView("MyChamp - Continue tournament", "GUI/View/GroupStageOverview.fxml", "GroupStageOverview", "null", "null");
 
         Stage stage = (Stage) btnContinue.getScene().getWindow();
         stage.close();
     }
+
+    
+
 }

@@ -53,6 +53,9 @@ public class ManagerViewController implements Initializable
         fillComboBoxTeam();
     }
 
+    /**
+     * Populates the combo box with the rounds.
+     */
     private void fillComboBoxRound()
     {
         ObservableList<String> comboItems
@@ -61,6 +64,9 @@ public class ManagerViewController implements Initializable
         cbRound.getSelectionModel().selectFirst();
     }
 
+    /**
+     * Populates the combo box with the groups.
+     */
     private void fillComboBoxGroup()
     {
         ObservableList<String> comboItems
@@ -69,6 +75,9 @@ public class ManagerViewController implements Initializable
         cbGroup.getSelectionModel().selectFirst();
     }
 
+    /**
+     * Populates the combo box with the teams.
+     */
     private void fillComboBoxTeam()
     {
         List<Team> teamList = teamParser.getAllTeams();
@@ -82,18 +91,36 @@ public class ManagerViewController implements Initializable
         cbTeam.getSelectionModel().selectFirst();
     }
 
+    /**
+     * Runs the changeView method.
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void handleRemoveWndw(ActionEvent event) throws IOException
     {
         model.changeView("Remove team ", "GUI/View/RemoveTeam.fxml", "RemoveTeam", null, null);
     }
 
+    /**
+     * Runs the changeView method.
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void handleGoToResultManager(ActionEvent event) throws IOException
     {
         model.changeView("Update Result ", "GUI/View/ResultManager.fxml", "ResultManager", null, null);
     }
 
+    /**
+     * Runs the changeView method and closes this stage.
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void handleBackButton(ActionEvent event) throws IOException
     {

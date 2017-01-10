@@ -27,11 +27,11 @@ import mychamp.GUI.Model.TeamParser;
 
 public class TeamsAddViewController implements Initializable
 {
-    
-    private Model model = Model.getInstance();
-    
-    private TeamParser teamParser = TeamParser.getInstance();
-    
+
+    private Model model = Model.getInstance(); // Gets the singleton instance of 'Model'.
+
+    private TeamParser teamParser = TeamParser.getInstance(); // Gets the singleton instance of 'TeamParser'.
+
     @FXML
     private TableColumn<Team, String> clnJoiningTeams;
     @FXML
@@ -50,11 +50,8 @@ public class TeamsAddViewController implements Initializable
     private Button btnEditNoOfTeams;
     @FXML
     private TableView<Team> tblSignedTeams;
-    
-    private int maxNumOfTeams = 0;
-    private int currentNumOfTeams = 0;
-    private String noOfTeams = null;
-    
+
+    private String noOfTeams = null; // The max nr of teams in string form.
 
     /**
      * Initializes the controller class.
@@ -74,29 +71,13 @@ public class TeamsAddViewController implements Initializable
             }
         });
     }
-    
-    private void populateList()
-    {
-        txtFldTeamName.focusTraversableProperty();
-        
-        clnJoiningTeams.setCellValueFactory(new PropertyValueFactory("teamName"));
-        tblSignedTeams.setItems(teamParser.loadTeamsIntoViewer());
-    }
-    
-    public void setInformation(String tournamentTitle, String noOfTeams)
-    {
-        this.lblTournamentName.setText(tournamentTitle);
-        this.noOfTeams = noOfTeams;
-        updateCounter();
-        
-    }
-    
+
     @FXML
     private void handleAddTeam(ActionEvent event)
     {
         sendTeamNames();
     }
-    
+
     @FXML
     private void handleEnterPressed(KeyEvent event)
     {
@@ -105,7 +86,38 @@ public class TeamsAddViewController implements Initializable
             sendTeamNames();
         }
     }
-    
+
+    /**
+     * Sets the cell value factory for the table view containing signed up
+     * teams, and loads teams that have previously been added into it.
+     */
+    private void populateList()
+    {
+        clnJoiningTeams.setCellValueFactory(new PropertyValueFactory("teamName"));
+        tblSignedTeams.setItems(teamParser.loadTeamsIntoViewer());
+    }
+
+    /**
+     * Asks for the title of the tournament, along with the max number of teams
+     * in string form, before setting a label in the view with the tournament
+     * title and setting the 'noOfTeams' variable to the max number of teams.
+     *
+     * @param tournamentTitle
+     * @param noOfTeams
+     */
+    public void setInformation(String tournamentTitle, String noOfTeams)
+    {
+        this.lblTournamentName.setText(tournamentTitle);
+        this.noOfTeams = noOfTeams;
+        updateCounter();
+
+    }
+
+    /**
+     * Checks to see if the name that has currently been written is already in
+     * use, or if nothing has been written at all. If not, adds a new team,
+     * refreshes the table and updates the counter.
+     */
     private void sendTeamNames()
     {
         boolean canAddTeam = true;
@@ -119,9 +131,9 @@ public class TeamsAddViewController implements Initializable
                 alert.setContentText("Name already taken. Please write a different name.");
                 alert.show();
             }
-            
+
         }
-        
+
         if (txtFldTeamName.getText().isEmpty())
         {
             canAddTeam = false;
@@ -138,14 +150,14 @@ public class TeamsAddViewController implements Initializable
         updateCounter();
         txtFldTeamName.requestFocus();
     }
-    
+
     @FXML
     private void handleRemoveSignedTeam(ActionEvent event)
     {
         removeSignedTeam();
-        
+
     }
-    
+
     @FXML
     private void handleDeletePressed(KeyEvent event)
     {
@@ -153,35 +165,6 @@ public class TeamsAddViewController implements Initializable
         {
             removeSignedTeam();
         }
-    }
-    
-    private void removeSignedTeam()
-    {
-        if (tblSignedTeams.getSelectionModel().getSelectedItem() == null || tblSignedTeams.getItems() == null)
-        {
-            Alert alert = new Alert(AlertType.WARNING);
-            alert.setTitle("No Selection");
-            alert.setContentText("Please select a team");
-            
-            alert.showAndWait();
-        } else
-        {
-            Alert alert = new Alert(AlertType.CONFIRMATION);
-            alert.setTitle("Delete Confirmation");
-            alert.setContentText("Are you sure you want to remove team?");
-            
-            Optional<ButtonType> result = alert.showAndWait();
-            
-            if (result.get() == ButtonType.OK)
-            {
-                int Id = tblSignedTeams.getSelectionModel().getSelectedItem().getTeamID();
-                teamParser.removeTeam(Id);
-                populateList();
-                tblSignedTeams.getSelectionModel().select(0);
-            }
-        }
-        
-        updateCounter();
     }
 
     //Returns to previous window so user can change the number of teams in the tournament
@@ -193,38 +176,80 @@ public class TeamsAddViewController implements Initializable
         Stage stage = (Stage) btnEditNoOfTeams.getScene().getWindow();
         stage.close();
     }
-    
+
     @FXML
     private void handleStartTournament(ActionEvent event) throws IOException
     {
         //Sorts the teams into groups when the specified number of teams have joined.
         model.sortTeamsIntoGroups();
         model.sendGroupInfo();
-        
+
         String tournamentTitle = lblTournamentName.getText();
         model.changeView("Tournament " + tournamentTitle, "GUI/View/GroupStageOverview.fxml", "GroupStageOverview", null, null);
 
         // Closes the primary stage
         Stage stage = (Stage) btnReadyOrNot.getScene().getWindow();
         stage.close();
-        
+
     }
-    
+
+    /**
+     * Gets information about the currently selected team in the list, and
+     * deletes if. Produces an error message if no team has been selected. Also
+     * asks for confirmation before deleting. The request is then relayed
+     * downwards through the layers. Finally calls a request to update the
+     * counter.
+     */
+    private void removeSignedTeam()
+    {
+        if (tblSignedTeams.getSelectionModel().getSelectedItem() == null || tblSignedTeams.getItems() == null)
+        {
+            Alert alert = new Alert(AlertType.WARNING);
+            alert.setTitle("No Selection");
+            alert.setContentText("Please select a team");
+
+            alert.showAndWait();
+        } else
+        {
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Delete Confirmation");
+            alert.setContentText("Are you sure you want to remove team?");
+
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.get() == ButtonType.OK)
+            {
+                int Id = tblSignedTeams.getSelectionModel().getSelectedItem().getTeamID();
+                teamParser.removeTeam(Id);
+                populateList();
+                tblSignedTeams.getSelectionModel().select(0);
+            }
+        }
+
+        updateCounter();
+    }
+
+    /**
+     * Updates the counter for the amount of teams added/maximum team capacity,
+     * and disables buttons accordingly.
+     */
     private void updateCounter()
     {
-        String stringMaxNumOfTeams;
-        String stringCurrentNumOfTeams;
-        
+        String stringMaxNumOfTeams; // The integer 'maxNumOfTeams' parsed to a string.
+        String stringCurrentNumOfTeams; // The integer 'currentNumOfTeams' parsed to a string.
+        int maxNumOfTeams = 0; // An integer representing the maximum number of teams in a tournament.
+        int currentNumOfTeams = 0; // An integer representing the currently added number of teams in a tournament.
+
         currentNumOfTeams = tblSignedTeams.getItems().size();
         maxNumOfTeams = Integer.parseInt(noOfTeams);
-        
+
         if (currentNumOfTeams == maxNumOfTeams)
         {
             btnReadyOrNot.setText("Ready");
             btnReadyOrNot.setDisable(false);
             btnAddTeam.setDisable(true);
             lblCountDown.setTextFill(Color.web("#7CFC00"));
-            
+
         } else if (currentNumOfTeams > maxNumOfTeams)
         {
             btnReadyOrNot.setText("Not Ready");
@@ -238,10 +263,10 @@ public class TeamsAddViewController implements Initializable
             btnAddTeam.setDisable(false);
             lblCountDown.setTextFill(Color.web("#FFFFF0"));
         }
-        
+
         stringMaxNumOfTeams = Integer.toString(maxNumOfTeams);
         stringCurrentNumOfTeams = Integer.toString(currentNumOfTeams);
         lblCountDown.setText(stringCurrentNumOfTeams + " / " + stringMaxNumOfTeams);
     }
-    
+
 }

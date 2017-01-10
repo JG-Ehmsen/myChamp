@@ -39,6 +39,22 @@ public class GroupStageOverviewController implements Initializable
     private TableColumn<Team, String> groupDClmn;
     @FXML
     private Button btnGoToMatchList;
+    @FXML
+    private TableColumn<Team, ?> gamesPlayedClmA;
+    @FXML
+    private TableColumn<Team, String> gamesWonClmA;
+    @FXML
+    private TableColumn<Team, String> gamesDrawClmA;
+    @FXML
+    private TableColumn<Team, String> gamesLostClmA;
+    @FXML
+    private TableColumn<Team, ?> goalsScoredClmA;
+    @FXML
+    private TableColumn<Team, ?> goalsScoredAgainstClmA;
+    @FXML
+    private TableColumn<Team, ?> differenceGoalsClmA;
+    @FXML
+    private TableColumn<Team, ?> teamPointsClmA;
 
     /**
      * Initializes the controller class.
@@ -60,7 +76,7 @@ public class GroupStageOverviewController implements Initializable
     }
 
     private void populateList()
-    {
+    {   
         groupAClmn.setCellValueFactory(new PropertyValueFactory("teamName"));
         ObservableList<Team> groupA = FXCollections.observableArrayList(model.getGroupA());
         groupATblVw.setItems(groupA);

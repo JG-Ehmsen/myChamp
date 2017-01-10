@@ -30,6 +30,11 @@ public class ResultManagerController implements Initializable
         // TODO
     }
 
+    /**
+     * Closes this stage.
+     *
+     * @param event
+     */
     @FXML
     private void btnCloseResultManager(ActionEvent event)
     {

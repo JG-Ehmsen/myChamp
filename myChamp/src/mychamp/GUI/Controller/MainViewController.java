@@ -36,6 +36,12 @@ public class MainViewController implements Initializable
         // TODO
     }
 
+    /**
+     * Runs the newTournament method.
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void handleNewTournament(ActionEvent event) throws IOException
     {
@@ -51,6 +57,12 @@ public class MainViewController implements Initializable
         }
     }
 
+    /**
+     * Runs the changeView method and closes this stage.
+     *
+     * @param event
+     * @throws IOException
+     */
     private void newTournament() throws IOException
     {
         model.changeView("MyChamp - Create tournament", "GUI/View/GeneratorView.fxml", "Generator", null, null);
@@ -60,6 +72,12 @@ public class MainViewController implements Initializable
         stage.close();
     }
 
+    /**
+     * Runs the contTournament method.
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void handleContinueTournament(ActionEvent event) throws IOException
     {
@@ -75,6 +93,12 @@ public class MainViewController implements Initializable
         }
     }
 
+    /**
+     * Runs the changeView method and closes this stage.
+     *
+     * @param event
+     * @throws IOException
+     */
     private void contTournament() throws IOException
     {
         model.changeView("MyChamp - Continue tournament", "GUI/View/GroupStageOverview.fxml", "GroupStageOverview", null, null);

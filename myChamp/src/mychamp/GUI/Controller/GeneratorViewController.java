@@ -44,7 +44,7 @@ public class GeneratorViewController implements Initializable
     }
 
     /**
-     * Runs the changeView method and closes the GeneratorView.
+     * Runs the changeView method and closes the FrontView.
      *
      * @param event
      * @throws IOException
@@ -59,12 +59,24 @@ public class GeneratorViewController implements Initializable
         stage.close();
     }
 
+    /**
+     * Runs the goToAddTeamView method.
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void handleNext(ActionEvent event) throws IOException
     {
         goToAddTeamView();
     }
 
+    /**
+     * Runs the changeView method and closes this stage. Shows an alert
+     * if info is missing in cBoxNoOfTeams or txtFldTournamentTitle.
+     *
+     * @throws IOException
+     */
     private void goToAddTeamView() throws IOException
     {
         if (cBoxNoOfTeams.getValue() == null || txtFldTournamentTitle.getText().equals("") || txtFldTournamentTitle.getText() == null)
@@ -84,6 +96,10 @@ public class GeneratorViewController implements Initializable
         }
     }
 
+    /**
+     * Populates the combo box to choose number of teams participating in the
+     * tournament.
+     */
     private void fillComboBox()
     {
         ObservableList<String> comboItems

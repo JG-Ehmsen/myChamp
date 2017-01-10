@@ -113,6 +113,12 @@ public class GroupStageOverviewController implements Initializable
         populateList();
     }
 
+    /**
+     * Runs the changeView method and closes this stage.
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void handleGoToMatchList(ActionEvent event) throws IOException
     {

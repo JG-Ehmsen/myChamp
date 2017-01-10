@@ -39,6 +39,16 @@ public class Model
 
     }
 
+    /**
+     * Changes the view.
+     *
+     * @param title
+     * @param path
+     * @param type
+     * @param tournamentTitle
+     * @param noOfTeams
+     * @throws IOException
+     */
     public void changeView(String title, String path, String type, String tournamentTitle, String noOfTeams) throws IOException
     {
         FXMLLoader loader = new FXMLLoader();

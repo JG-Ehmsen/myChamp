@@ -37,6 +37,11 @@ public class RemoveTeamController implements Initializable
         // TODO
     }
 
+    /**
+     * Closes this stage.
+     *
+     * @param event
+     */
     @FXML
     private void handleCloseView(ActionEvent event)
     {
@@ -53,7 +58,7 @@ public class RemoveTeamController implements Initializable
         removeTeam.setItems(comboItems);
         removeTeam.getSelectionModel().selectFirst();
     }
-    
+
     @FXML
     private void removeTeamFromTournament(ActionEvent event)
     {
@@ -82,6 +87,6 @@ public class RemoveTeamController implements Initializable
 
         }
     }
-    
+
     
 }

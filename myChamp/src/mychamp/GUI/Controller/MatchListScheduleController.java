@@ -32,6 +32,12 @@ public class MatchListScheduleController implements Initializable
         // TODO
     }
 
+    /**
+     * Runs the changeView method and closes this stage.
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void handleGoToTable(ActionEvent event) throws IOException
     {
@@ -43,6 +49,12 @@ public class MatchListScheduleController implements Initializable
         stage.close();
     }
 
+    /**
+     * Runs the changeView method and closes this stage.
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void handleGoToManagerView(ActionEvent event) throws IOException
     {

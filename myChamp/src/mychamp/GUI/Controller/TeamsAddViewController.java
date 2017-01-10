@@ -72,6 +72,11 @@ public class TeamsAddViewController implements Initializable
         });
     }
 
+    /**
+     * Runs the sendTeamName method.
+     *
+     * @param event
+     */
     @FXML
     private void handleAddTeam(ActionEvent event)
     {
@@ -151,6 +156,10 @@ public class TeamsAddViewController implements Initializable
         txtFldTeamName.requestFocus();
     }
 
+    /**
+     * Runs the removeSigneTeam method.
+     * @param event 
+     */
     @FXML
     private void handleRemoveSignedTeam(ActionEvent event)
     {
@@ -167,7 +176,12 @@ public class TeamsAddViewController implements Initializable
         }
     }
 
-    //Returns to previous window so user can change the number of teams in the tournament
+    /**
+     * Runs the changeView method and closes this stage.
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     private void handleEditAmountTeams(ActionEvent event) throws IOException
     {

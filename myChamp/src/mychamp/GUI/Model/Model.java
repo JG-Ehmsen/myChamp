@@ -8,8 +8,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import mychamp.BLL.TeamManager;
-import java.util.List;
-import mychamp.BE.Team;
 import mychamp.BLL.GroupManager;
 import mychamp.GUI.Controller.TeamsAddViewController;
 import mychamp.MyChamp;
@@ -20,7 +18,7 @@ public class Model
     TeamManager teamManager = TeamManager.getInstance();
     GroupManager groupManager = GroupManager.getInstance();
     
-    public boolean contTour = false;
+ 
 
     private static Model instance;
 
@@ -66,14 +64,5 @@ public class Model
     }
 
 
-    public boolean getIsContTour()
-    {
-        return contTour;
-    }
-
-    public void setContTour(boolean contTour)
-    {
-        this.contTour = contTour;
-    }
 
 }

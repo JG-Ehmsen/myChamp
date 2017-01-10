@@ -47,6 +47,7 @@ public class GroupManager
     private void shuffleTeams() throws IOException
     {
         shuffleTeams = fileManager.getAllTeams();
+        
         Collections.shuffle(shuffleTeams);
 
         teamQueue = new LinkedList(shuffleTeams);
@@ -122,10 +123,10 @@ public class GroupManager
     {
         try
         {
-            fileManager.saveGroup(extractTeamIDs(groupA));
-            fileManager.saveGroup(extractTeamIDs(groupB));
-            fileManager.saveGroup(extractTeamIDs(groupC));
-            fileManager.saveGroup(extractTeamIDs(groupD));
+            fileManager.saveGroup(extractTeamIDs(getGroupA()));
+            fileManager.saveGroup(extractTeamIDs(getGroupB()));
+            fileManager.saveGroup(extractTeamIDs(getGroupC()));
+            fileManager.saveGroup(extractTeamIDs(getGroupD()));
 
         } catch (IOException ex)
         {
@@ -147,5 +148,9 @@ public class GroupManager
 
     public List<Team> teamNamesInAGroup(String group) throws IOException{
         return fileManager.getTeamsInGroup(group);
+    }
+    
+    public boolean checkGroupRAF(){
+        return fileManager.checkGroupRAF();
     }
 }

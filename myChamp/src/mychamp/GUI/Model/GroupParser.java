@@ -10,6 +10,7 @@ public class GroupParser
 
     private static GroupParser instance;
     GroupManager groupManager = GroupManager.getInstance();
+    public boolean contTour = false;
 
     public static GroupParser getInstance()
     {
@@ -24,11 +25,12 @@ public class GroupParser
     private GroupParser()
     {
     }
-    
-    public List<Team> teamNamesInAGroup(String group) throws IOException{
+
+    public List<Team> teamNamesInAGroup(String group) throws IOException
+    {
         return groupManager.teamNamesInAGroup(group);
     }
-    
+
     public void sortTeamsIntoGroups()
     {
         groupManager.sortTeamsIntoGroups();
@@ -58,4 +60,15 @@ public class GroupParser
     {
         return groupManager.getGroupD();
     }
+
+    public boolean checkGroupRAF()
+    {
+        return groupManager.checkGroupRAF();
+    }
+
+    public boolean getIsContTour()
+    {
+        return checkGroupRAF();
+    }
+
 }

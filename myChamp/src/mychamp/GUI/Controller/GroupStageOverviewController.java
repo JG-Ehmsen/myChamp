@@ -51,7 +51,7 @@ public class GroupStageOverviewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        model.getIsContTour();
+        groupParser.getIsContTour();
         populateList();
     }
 
@@ -67,7 +67,7 @@ public class GroupStageOverviewController implements Initializable
 
     private void populateList()
     {
-        if (model.getIsContTour() == false)
+        if (groupParser.getIsContTour() == false)
         {
             groupAClmn.setCellValueFactory(new PropertyValueFactory("teamName"));
             ObservableList<Team> groupA = FXCollections.observableArrayList(groupParser.getGroupA());

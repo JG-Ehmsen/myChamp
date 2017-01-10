@@ -27,11 +27,11 @@ import mychamp.GUI.Model.TeamParser;
 
 public class TeamsAddViewController implements Initializable
 {
-
+    
     private Model model = Model.getInstance();
-
+    
     private TeamParser teamParser = TeamParser.getInstance();
-
+    
     @FXML
     private TableColumn<Team, String> clnJoiningTeams;
     @FXML
@@ -50,10 +50,11 @@ public class TeamsAddViewController implements Initializable
     private Button btnEditNoOfTeams;
     @FXML
     private TableView<Team> tblSignedTeams;
-
+    
     private int maxNumOfTeams = 0;
     private int currentNumOfTeams = 0;
     private String noOfTeams = null;
+    
 
     /**
      * Initializes the controller class.
@@ -73,38 +74,38 @@ public class TeamsAddViewController implements Initializable
             }
         });
     }
-
+    
     private void populateList()
     {
         txtFldTeamName.focusTraversableProperty();
-
+        
         clnJoiningTeams.setCellValueFactory(new PropertyValueFactory("teamName"));
         tblSignedTeams.setItems(teamParser.loadTeamsIntoViewer());
     }
-
+    
     public void setInformation(String tournamentTitle, String noOfTeams)
     {
         this.lblTournamentName.setText(tournamentTitle);
         this.noOfTeams = noOfTeams;
         updateCounter();
-
+        
     }
-
+    
     @FXML
     private void handleAddTeam(ActionEvent event)
     {
         sendTeamNames();
     }
-
+    
     @FXML
     private void handleEnterPressed(KeyEvent event)
     {
-        if (event.getCode() == KeyCode.ENTER)
+        if (event.getCode() == KeyCode.ENTER && !btnAddTeam.isDisabled())
         {
             sendTeamNames();
         }
     }
-
+    
     private void sendTeamNames()
     {
         boolean canAddTeam = true;
@@ -118,9 +119,9 @@ public class TeamsAddViewController implements Initializable
                 alert.setContentText("Name already taken. Please write a different name.");
                 alert.show();
             }
-
+            
         }
-
+        
         if (txtFldTeamName.getText().isEmpty())
         {
             canAddTeam = false;
@@ -135,15 +136,16 @@ public class TeamsAddViewController implements Initializable
             populateList();
         }
         updateCounter();
+        txtFldTeamName.requestFocus();
     }
-
+    
     @FXML
     private void handleRemoveSignedTeam(ActionEvent event)
     {
         removeSignedTeam();
-
+        
     }
-
+    
     @FXML
     private void handleDeletePressed(KeyEvent event)
     {
@@ -152,7 +154,7 @@ public class TeamsAddViewController implements Initializable
             removeSignedTeam();
         }
     }
-
+    
     private void removeSignedTeam()
     {
         if (tblSignedTeams.getSelectionModel().getSelectedItem() == null || tblSignedTeams.getItems() == null)
@@ -160,24 +162,25 @@ public class TeamsAddViewController implements Initializable
             Alert alert = new Alert(AlertType.WARNING);
             alert.setTitle("No Selection");
             alert.setContentText("Please select a team");
-
+            
             alert.showAndWait();
         } else
         {
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("Delete Confirmation");
             alert.setContentText("Are you sure you want to remove team?");
-
+            
             Optional<ButtonType> result = alert.showAndWait();
-
+            
             if (result.get() == ButtonType.OK)
             {
                 int Id = tblSignedTeams.getSelectionModel().getSelectedItem().getTeamID();
                 teamParser.removeTeam(Id);
                 populateList();
+                tblSignedTeams.getSelectionModel().select(0);
             }
         }
-
+        
         updateCounter();
     }
 
@@ -188,38 +191,38 @@ public class TeamsAddViewController implements Initializable
         Stage stage = (Stage) btnEditNoOfTeams.getScene().getWindow();
         stage.close();
     }
-
+    
     @FXML
     private void handleStartTournament(ActionEvent event) throws IOException
     {
         //Sorts the teams into groups when the specified number of teams have joined.
         model.sortTeamsIntoGroups();
         model.sendGroupInfo();
-
+        
         String tournamentTitle = lblTournamentName.getText();
         model.changeView("Tournament " + tournamentTitle, "GUI/View/GroupStageOverview.fxml", "GroupStageOverview", "null", "null");
 
         // Closes the primary stage
         Stage stage = (Stage) btnReadyOrNot.getScene().getWindow();
         stage.close();
-
+        
     }
-
+    
     private void updateCounter()
     {
         String stringMaxNumOfTeams;
         String stringCurrentNumOfTeams;
-
+        
         currentNumOfTeams = tblSignedTeams.getItems().size();
         maxNumOfTeams = Integer.parseInt(noOfTeams);
-
+        
         if (currentNumOfTeams == maxNumOfTeams)
         {
             btnReadyOrNot.setText("Ready");
             btnReadyOrNot.setDisable(false);
             btnAddTeam.setDisable(true);
             lblCountDown.setTextFill(Color.web("#7CFC00"));
-
+            
         } else if (currentNumOfTeams > maxNumOfTeams)
         {
             btnReadyOrNot.setText("Not Ready");
@@ -233,10 +236,10 @@ public class TeamsAddViewController implements Initializable
             btnAddTeam.setDisable(false);
             lblCountDown.setTextFill(Color.web("#FFFFF0"));
         }
-
+        
         stringMaxNumOfTeams = Integer.toString(maxNumOfTeams);
         stringCurrentNumOfTeams = Integer.toString(currentNumOfTeams);
         lblCountDown.setText(stringCurrentNumOfTeams + " / " + stringMaxNumOfTeams);
     }
-
+    
 }

@@ -80,7 +80,7 @@ public class FileManager
         }
     }
 
-    public void saveGroup(List<Team> groupArray) throws IOException
+    public void saveGroup(List<Integer> groupArray) throws IOException
     {
         int nextGroupId;
 
@@ -97,16 +97,28 @@ public class FileManager
 
             groupRAF.seek(getFirstAvailPointer("group"));
             groupRAF.seek(groupRAF.length());
-            //groupRAF.writeInt(nextGroupId);
+            groupRAF.writeInt(nextGroupId);
 
-            for (int i = 0; i < groupArray.size(); i++)
+            if (groupArray.size() == 3)
             {
-                groupRAF.writeInt(i);
+                for (Integer teamID : groupArray)
+                {
+                    groupRAF.writeInt(teamID);
+                }
+                
+            } else { //Only accounts for 3 teams in the group. Writes 0 for the ID of the 4th team.
+                for (Integer teamID : groupArray)
+                {
+                    groupRAF.writeInt(teamID);
+                    groupRAF.writeInt(0);
 
+                }
             }
 
         }
     }
+
+ 
 
     public long getFirstAvailPointer(String fileType) throws FileNotFoundException, IOException
     {

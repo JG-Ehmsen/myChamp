@@ -69,7 +69,7 @@ public class RemoveTeamController implements Initializable
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setTitle("Delete Confirmation");
             alert.setHeaderText(null);
-            alert.setContentText("Are you sure you want to remove team");
+            alert.setContentText("Are you sure you want to remove team?");
 
             Optional<ButtonType> result = alert.showAndWait();
 

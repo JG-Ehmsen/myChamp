@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mychamp.GUI.Controller;
 
 import java.io.IOException;
@@ -15,11 +10,6 @@ import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import mychamp.GUI.Model.Model;
 
-/**
- * FXML Controller class
- *
- * @author Fjord82
- */
 public class MatchListScheduleController implements Initializable
 {
 
@@ -46,7 +36,7 @@ public class MatchListScheduleController implements Initializable
     private void handleGoToTable(ActionEvent event) throws IOException
     {
 
-        model.changeView("Tournament " + lblTournamentName, "GUI/View/GroupStageOverview.fxml");
+        model.changeView("Tournament " + lblTournamentName, "GUI/View/GroupStageOverview.fxml", "GroupStageOverview", "null", "null");
 
         // Closes the primary stage
         Stage stage = (Stage) btnGoToTable.getScene().getWindow();

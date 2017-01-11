@@ -10,26 +10,26 @@
 
 <AnchorPane id="AnchorPane" minHeight="300.0" minWidth="400.0" prefHeight="300.0" prefWidth="400.0" style="-fx-background-color: Black;" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mychamp.GUI.Controller.TeamsAddViewController">
    <children>
-      <TableView fx:id="tblSignedTeams" layoutX="200.0" layoutY="16.0" onKeyPressed="#handleDeletePressed" prefHeight="272.0" prefWidth="187.0">
+      <TableView fx:id="tblSignedTeams" layoutX="200.0" layoutY="16.0" onKeyPressed="#handleDeletePressed" prefHeight="272.0" prefWidth="187.0" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
         <columns>
           <TableColumn fx:id="clnJoiningTeams" prefWidth="199.0" text="Joining teams" />
         </columns>
       </TableView>
-      <TextField fx:id="txtFldTeamName" layoutX="15.0" layoutY="93.0" onKeyPressed="#handleEnterPressed" />
-      <Label layoutX="15.0" layoutY="69.0" text="Sign in team here" textFill="WHITE" />
-      <Button fx:id="btnAddTeam" layoutX="17.0" layoutY="137.0" mnemonicParsing="false" onAction="#handleAddTeam" style="-fx-background-color: white;" text="Add team" />
-      <Button fx:id="btnRemoveTeam" layoutX="107.0" layoutY="137.0" mnemonicParsing="false" onAction="#handleRemoveSignedTeam" style="-fx-background-color: white;" text="Remove " />
-      <Label layoutX="17.0" layoutY="179.0" text="Remining registration:" textFill="WHITE" />
-      <Label layoutX="14.0" layoutY="234.0" text="Start tournament" textFill="WHITE" />
-      <Button fx:id="btnReadyOrNot" layoutX="14.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleStartTournament" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: white;" text="Not ready" />
+      <TextField fx:id="txtFldTeamName" layoutX="15.0" layoutY="93.0" onKeyPressed="#handleEnterPressed" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="215.0" />
+      <Label layoutX="15.0" layoutY="69.0" text="Sign in team here" textFill="WHITE" AnchorPane.leftAnchor="15.0" />
+      <Button fx:id="btnAddTeam" layoutX="17.0" layoutY="137.0" mnemonicParsing="false" onAction="#handleAddTeam" style="-fx-background-color: white;" text="Add team" AnchorPane.leftAnchor="15.0" />
+      <Button fx:id="btnRemoveTeam" layoutX="107.0" layoutY="137.0" mnemonicParsing="false" onAction="#handleRemoveSignedTeam" style="-fx-background-color: white;" text="Remove " AnchorPane.rightAnchor="215.0" />
+      <Label layoutX="17.0" layoutY="179.0" text="Remining registration:" textFill="WHITE" AnchorPane.leftAnchor="15.0" />
+      <Label layoutX="14.0" layoutY="234.0" text="Start tournament" textFill="WHITE" AnchorPane.leftAnchor="15.0" />
+      <Button fx:id="btnReadyOrNot" layoutX="14.0" layoutY="260.0" mnemonicParsing="false" onAction="#handleStartTournament" prefHeight="26.0" prefWidth="100.0" style="-fx-background-color: white;" text="Not ready" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" />
       <Label fx:id="lblCountDown" alignment="CENTER" layoutX="21.0" layoutY="202.0" prefHeight="27.0" prefWidth="100.0" text="0" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Label fx:id="lblTournamentName" layoutX="12.0" layoutY="24.0" text="Tournament Name" textFill="WHITE">
+      <Label fx:id="lblTournamentName" layoutX="12.0" layoutY="24.0" text="Tournament Name" textFill="WHITE" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="215.0" AnchorPane.topAnchor="10.0">
          <font>
             <Font size="18.0" />
          </font></Label>
-      <Button fx:id="btnEditNoOfTeams" layoutX="136.0" layoutY="201.0" mnemonicParsing="false" onAction="#handleEditAmountTeams" style="-fx-background-color: white;" text="Edit" />
+      <Button fx:id="btnEditNoOfTeams" layoutX="136.0" layoutY="201.0" mnemonicParsing="false" onAction="#handleEditAmountTeams" style="-fx-background-color: white;" text="Edit" AnchorPane.rightAnchor="215.0" />
    </children>
 </AnchorPane>

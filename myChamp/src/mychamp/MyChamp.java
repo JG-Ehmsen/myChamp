@@ -5,9 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import mychamp.BLL.MatchManager;
 
 public class MyChamp extends Application
 {
+    MatchManager matchManager = MatchManager.getInstance();
 
     @Override
     public void start(Stage stage) throws Exception
@@ -25,6 +27,7 @@ public class MyChamp extends Application
     public static void main(String[] args)
     {
         launch(args);
+    
     }
 
 }

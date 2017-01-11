@@ -1,59 +1,54 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mychamp.BE;
 
-/**
- *
- * @author Fjord82
- */
 public class Match
 {
+
     private int roundID;
-    private String homeTeam = "";
-    private String awayTeam = "";
-    
-    
+    private int matchID;
+    private int homeTeamID;
+    private int awayTeamID;
+    private String homeTeamName = "";
 
-public Match(int roundID, String homeTeam, String awayTeam)
-{
-    this.roundID = roundID;
-    this.homeTeam = homeTeam;
-    this.awayTeam = awayTeam;
-    
-}      
-             
+    private String awayTeamName = "";
 
-public int getRoundID()
-{
-    return roundID;
-}
+    public Match(int roundID, int matchID, int homeTeamID, int awayTeamID, String homeTeamName, String awayTeamName)
+    {
+        this.roundID = roundID;
+        this.matchID = matchID;
+        this.homeTeamID = homeTeamID;
+        this.awayTeamID = awayTeamID;
+        this.homeTeamName=homeTeamName;
+        this.awayTeamName=awayTeamName;
+    }
 
-public void setRoundID(int roundID)
-{
-    this.roundID = roundID;
-}
+    public String getHomeTeamName()
+    {
+        return homeTeamName;
+    }
 
-public String getHomeTeam()
-{
-    return homeTeam;
-}
+    public String getAwayTeamName()
+    {
+        return awayTeamName;
+    }
 
-public void setHomeTeam(String homeTeam)
-{
-    this.homeTeam = homeTeam;
-}
+    public int getMatchID()
+    {
+        return matchID;
+    }
 
-public String getAwayTeam()
-{
-    return awayTeam;
-}
+    public int getRoundID()
+    {
+        return roundID;
+    }
 
-public void setAwayTeam(String awayTeam)
-{
-    this.awayTeam = awayTeam;
-}
+    public int getHomeTeamID()
+    {
+        return homeTeamID;
+    }
+
+    public int getAwayTeamID()
+    {
+        return awayTeamID;
+    }
 
 }

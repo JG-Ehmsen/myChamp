@@ -47,7 +47,7 @@ public class GroupManager
     private void shuffleTeams() throws IOException
     {
         shuffleTeams = fileManager.getAllTeams();
-        
+
         Collections.shuffle(shuffleTeams);
 
         teamQueue = new LinkedList(shuffleTeams);
@@ -91,7 +91,7 @@ public class GroupManager
                 }
                 groupCounter++;
             }
-   
+
         } catch (IOException ex)
         {
             Logger.getLogger(Model.class.getName()).log(Level.SEVERE, null, ex);
@@ -121,8 +121,7 @@ public class GroupManager
 
     public void sendGroupInfo()
     {
-        fileManager.saveAllGroups
-        (
+        fileManager.saveAllGroups(
                 extractTeamIDs(getGroupA()),
                 extractTeamIDs(getGroupB()),
                 extractTeamIDs(getGroupC()),
@@ -133,20 +132,22 @@ public class GroupManager
     private List<Integer> extractTeamIDs(List<Team> group)
     {
         List<Integer> groupWithTeamIDs = new ArrayList();
-        
+
         for (Team team : group)
         {
             groupWithTeamIDs.add(team.getTeamID());
         }
-  
+
         return groupWithTeamIDs;
     }
 
-    public List<Team> teamNamesInAGroup(String group) throws IOException{
+    public List<Team> teamNamesInAGroup(String group) throws IOException
+    {
         return fileManager.getTeamsInGroup(group);
     }
-    
-    public boolean checkGroupRAF(){
+
+    public boolean checkGroupRAF()
+    {
         return fileManager.checkGroupRAF();
     }
 }

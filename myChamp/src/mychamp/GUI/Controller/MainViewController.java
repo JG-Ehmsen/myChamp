@@ -112,8 +112,7 @@ public class MainViewController implements Initializable
         if (groupParser.getIsContTour() == true)
         {
 
-        model.changeView("MyChamp - Continue tournament", "GUI/View/GroupStageOverview.fxml", "GroupStageOverview", null, null);
-
+            model.changeView("MyChamp - Continue tournament", "GUI/View/GroupStageOverview.fxml", "GroupStageOverview", null, null);
 
             Stage stage = (Stage) btnContinue.getScene().getWindow();
             stage.close();

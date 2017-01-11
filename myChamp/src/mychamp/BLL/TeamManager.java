@@ -49,7 +49,7 @@ public class TeamManager
         }
 
     }
-    
+
     public void clearAllFiles()
     {
         fileManager.clearAllFiles();

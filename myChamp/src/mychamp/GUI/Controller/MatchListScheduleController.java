@@ -25,9 +25,6 @@ public class MatchListScheduleController implements Initializable
 
     @FXML
     private Button btnGoToTable;
-
-    private Object lblTournamentName;
-
     @FXML
     private Button btnUpdateTour;
     @FXML

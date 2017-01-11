@@ -150,6 +150,7 @@ public class MatchManager
                     {
                         awayID = team.getTeamID();
 
+
                     }
                 }
                 Match newMatch = new Match(roundID, matchID, homeID, awayID, fileManager.getTeamName(homeID), fileManager.getTeamName(awayID));

@@ -63,7 +63,7 @@ public class FileManager
             teamRAF.seek(0);
             teamRAF.writeInt(nextId + 1);
 
-            teamRAF.seek(getFirstAvailPointer("team"));
+            teamRAF.seek(getFirstAvailPointer());
 
             teamRAF.writeInt(nextId);
             teamRAF.writeBytes(String.format("%-" + TEAM_NAME_SIZE + "s", teamName).substring(0, TEAM_NAME_SIZE));
@@ -91,59 +91,39 @@ public class FileManager
                 groupRAF.writeInt(1);
                 groupRAF.seek(0);
             }
+            groupRAF.seek(0);
             nextGroupId = groupRAF.readInt();
             groupRAF.seek(0);
             groupRAF.writeInt(nextGroupId + 1);
 
-            groupRAF.seek(getFirstAvailPointer("group"));
             groupRAF.seek(groupRAF.length());
             groupRAF.writeInt(nextGroupId);
 
-            if (groupArray.size() == 3)
+            if (groupArray.size() == 4)
             {
                 for (Integer teamID : groupArray)
                 {
                     groupRAF.writeInt(teamID);
                 }
-                
-            } else { //Only accounts for 3 teams in the group. Writes 0 for the ID of the 4th team.
+
+            } else
+            { //Only accounts for 3 teams in the group. Writes 0 for the ID of the 4th team.
                 for (Integer teamID : groupArray)
                 {
                     groupRAF.writeInt(teamID);
-                    groupRAF.writeInt(0);
-
                 }
+                groupRAF.writeInt(-2);
             }
 
         }
     }
 
- 
-
-    public long getFirstAvailPointer(String fileType) throws FileNotFoundException, IOException
+    public long getFirstAvailPointer() throws FileNotFoundException, IOException
     {
-        String file = "";
-        int recordSize = 0;
 
-        switch (fileType)
+        try (RandomAccessFile raf = new RandomAccessFile(new File("teams.txt"), "rw"))
         {
-            case "team":
-                file = "teams.txt";
-                recordSize = RECORD_SIZE_TEAMS;
-                break;
-            case "group":
-                file = "groups.txt";
-                recordSize = RECORD_SIZE_GROUPS;
-                break;
-            case "round":
-                file = "rounds.txt";
-                recordSize = RECORD_SIZE_ROUNDS;
-                break;
-        }
-
-        try (RandomAccessFile raf = new RandomAccessFile(new File(file), "rw"))
-        {
-            for (long i = 0; i < raf.length(); i += recordSize)
+            for (long i = INT_SIZE; i < raf.length(); i += RECORD_SIZE_TEAMS)
             {
                 raf.seek(i);
                 int Id = raf.readInt();
@@ -207,6 +187,86 @@ public class FileManager
 
     }
 
+    private Team getTeamByID(int id) throws IOException
+    {
+        String teamNameString = "";
+
+        int gamesPlayed = 0, gamesWon = 0, gamesDraw = 0, gamesLost = 0, goalsScored = 0, goalsAgainst = 0;
+
+        try (RandomAccessFile teamRAF = new RandomAccessFile(new File("teams.txt"), "r"))
+        {
+
+            for (int pos = INT_SIZE; pos < teamRAF.length(); pos += RECORD_SIZE_TEAMS)
+            {
+                teamRAF.seek(pos);
+                int teamId = teamRAF.readInt();
+                if (teamId == id)
+                {
+
+                    byte[] teamName = new byte[TEAM_NAME_SIZE];
+                    teamRAF.read(teamName);
+                    teamNameString = new String(teamName).trim();
+
+                    gamesPlayed = teamRAF.readInt();
+                    gamesWon = teamRAF.readInt();
+                    gamesDraw = teamRAF.readInt();
+                    gamesLost = teamRAF.readInt();
+                    goalsScored = teamRAF.readInt();
+                    goalsAgainst = teamRAF.readInt();
+                }
+
+            }
+            return new Team(id, teamNameString, gamesPlayed, gamesWon, gamesDraw, gamesLost, goalsScored, goalsAgainst);
+        }
+
+    }
+
+    public List<Team> getTeamsInGroup(String group) throws IOException
+    {
+        int offset = 0;
+        switch (group)
+        {
+            case "GroupA":
+                offset = INT_SIZE * 2;
+                break;
+            case "GroupB":
+                offset = INT_SIZE * 2 + RECORD_SIZE_GROUPS;
+                break;
+            case "GroupC":
+                offset = INT_SIZE * 2 + RECORD_SIZE_GROUPS * 2;
+                break;
+            case "GroupD":
+                offset = INT_SIZE * 2 + RECORD_SIZE_GROUPS * 3;
+                break;
+        }
+
+        List<Team> teamsInGroup = new ArrayList();
+
+        try (RandomAccessFile groupRAF = new RandomAccessFile(new File("groups.txt"), "r"))
+        {
+            int finalID;
+
+            groupRAF.seek(offset);
+            for (int i = 0; i < 4; i++)
+            {
+                int ID = 0;
+
+                ID = groupRAF.readInt();
+
+                if (ID != -2)
+                {
+                    teamsInGroup.add(getTeamByID(ID));
+
+                }
+
+            }
+
+        }
+
+        return teamsInGroup;
+
+    }
+
     public void clearTeam(int id) throws IOException
     {
         try (RandomAccessFile raf = new RandomAccessFile(new File("teams.txt"), "rw"))
@@ -227,4 +287,20 @@ public class FileManager
         }
 
     }
+
+    public boolean checkGroupRAF()
+    {
+        try (RandomAccessFile groupRAF = new RandomAccessFile(new File("groups.txt"), "r"))
+        {
+            return groupRAF.length() != 0;
+        } catch (FileNotFoundException ex)
+        {
+            Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) 
+        {
+            Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
 }

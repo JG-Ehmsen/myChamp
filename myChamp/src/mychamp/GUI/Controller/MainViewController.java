@@ -8,17 +8,20 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.stage.Window;
+import mychamp.GUI.Model.GroupParser;
 import mychamp.GUI.Model.Model;
 
 public class MainViewController implements Initializable
 {
 
     Model model = Model.getInstance();
+    GroupParser groupParser = GroupParser.getInstance();
 
     private Window primaryStage;
     @FXML
@@ -27,6 +30,7 @@ public class MainViewController implements Initializable
     private Stage window;
     private Parent root;
     Scene scene;
+
     @FXML
     private Button btnContinue;
 
@@ -82,6 +86,7 @@ public class MainViewController implements Initializable
     private void handleContinueTournament(ActionEvent event) throws IOException
     {
         contTournament();
+
     }
 
     @FXML
@@ -101,9 +106,21 @@ public class MainViewController implements Initializable
      */
     private void contTournament() throws IOException
     {
+        if (groupParser.getIsContTour() == true)
+        {
+
         model.changeView("MyChamp - Continue tournament", "GUI/View/GroupStageOverview.fxml", "GroupStageOverview", null, null);
 
-        Stage stage = (Stage) btnContinue.getScene().getWindow();
-        stage.close();
+
+            Stage stage = (Stage) btnContinue.getScene().getWindow();
+            stage.close();
+        } else
+        {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Error");
+            alert.setContentText("Currently there are no saved tournament.");
+            alert.show();
+        }
     }
+
 }

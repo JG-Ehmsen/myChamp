@@ -3,6 +3,8 @@ package mychamp.GUI.Controller;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,12 +16,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import mychamp.BE.Team;
+import mychamp.GUI.Model.GroupParser;
 import mychamp.GUI.Model.Model;
 
 public class GroupStageOverviewController implements Initializable
 {
 
     private Model model = Model.getInstance();
+    private GroupParser groupParser = GroupParser.getInstance();
 
     @FXML
     private TableView<Team> groupATblVw;
@@ -39,6 +43,7 @@ public class GroupStageOverviewController implements Initializable
     private TableColumn<Team, String> groupDClmn;
     @FXML
     private Button btnGoToMatchList;
+
     @FXML
     private TableColumn<Team, String> gamesPlayedClmA;
     @FXML
@@ -110,6 +115,7 @@ public class GroupStageOverviewController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        groupParser.getIsContTour();
         populateList();
     }
 
@@ -132,53 +138,82 @@ public class GroupStageOverviewController implements Initializable
     private void populateList()
     {
 
-        groupAClmn.setCellValueFactory(new PropertyValueFactory("teamName"));
-        gamesPlayedClmA.setCellValueFactory(new PropertyValueFactory("teamGamesPlayed"));
-        gamesWonClmA.setCellValueFactory(new PropertyValueFactory("teamGamesWon"));
-        gamesDrawClmA.setCellValueFactory(new PropertyValueFactory("teamGamesDraw"));
-        gamesLostClmA.setCellValueFactory(new PropertyValueFactory("teamGamesLost"));
-        goalsScoredClmA.setCellValueFactory(new PropertyValueFactory("teamGoalsScored"));
-        goalsScoredAgainstClmA.setCellValueFactory(new PropertyValueFactory("teamGoalsScoredAgainst"));
-        differenceGoalsClmA.setCellValueFactory(new PropertyValueFactory("teamGoalDifference"));
-        teamPointsClmA.setCellValueFactory(new PropertyValueFactory("teamPoints"));
-        ObservableList<Team> groupA = FXCollections.observableArrayList(model.getGroupA());
-        groupATblVw.setItems(groupA);
+        if (groupParser.getIsContTour() == false)
+        {
 
-        groupBClmn.setCellValueFactory(new PropertyValueFactory("teamName"));
-        gamesPlayedClmB.setCellValueFactory(new PropertyValueFactory("teamGamesPlayed"));
-        gamesWonClmB.setCellValueFactory(new PropertyValueFactory("teamGamesWon"));
-        gamesDrawClmB.setCellValueFactory(new PropertyValueFactory("teamGamesDraw"));
-        gamesLostClmB.setCellValueFactory(new PropertyValueFactory("teamGamesLost"));
-        goalsScoredClmB.setCellValueFactory(new PropertyValueFactory("teamGoalsScored"));
-        goalsScoredAgainstClmB.setCellValueFactory(new PropertyValueFactory("teamGoalsScoredAgainst"));
-        differenceGoalsClmB.setCellValueFactory(new PropertyValueFactory("teamGoalDifference"));
-        teamPointsClmB.setCellValueFactory(new PropertyValueFactory("teamPoints"));
-        ObservableList<Team> groupB = FXCollections.observableArrayList(model.getGroupB());
-        groupBTblVw.setItems(groupB);
+            groupAClmn.setCellValueFactory(new PropertyValueFactory("teamName"));
+            gamesPlayedClmA.setCellValueFactory(new PropertyValueFactory("teamGamesPlayed"));
+            gamesWonClmA.setCellValueFactory(new PropertyValueFactory("teamGamesWon"));
+            gamesDrawClmA.setCellValueFactory(new PropertyValueFactory("teamGamesDraw"));
+            gamesLostClmA.setCellValueFactory(new PropertyValueFactory("teamGamesLost"));
+            goalsScoredClmA.setCellValueFactory(new PropertyValueFactory("teamGoalsScored"));
+            goalsScoredAgainstClmA.setCellValueFactory(new PropertyValueFactory("teamGoalsScoredAgainst"));
+            differenceGoalsClmA.setCellValueFactory(new PropertyValueFactory("teamGoalDifference"));
+            teamPointsClmA.setCellValueFactory(new PropertyValueFactory("teamPoints"));
 
-        groupCClmn.setCellValueFactory(new PropertyValueFactory("teamName"));
-        gamesPlayedClmC.setCellValueFactory(new PropertyValueFactory("teamGamesPlayed"));
-        gamesWonClmC.setCellValueFactory(new PropertyValueFactory("teamGamesWon"));
-        gamesDrawClmC.setCellValueFactory(new PropertyValueFactory("teamGamesDraw"));
-        gamesLostClmC.setCellValueFactory(new PropertyValueFactory("teamGamesLost"));
-        goalsScoredClmC.setCellValueFactory(new PropertyValueFactory("teamGoalsScored"));
-        goalsScoredAgainstClmC.setCellValueFactory(new PropertyValueFactory("teamGoalsScoredAgainst"));
-        differenceGoalsClmC.setCellValueFactory(new PropertyValueFactory("teamGoalDifference"));
-        teamPointsClmC.setCellValueFactory(new PropertyValueFactory("teamPoints"));
-        ObservableList<Team> groupC = FXCollections.observableArrayList(model.getGroupC());
-        groupCTblVw.setItems(groupC);
+            ObservableList<Team> groupA = FXCollections.observableArrayList(groupParser.getGroupA());
+            groupATblVw.setItems(groupA);
 
-        groupDClmn.setCellValueFactory(new PropertyValueFactory("teamName"));
-        gamesPlayedClmD.setCellValueFactory(new PropertyValueFactory("teamGamesPlayed"));
-        gamesWonClmD.setCellValueFactory(new PropertyValueFactory("teamGamesWon"));
-        gamesDrawClmD.setCellValueFactory(new PropertyValueFactory("teamGamesDraw"));
-        gamesLostClmD.setCellValueFactory(new PropertyValueFactory("teamGamesLost"));
-        goalsScoredClmD.setCellValueFactory(new PropertyValueFactory("teamGoalsScored"));
-        goalsScoredAgainstClmD.setCellValueFactory(new PropertyValueFactory("teamGoalsScoredAgainst"));
-        differenceGoalsClmD.setCellValueFactory(new PropertyValueFactory("teamGoalDifference"));
-        teamPointsClmD.setCellValueFactory(new PropertyValueFactory("teamPoints"));
-        ObservableList<Team> groupD = FXCollections.observableArrayList(model.getGroupD());
-        groupDTblVw.setItems(groupD);
+            groupBClmn.setCellValueFactory(new PropertyValueFactory("teamName"));
+            gamesPlayedClmB.setCellValueFactory(new PropertyValueFactory("teamGamesPlayed"));
+            gamesWonClmB.setCellValueFactory(new PropertyValueFactory("teamGamesWon"));
+            gamesDrawClmB.setCellValueFactory(new PropertyValueFactory("teamGamesDraw"));
+            gamesLostClmB.setCellValueFactory(new PropertyValueFactory("teamGamesLost"));
+            goalsScoredClmB.setCellValueFactory(new PropertyValueFactory("teamGoalsScored"));
+            goalsScoredAgainstClmB.setCellValueFactory(new PropertyValueFactory("teamGoalsScoredAgainst"));
+            differenceGoalsClmB.setCellValueFactory(new PropertyValueFactory("teamGoalDifference"));
+            teamPointsClmB.setCellValueFactory(new PropertyValueFactory("teamPoints"));
+            ObservableList<Team> groupB = FXCollections.observableArrayList(groupParser.getGroupB());
+            groupBTblVw.setItems(groupB);
+
+            groupCClmn.setCellValueFactory(new PropertyValueFactory("teamName"));
+            gamesPlayedClmC.setCellValueFactory(new PropertyValueFactory("teamGamesPlayed"));
+            gamesWonClmC.setCellValueFactory(new PropertyValueFactory("teamGamesWon"));
+            gamesDrawClmC.setCellValueFactory(new PropertyValueFactory("teamGamesDraw"));
+            gamesLostClmC.setCellValueFactory(new PropertyValueFactory("teamGamesLost"));
+            goalsScoredClmC.setCellValueFactory(new PropertyValueFactory("teamGoalsScored"));
+            goalsScoredAgainstClmC.setCellValueFactory(new PropertyValueFactory("teamGoalsScoredAgainst"));
+            differenceGoalsClmC.setCellValueFactory(new PropertyValueFactory("teamGoalDifference"));
+            teamPointsClmC.setCellValueFactory(new PropertyValueFactory("teamPoints"));
+            ObservableList<Team> groupC = FXCollections.observableArrayList(groupParser.getGroupC());
+            groupCTblVw.setItems(groupC);
+
+            groupDClmn.setCellValueFactory(new PropertyValueFactory("teamName"));
+            gamesPlayedClmD.setCellValueFactory(new PropertyValueFactory("teamGamesPlayed"));
+            gamesWonClmD.setCellValueFactory(new PropertyValueFactory("teamGamesWon"));
+            gamesDrawClmD.setCellValueFactory(new PropertyValueFactory("teamGamesDraw"));
+            gamesLostClmD.setCellValueFactory(new PropertyValueFactory("teamGamesLost"));
+            goalsScoredClmD.setCellValueFactory(new PropertyValueFactory("teamGoalsScored"));
+            goalsScoredAgainstClmD.setCellValueFactory(new PropertyValueFactory("teamGoalsScoredAgainst"));
+            differenceGoalsClmD.setCellValueFactory(new PropertyValueFactory("teamGoalDifference"));
+            teamPointsClmD.setCellValueFactory(new PropertyValueFactory("teamPoints"));
+            ObservableList<Team> groupD = FXCollections.observableArrayList(groupParser.getGroupD());
+            groupDTblVw.setItems(groupD);
+        } else
+        {
+            try
+            {
+                groupAClmn.setCellValueFactory(new PropertyValueFactory("teamName"));
+                ObservableList<Team> groupA = FXCollections.observableArrayList(groupParser.teamNamesInAGroup("GroupA"));
+                groupATblVw.setItems(groupA);
+
+                groupBClmn.setCellValueFactory(new PropertyValueFactory("teamName"));
+                ObservableList<Team> groupB = FXCollections.observableArrayList(groupParser.teamNamesInAGroup("GroupB"));
+                groupBTblVw.setItems(groupB);
+
+                groupCClmn.setCellValueFactory(new PropertyValueFactory("teamName"));
+                ObservableList<Team> groupC = FXCollections.observableArrayList(groupParser.teamNamesInAGroup("GroupC"));
+                groupCTblVw.setItems(groupC);
+
+                groupDClmn.setCellValueFactory(new PropertyValueFactory("teamName"));
+                ObservableList<Team> groupD = FXCollections.observableArrayList(groupParser.teamNamesInAGroup("GroupD"));
+                groupDTblVw.setItems(groupD);
+            } catch (IOException ex)
+            {
+                Logger.getLogger(GroupStageOverviewController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
     }
 
 }

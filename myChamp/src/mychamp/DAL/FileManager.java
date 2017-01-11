@@ -270,6 +270,32 @@ public class FileManager
 
     }
 
+    public String getTeamName(int id) throws IOException
+    {
+        String teamNameString = "";
+
+        try (RandomAccessFile teamRAF = new RandomAccessFile(new File("teams.txt"), "r"))
+        {
+
+            for (int pos = INT_SIZE; pos < teamRAF.length(); pos += RECORD_SIZE_TEAMS)
+            {
+                teamRAF.seek(pos);
+                int teamId = teamRAF.readInt();
+                if (teamId == id)
+                {
+
+                    byte[] teamName = new byte[TEAM_NAME_SIZE];
+                    teamRAF.read(teamName);
+                    teamNameString = new String(teamName).trim();
+
+                }
+
+            }
+            return teamNameString;
+        }
+
+    }
+
     public List<Team> getTeamsInGroup(String group) throws IOException
     {
         int offset = 0;

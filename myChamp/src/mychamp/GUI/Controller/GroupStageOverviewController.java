@@ -130,7 +130,7 @@ public class GroupStageOverviewController implements Initializable
     @FXML
     private void handleGoToMatchList(ActionEvent event) throws IOException
     {
-       
+       //matchManager.printGroups();
         model.changeView("Upcoming Matches & Results", "GUI/View/MatchListSchedule.fxml", "MatchListSchedule", null, null);
 
         // Closes the primary stage
@@ -198,7 +198,7 @@ public class GroupStageOverviewController implements Initializable
 //        {
             try
             {
-                System.out.println("Continued tournament.");
+                
                 ObservableList<Team> groupA = FXCollections.observableArrayList(groupParser.teamNamesInAGroup("GroupA"));
                 groupATblVw.setItems(groupA);
 

@@ -33,10 +33,10 @@
                                       <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="220.0" prefWidth="500.0">
                                              <children>
-                                                <TableView layoutY="6.0" prefHeight="220.0" prefWidth="500.0">
+                                                <TableView fx:id="tblrnd1" layoutY="6.0" prefHeight="220.0" prefWidth="500.0">
                                                   <columns>
-                                                    <TableColumn prefWidth="210.0" text="Home Team" />
-                                                    <TableColumn prefWidth="210.0" text="Away Team" />
+                                                    <TableColumn fx:id="r1H" prefWidth="210.0" text="Home Team" />
+                                                    <TableColumn fx:id="r1A" prefWidth="210.0" text="Away Team" />
                                                       <TableColumn text="Result" />
                                                   </columns>
                                                 </TableView>
@@ -48,10 +48,10 @@
                                       <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <TableView layoutY="7.0" prefHeight="220.0" prefWidth="500.0">
+                                                <TableView fx:id="tblrnd2" layoutY="7.0" prefHeight="220.0" prefWidth="500.0">
                                                   <columns>
-                                                    <TableColumn prefWidth="210.0" text="Home Team" />
-                                                    <TableColumn prefWidth="210.0" text="Away Team" />
+                                                    <TableColumn fx:id="r2H" prefWidth="210.0" text="Home Team" />
+                                                    <TableColumn fx:id="r2A" prefWidth="210.0" text="Away Team" />
                                                       <TableColumn text="Result" />
                                                   </columns>
                                                 </TableView>
@@ -63,10 +63,10 @@
                                       <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <TableView layoutY="7.0" prefHeight="220.0" prefWidth="500.0">
+                                                <TableView fx:id="tblrnd3" layoutY="7.0" prefHeight="220.0" prefWidth="500.0">
                                                   <columns>
-                                                    <TableColumn prefWidth="210.0" text="Home Team" />
-                                                    <TableColumn prefWidth="210.0" text="Away Team" />
+                                                    <TableColumn fx:id="r3H" prefWidth="210.0" text="Home Team" />
+                                                    <TableColumn fx:id="r3A" prefWidth="210.0" text="Away Team" />
                                                       <TableColumn text="Result" />
                                                   </columns>
                                                 </TableView>
@@ -78,10 +78,10 @@
                                       <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <TableView layoutY="7.0" prefHeight="220.0" prefWidth="500.0">
+                                                <TableView fx:id="tblrnd4" layoutY="7.0" prefHeight="220.0" prefWidth="500.0">
                                                   <columns>
-                                                    <TableColumn prefWidth="210.0" text="Home Team" />
-                                                    <TableColumn prefWidth="210.0" text="Away Team" />
+                                                    <TableColumn fx:id="r4H" prefWidth="210.0" text="Home Team" />
+                                                    <TableColumn fx:id="r4A" prefWidth="210.0" text="Away Team" />
                                                       <TableColumn text="Result" />
                                                   </columns>
                                                 </TableView>
@@ -93,10 +93,10 @@
                                       <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <TableView layoutY="7.0" prefHeight="220.0" prefWidth="500.0">
+                                                <TableView fx:id="tblrnd5" layoutY="7.0" prefHeight="220.0" prefWidth="500.0">
                                                   <columns>
-                                                    <TableColumn prefWidth="210.0" text="Home Team" />
-                                                    <TableColumn prefWidth="210.0" text="Away Team" />
+                                                    <TableColumn fx:id="r5H" prefWidth="210.0" text="Home Team" />
+                                                    <TableColumn fx:id="r5A" prefWidth="210.0" text="Away Team" />
                                                       <TableColumn text="Result" />
                                                   </columns>
                                                 </TableView>
@@ -108,10 +108,10 @@
                                       <content>
                                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                              <children>
-                                                <TableView layoutY="7.0" prefHeight="220.0" prefWidth="500.0">
+                                                <TableView fx:id="tblrnd6" layoutY="7.0" prefHeight="220.0" prefWidth="500.0">
                                                   <columns>
-                                                    <TableColumn prefWidth="210.0" text="Home Team" />
-                                                    <TableColumn prefWidth="210.0" text="Away Team" />
+                                                    <TableColumn fx:id="r6H" prefWidth="210.0" text="Home Team" />
+                                                    <TableColumn fx:id="r6A" prefWidth="210.0" text="Away Team" />
                                                       <TableColumn text="Result" />
                                                   </columns>
                                                 </TableView>

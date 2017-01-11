@@ -13,16 +13,14 @@ import mychamp.BE.Match;
 import mychamp.BE.Team;
 import mychamp.DAL.FileManager;
 
-
-
 /**
  *
  * @author Fjord82
  */
 public class MatchManager
 {
-    private static MatchManager instance;
 
+    private static MatchManager instance;
 
     public static MatchManager getInstance()
     {
@@ -38,108 +36,95 @@ public class MatchManager
     {
 
     }
-    
+
     FileManager fileManager = FileManager.getInstance();
-    List<Team> generateMatchList; // = new ArrayList();
-    
+    //List<Team> generateMatchList; // = new ArrayList();
+
     List<Match> round1 = new ArrayList();
     List<Match> round2 = new ArrayList();
     List<Match> round3 = new ArrayList();
     List<Match> round4 = new ArrayList();
     List<Match> round5 = new ArrayList();
     List<Match> round6 = new ArrayList();
-    
-    
-    private void generateMatchList() throws IOException
+
+    private void generateMatchList(String group) throws IOException
     {
-        generateMatchList = fileManager.getAllTeams();
-                //getTeamsInGroup(group);
-        
-        //if odd number of teams create ghostTeam
+        int noOfTeamsInGroup = fileManager.getTeamsInGroup(group).size();
+
+        //If there are odd number of teams then we create a local ghost team.
         boolean ghost = false;
-        int teams = 0;//need to extract noOfTeams from each group
-        if(teams % 2 == 1)
+
+        if (noOfTeamsInGroup % 2 == 1)
         {
-            teams++;
+            noOfTeamsInGroup++;
             ghost = true;
         }
-        
-        //Generates the match fixturelist using a cyclic algorithm
-        int totalRounds = teams - 1;
-        int matchesPerRound = teams/2;
-        String [][] rounds = new String [totalRounds][matchesPerRound];
-        
-        for(int round = 0; round < totalRounds; round++)
+
+        //Generates the match fixturelist using a cyclic algorithm.
+        int totalRounds = noOfTeamsInGroup - 1;
+        int matchesPerRound = noOfTeamsInGroup / 2;
+        String[][] rounds = new String[totalRounds][matchesPerRound];
+
+        for (int round = 0; round < totalRounds; round++)
         {
-            for(int match = 0; match < matchesPerRound; match++)
+            for (int match = 0; match < matchesPerRound; match++)
             {
-                int home = (round + match) % (teams - 1);
-                
-                int away = (teams - 1 - match + round) % (teams - 1);
-                
+                int home = (round + match) % (noOfTeamsInGroup - 1);
+
+                int away = (noOfTeamsInGroup - 1 - match + round) % (noOfTeamsInGroup - 1);
+
                 //Last team stays in the same place, while the others rotate around it
-                
-                if(match == 0)
+                if (match == 0)
                 {
-                    away = teams - 1;
+                    away = noOfTeamsInGroup - 1;
                 }
-                
+
                 rounds[round][match] = (home + 1) + " v " + (away + 1);
             }
         }
-        
-        // Interleave so that the home and away games are fairly evenly dispered.
-        String[][] interleaved = new String [totalRounds][matchesPerRound];
-        int even = 0;
-        int odd = (teams / 2);
-        
-        for(int i = 0; i <  rounds.length; i++)
+
+        for (int round = 0; round < rounds.length; round++)
         {
-            if(i % 2 == 0)
-            {
-                interleaved[i] = rounds[even++];
-            }
-            else
-            {
-                interleaved[i] = rounds[odd++];
-            }
-        }
-        
-        rounds = interleaved;
-        
-        //Last team cant be away for every game so flip them 
-        //To home on odd rounds.
-        
-       for(int round = 0; round < rounds.length; round++)
-        {
-            if(round % 2 == 1)
+            if (round % 2 == 1)
             {
                 rounds[round][0] = flip(rounds[round][0]);
             }
         }
-        
-        //Display the fixtures
-        for(int i = 0; i < rounds.length; i++)
+
+        String[][] mirrorRounds = new String[totalRounds][matchesPerRound];
+
+        for (int round = 0; round < totalRounds; round++)
         {
-            System.out.println("Round " + (i + 1));
-            
-            System.out.println(Arrays.asList(rounds[i]));
-            System.out.println();
+            for (int match = 0; match < matchesPerRound; match++)
+            {
+                mirrorRounds[round][match] = flip(rounds[round][match]);
+
+            }
         }
-        
-        System.out.println();
-        if(ghost)
+
+        String[][] groupRounds = new String[6][2];
+
+        for (int round = 0; round < 6; round++)
         {
-            System.out.println("Matches against team " + teams + "are byes.");
+            for (int match = 0; match < 2; match++)
+            {
+                if (round < 3 && match < 2)
+                {
+                    groupRounds[round][match] = rounds[round][match];
+                } else
+                {
+                    groupRounds[round][match] = mirrorRounds[round - 3][match];
+                }
+
+            }
         }
-        
-        System.out.println("Use mirror image of these rounds " + "return fixtures.");
-            
+
     }
-    
-    private static String flip(String match) 
+
+    private static String flip(String match)
     {
         String[] components = match.split(" v ");
         return components[1] + " v " + components[0];
     }
+
 }

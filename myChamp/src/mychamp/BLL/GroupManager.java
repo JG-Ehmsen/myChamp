@@ -121,17 +121,13 @@ public class GroupManager
 
     public void sendGroupInfo()
     {
-        try
-        {
-            fileManager.saveGroup(extractTeamIDs(getGroupA()));
-            fileManager.saveGroup(extractTeamIDs(getGroupB()));
-            fileManager.saveGroup(extractTeamIDs(getGroupC()));
-            fileManager.saveGroup(extractTeamIDs(getGroupD()));
-
-        } catch (IOException ex)
-        {
-            Logger.getLogger(GroupManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        fileManager.saveAllGroups
+        (
+                extractTeamIDs(getGroupA()),
+                extractTeamIDs(getGroupB()),
+                extractTeamIDs(getGroupC()),
+                extractTeamIDs(getGroupD())
+        );
     }
 
     private List<Integer> extractTeamIDs(List<Team> group)

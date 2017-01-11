@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package mychamp.BLL;
 
 import java.io.IOException;
@@ -13,12 +8,10 @@ import mychamp.BE.Match;
 import mychamp.BE.Team;
 import mychamp.DAL.FileManager;
 
-/**
- *
- * @author Fjord82
- */
 public class MatchManager
 {
+
+    FileManager fileManager = FileManager.getInstance();
 
     private static MatchManager instance;
 
@@ -37,9 +30,6 @@ public class MatchManager
 
     }
 
-    FileManager fileManager = FileManager.getInstance();
-    //List<Team> generateMatchList; // = new ArrayList();
-
     List<Match> round1 = new ArrayList();
     List<Match> round2 = new ArrayList();
     List<Match> round3 = new ArrayList();
@@ -47,7 +37,7 @@ public class MatchManager
     List<Match> round5 = new ArrayList();
     List<Match> round6 = new ArrayList();
 
-    private void generateMatchList(String group) throws IOException
+    private String[][] generateMatchList(String group) throws IOException
     {
         int noOfTeamsInGroup = fileManager.getTeamsInGroup(group).size();
 
@@ -63,6 +53,7 @@ public class MatchManager
         //Generates the match fixturelist using a cyclic algorithm.
         int totalRounds = noOfTeamsInGroup - 1;
         int matchesPerRound = noOfTeamsInGroup / 2;
+
         String[][] rounds = new String[totalRounds][matchesPerRound];
 
         for (int round = 0; round < totalRounds; round++)
@@ -79,7 +70,7 @@ public class MatchManager
                     away = noOfTeamsInGroup - 1;
                 }
 
-                rounds[round][match] = (home + 1) + " v " + (away + 1);
+                rounds[round][match] = (home) + " v " + (away);
             }
         }
 
@@ -119,12 +110,96 @@ public class MatchManager
             }
         }
 
+        return groupRounds;
+
     }
 
-    private static String flip(String match)
+    private String flip(String match)
     {
         String[] components = match.split(" v ");
         return components[1] + " v " + components[0];
     }
+
+    private List<Match> scheduleGroup(String group) throws IOException
+    {
+        String[][] generatedMatches = generateMatchList(group);
+
+        
+
+        List<Team> teamsInGroup = new ArrayList(fileManager.getTeamsInGroup(group));
+
+
+        List<Match> groupMatchlist = new ArrayList();
+
+        int roundID = 0;
+        int matchID = 0;
+        int homeID = 0;
+        int awayID = 0;
+
+        for (int round = 0; round < 6; round++)
+        {
+            roundID = round;
+            for (int match = 0; match < 2; match++)
+            {
+                matchID = match;
+                String[] string = generatedMatches[round][match].split(" v ");
+
+                int teamHome = Integer.parseInt(string[0]);
+                int teamAway = Integer.parseInt(string[1]);
+
+                for (int index = 0; index < 4; index++)
+                {
+                    Team team = teamsInGroup.get(index);
+
+                    if (teamHome == index)
+                    {
+                        homeID = team.getTeamID();
+                    }
+                    if (teamAway == index)
+                    {
+                        awayID = team.getTeamID();
+                        
+                    }
+
+                }
+
+                Match newMatch = new Match(roundID, matchID, homeID, awayID);
+                groupMatchlist.add(newMatch);
+            }
+
+        }
+
+        return groupMatchlist;
+    }
+
+//    public void printGroups() throws IOException
+//    {
+//        List<Match> list = scheduleGroup("groupA");
+//
+//        for (Match match : list)
+//        {
+//            System.out.println("matchID: " + match.getMatchID() + " roundID: " + match.getRoundID() + " home: " + match.getHomeTeamID() + " away: " + match.getAwayTeamID());
+//        }
+//        List<Team> teamsInGroup = fileManager.getTeamsInGroup("groupA");
+//
+//        for (Team team : teamsInGroup)
+//        {
+//           System.out.println("teamID: " + team.getTeamID());
+//        }
+//    for (int round = 0; round < 6; round++)
+//        {
+//            for (int match = 0; match < 2; match++)
+//            {
+//                System.out.println(generatedMatches[round][match]);
+//            }
+//
+//        }
+//        
+//        
+//        for (Team team : teamsInGroup)
+//        {
+//            System.out.println("teamID: " + team.getTeamID());
+//        }
+//    }
 
 }

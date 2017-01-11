@@ -9,7 +9,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" minHeight="400.0" minWidth="600.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mychamp.GUI.Controller.GeneratorViewController">
+<AnchorPane id="AnchorPane" minHeight="320.0" minWidth="600.0" prefHeight="320.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mychamp.GUI.Controller.GeneratorViewController">
     <children>
         <SplitPane dividerPositions="0.20351758793969849" layoutX="-2.0" layoutY="-2.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <items>
@@ -29,15 +29,15 @@
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: black;">
                                     <children>
 
-                                        <TextField fx:id="txtFldTournamentTitle" layoutX="6.0" layoutY="30.0" maxHeight="25.0" maxWidth="160.0" minHeight="25.0" minWidth="160.0" onKeyPressed="#tourTitlePressed" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
-                                        <Label layoutX="6.0" layoutY="14.0" text="Tournament title" textFill="WHITE" AnchorPane.bottomAnchor="277.0" AnchorPane.leftAnchor="5.0" />
-                                        <ComboBox fx:id="cBoxNoOfTeams" layoutX="6.0" layoutY="91.0" maxHeight="25.0" maxWidth="160.0" minHeight="25.0" minWidth="160.0" onKeyPressed="#noOfTeamsPressed" prefWidth="150.0" promptText="No. of teams" style="-fx-background-color: white;" visibleRowCount="14" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" />
+                                        <TextField fx:id="txtFldTournamentTitle" layoutX="6.0" layoutY="30.0" maxHeight="25.0" maxWidth="160.0" minHeight="25.0" minWidth="160.0" onKeyPressed="#tourTitlePressed" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="35.0" />
+                                        <Label layoutX="9.0" layoutY="14.0" text="Tournament title" textFill="WHITE" AnchorPane.bottomAnchor="197.0" AnchorPane.leftAnchor="5.0" />
+                                        <ComboBox fx:id="cBoxNoOfTeams" layoutX="6.0" layoutY="91.0" maxHeight="25.0" maxWidth="160.0" minHeight="25.0" minWidth="160.0" onKeyPressed="#noOfTeamsPressed" prefWidth="150.0" promptText="No. of teams" style="-fx-background-color: white;" visibleRowCount="14" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="95.0" />
                                         <Label layoutX="6.0" layoutY="75.0" text="Select no. of teams" textFill="WHITE" AnchorPane.leftAnchor="5.0" />
-                                        <Button fx:id="btnBack" layoutX="7.0" layoutY="269.0" minHeight="25.0" minWidth="50.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="25.0" prefWidth="50.0" style="-fx-background-color: white;" text="Back" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="5.0" />
-                                        <Button fx:id="btnNext" layoutX="117.0" layoutY="269.0" minHeight="25.0" minWidth="50.0" mnemonicParsing="false" onAction="#handleNext" prefHeight="25.0" prefWidth="50.0" style="-fx-background-color: white;" text="Next" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="5.0" />
+                                        <Button fx:id="btnBack" layoutX="7.0" layoutY="269.0" minHeight="25.0" minWidth="50.0" mnemonicParsing="false" onAction="#handleBack" prefHeight="25.0" prefWidth="50.0" style="-fx-background-color: white;" text="Back" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="10.0" />
+                                        <Button fx:id="btnNext" layoutX="117.0" layoutY="269.0" minHeight="25.0" minWidth="50.0" mnemonicParsing="false" onAction="#handleNext" prefHeight="25.0" prefWidth="50.0" style="-fx-background-color: white;" text="Next" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="10.0" />
                                     </children>
                                 </AnchorPane>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" style="-fx-background-color: black;">
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="414.0" style="-fx-background-color: black;">
                                     <children>
                                         <ImageView fitHeight="281.0" fitWidth="391.0" layoutX="12.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="131.4114227294922" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="46.58857727050781">
                                             <image>

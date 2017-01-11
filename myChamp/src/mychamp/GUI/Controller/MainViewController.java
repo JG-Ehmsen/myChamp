@@ -16,11 +16,13 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import mychamp.GUI.Model.GroupParser;
 import mychamp.GUI.Model.Model;
+import mychamp.GUI.Model.TeamParser;
 
 public class MainViewController implements Initializable
 {
 
     Model model = Model.getInstance();
+    TeamParser teamParser = TeamParser.getInstance();
     GroupParser groupParser = GroupParser.getInstance();
 
     private Window primaryStage;
@@ -69,6 +71,7 @@ public class MainViewController implements Initializable
      */
     private void newTournament() throws IOException
     {
+        teamParser.clearAllFiles();
         model.changeView("MyChamp - Create tournament", "GUI/View/GeneratorView.fxml", "Generator", null, null);
 
         // Closes the primary stage

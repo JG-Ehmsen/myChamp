@@ -80,44 +80,93 @@ public class FileManager
         }
     }
 
-    public void saveGroup(List<Integer> groupArray) throws IOException
+    public void saveAllGroups(List<Integer> groupAID, List<Integer> groupBID, List<Integer> groupCID, List<Integer> groupDID)
     {
-        int nextGroupId;
-
-        try (RandomAccessFile groupRAF = new RandomAccessFile(new File("groups.txt"), "rw"))
+        int nextGroupId = 1;
+        try
         {
-            if (groupRAF.length() == 0)
-            {
-                groupRAF.writeInt(1);
-                groupRAF.seek(0);
-            }
-            groupRAF.seek(0);
-            nextGroupId = groupRAF.readInt();
-            groupRAF.seek(0);
+            RandomAccessFile groupRAF = new RandomAccessFile(new File("groups.txt"), "rw");
+
+            groupRAF.writeInt(nextGroupId);
+            nextGroupId++;
+            saveGroup(groupRAF, groupAID);
             groupRAF.writeInt(nextGroupId + 1);
 
-            groupRAF.seek(groupRAF.length());
-            groupRAF.writeInt(nextGroupId);
+            saveGroup(groupRAF, groupBID);
+            groupRAF.writeInt(nextGroupId + 1);
 
-            if (groupArray.size() == 4)
-            {
-                for (Integer teamID : groupArray)
-                {
-                    groupRAF.writeInt(teamID);
-                }
+            saveGroup(groupRAF, groupCID);
+            groupRAF.writeInt(nextGroupId + 1);
 
-            } else
-            { //Only accounts for 3 teams in the group. Writes 0 for the ID of the 4th team.
-                for (Integer teamID : groupArray)
-                {
-                    groupRAF.writeInt(teamID);
-                }
-                groupRAF.writeInt(-2);
-            }
+            saveGroup(groupRAF, groupDID);
 
+        } catch (FileNotFoundException ex)
+        {
+            Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex)
+        {
+            Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
+    public void saveGroup(RandomAccessFile groupRAF, List<Integer> groupArray) throws IOException
+    {
+        if (groupArray.size() == 4)
+        {
+            for (Integer teamID : groupArray)
+            {
+                groupRAF.writeInt(teamID);
+            }
+
+        } else
+        { //Only accounts for 3 teams in the group. Writes 0 for the ID of the 4th team.
+            for (Integer teamID : groupArray)
+            {
+                groupRAF.writeInt(teamID);
+            }
+            groupRAF.writeInt(-2);
+        }
+
+    }
+
+//    public void saveGroup(List<Integer> groupArray) throws IOException
+//    {
+//        int nextGroupId;
+//
+//        try (RandomAccessFile groupRAF = new RandomAccessFile(new File("groups.txt"), "rw"))
+//        {
+//            if (groupRAF.length() == 0)
+//            {
+//                groupRAF.writeInt(1);
+//                groupRAF.seek(0);
+//            }
+//            groupRAF.seek(0);
+//            nextGroupId = groupRAF.readInt();
+//            groupRAF.seek(0);
+//            groupRAF.writeInt(nextGroupId + 1);
+//
+//            groupRAF.seek(groupRAF.length());
+//            groupRAF.writeInt(nextGroupId);
+//
+//            if (groupArray.size() == 4)
+//            {
+//                for (Integer teamID : groupArray)
+//                {
+//                    groupRAF.writeInt(teamID);
+//                }
+//
+//            } else
+//            { //Only accounts for 3 teams in the group. Writes 0 for the ID of the 4th team.
+//                for (Integer teamID : groupArray)
+//                {
+//                    groupRAF.writeInt(teamID);
+//                }
+//                groupRAF.writeInt(-2);
+//            }
+//
+//        }
+//    }
     public long getFirstAvailPointer() throws FileNotFoundException, IOException
     {
 
@@ -227,16 +276,16 @@ public class FileManager
         switch (group)
         {
             case "GroupA":
-                offset = INT_SIZE * 2;
+                offset = INT_SIZE;
                 break;
             case "GroupB":
-                offset = INT_SIZE * 2 + RECORD_SIZE_GROUPS;
+                offset = INT_SIZE + RECORD_SIZE_GROUPS;
                 break;
             case "GroupC":
-                offset = INT_SIZE * 2 + RECORD_SIZE_GROUPS * 2;
+                offset = INT_SIZE + RECORD_SIZE_GROUPS * 2;
                 break;
             case "GroupD":
-                offset = INT_SIZE * 2 + RECORD_SIZE_GROUPS * 3;
+                offset = INT_SIZE + RECORD_SIZE_GROUPS * 3;
                 break;
         }
 
@@ -296,11 +345,28 @@ public class FileManager
         } catch (FileNotFoundException ex)
         {
             Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) 
+        } catch (IOException ex)
         {
             Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
+    }
+
+    public void clearAllFiles()
+    {
+        try
+        {
+            RandomAccessFile groupRAF = new RandomAccessFile(new File("groups.txt"), "rw");
+            RandomAccessFile teamRAF = new RandomAccessFile(new File("teams.txt"), "rw");
+            groupRAF.setLength(0);
+            teamRAF.setLength(0);
+        } catch (FileNotFoundException ex)
+        {
+            Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex)
+        {
+            Logger.getLogger(FileManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

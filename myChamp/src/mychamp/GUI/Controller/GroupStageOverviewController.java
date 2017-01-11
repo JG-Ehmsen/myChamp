@@ -16,7 +16,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import mychamp.BE.Team;
-import mychamp.BLL.MatchManager;
 import mychamp.GUI.Model.GroupParser;
 import mychamp.GUI.Model.Model;
 
@@ -25,7 +24,6 @@ public class GroupStageOverviewController implements Initializable
 
     private Model model = Model.getInstance();
     private GroupParser groupParser = GroupParser.getInstance();
-    private MatchManager matchManager = MatchManager.getInstance();
 
     @FXML
     private TableView<Team> groupATblVw;

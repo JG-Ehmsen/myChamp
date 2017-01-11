@@ -12,16 +12,18 @@ package mychamp.BE;
 public class Match
 {
     private int roundID;
-    private String homeTeam = "";
-    private String awayTeam = "";
+    private int group;
+    private int homeTeamID;
+    private int awayTeamID;
     
     
 
-public Match(int roundID, String homeTeam, String awayTeam)
+public Match(int roundID, int group, int homeTeamID, int awayTeamID)
 {
-    this.roundID = roundID;
-    this.homeTeam = homeTeam;
-    this.awayTeam = awayTeam;
+   this.roundID = roundID;
+    this.group = group;
+    this.homeTeamID = homeTeamID;
+    this.awayTeamID = awayTeamID;
     
 }      
              
@@ -36,24 +38,36 @@ public void setRoundID(int roundID)
     this.roundID = roundID;
 }
 
-public String getHomeTeam()
-{
-    return homeTeam;
-}
+    public int getGroup()
+    {
+        return group;
+    }
 
-public void setHomeTeam(String homeTeam)
-{
-    this.homeTeam = homeTeam;
-}
+    public void setGroup(int group)
+    {
+        this.group = group;
+    }
 
-public String getAwayTeam()
-{
-    return awayTeam;
-}
+    public int getHomeTeamID()
+    {
+        return homeTeamID;
+    }
 
-public void setAwayTeam(String awayTeam)
-{
-    this.awayTeam = awayTeam;
-}
+    public void setHomeTeamID(int homeTeamID)
+    {
+        this.homeTeamID = homeTeamID;
+    }
+
+    public int getAwayTeamID()
+    {
+        return awayTeamID;
+    }
+
+    public void setAwayTeamID(int awayTeamID)
+    {
+        this.awayTeamID = awayTeamID;
+    }
+
+
 
 }

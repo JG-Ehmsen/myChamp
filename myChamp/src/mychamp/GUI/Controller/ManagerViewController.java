@@ -21,6 +21,8 @@ import mychamp.GUI.Model.TeamParser;
 public class ManagerViewController implements Initializable
 {
 
+    TeamParser teamParser = TeamParser.getInstance();
+
     private Model model = Model.getInstance();
 
     private Window primaryStage;
@@ -31,9 +33,6 @@ public class ManagerViewController implements Initializable
     private ComboBox<String> cbGroup;
     @FXML
     private ComboBox<String> cbTeam;
-
-    TeamParser teamParser = TeamParser.getInstance();
-    private Button btnBackMatchlist;
     @FXML
     private Button btnRemoveWndw;
     @FXML

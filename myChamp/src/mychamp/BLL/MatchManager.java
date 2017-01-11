@@ -2,7 +2,6 @@ package mychamp.BLL;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import mychamp.BE.Match;
 import mychamp.BE.Team;
@@ -124,10 +123,7 @@ public class MatchManager
     {
         String[][] generatedMatches = generateMatchList(group);
 
-        
-
         List<Team> teamsInGroup = new ArrayList(fileManager.getTeamsInGroup(group));
-
 
         List<Match> groupMatchlist = new ArrayList();
 
@@ -158,7 +154,7 @@ public class MatchManager
                     if (teamAway == index)
                     {
                         awayID = team.getTeamID();
-                        
+
                     }
 
                 }
@@ -201,5 +197,4 @@ public class MatchManager
 //            System.out.println("teamID: " + team.getTeamID());
 //        }
 //    }
-
 }

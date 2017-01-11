@@ -45,7 +45,6 @@ public class GroupStageOverviewController implements Initializable
     private TableColumn<Team, String> groupDClmn;
     @FXML
     private Button btnGoToMatchList;
-
     @FXML
     private TableColumn<Team, String> gamesPlayedClmA;
     @FXML
@@ -130,7 +129,7 @@ public class GroupStageOverviewController implements Initializable
     @FXML
     private void handleGoToMatchList(ActionEvent event) throws IOException
     {
-       
+
         model.changeView("Upcoming Matches & Results", "GUI/View/MatchListSchedule.fxml", "MatchListSchedule", null, null);
 
         // Closes the primary stage
@@ -196,24 +195,24 @@ public class GroupStageOverviewController implements Initializable
 //            groupDTblVw.setItems(groupD);
 //        } else
 //        {
-            try
-            {
-                System.out.println("Continued tournament.");
-                ObservableList<Team> groupA = FXCollections.observableArrayList(groupParser.teamNamesInAGroup("GroupA"));
-                groupATblVw.setItems(groupA);
+        try
+        {
+            System.out.println("Continued tournament.");
+            ObservableList<Team> groupA = FXCollections.observableArrayList(groupParser.teamNamesInAGroup("GroupA"));
+            groupATblVw.setItems(groupA);
 
-                ObservableList<Team> groupB = FXCollections.observableArrayList(groupParser.teamNamesInAGroup("GroupB"));
-                groupBTblVw.setItems(groupB);
+            ObservableList<Team> groupB = FXCollections.observableArrayList(groupParser.teamNamesInAGroup("GroupB"));
+            groupBTblVw.setItems(groupB);
 
-                ObservableList<Team> groupC = FXCollections.observableArrayList(groupParser.teamNamesInAGroup("GroupC"));
-                groupCTblVw.setItems(groupC);
+            ObservableList<Team> groupC = FXCollections.observableArrayList(groupParser.teamNamesInAGroup("GroupC"));
+            groupCTblVw.setItems(groupC);
 
-                ObservableList<Team> groupD = FXCollections.observableArrayList(groupParser.teamNamesInAGroup("GroupD"));
-                groupDTblVw.setItems(groupD);
-            } catch (IOException ex)
-            {
-                Logger.getLogger(GroupStageOverviewController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            ObservableList<Team> groupD = FXCollections.observableArrayList(groupParser.teamNamesInAGroup("GroupD"));
+            groupDTblVw.setItems(groupD);
+        } catch (IOException ex)
+        {
+            Logger.getLogger(GroupStageOverviewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
         //}
 
     }

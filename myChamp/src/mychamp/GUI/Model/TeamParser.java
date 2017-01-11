@@ -63,4 +63,9 @@ public class TeamParser
         }
         return null;
     }
+    
+    public void clearAllFiles()
+    {
+        teamManager.clearAllFiles();
+    }
 }

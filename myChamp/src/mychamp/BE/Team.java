@@ -220,11 +220,21 @@ public class Team
         this.teamPoints = teamPoints;
     }
 
+    /**
+     * Returns the team goal difference.
+     *
+     * @return
+     */
     public int getTeamGoalDifference()
     {
         return teamGoalDifference;
     }
 
+    /**
+     * Sets the team goal difference.
+     *
+     * @param teamGoalDifference
+     */
     public void setTeamGoalDifference(int teamGoalDifference)
     {
         this.teamGoalDifference = teamGoalDifference;

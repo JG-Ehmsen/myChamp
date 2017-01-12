@@ -12,8 +12,13 @@ import mychamp.BLL.TeamManager;
 public class TeamParser
 {
 
+    /**
+     * Ensures that the class can be used as a singleton, by making a static
+     * instance of it, ensuring that the constructor is private, and having a
+     * method that either returns the static instance if it exists, or makes a
+     * new one.
+     */
     private static TeamParser instance;
-    TeamManager teamManager = TeamManager.getInstance();
 
     public static TeamParser getInstance()
     {
@@ -27,6 +32,11 @@ public class TeamParser
     private TeamParser()
     {
     }
+
+    /**
+     * Gets the singleton instance of the team manager.
+     */
+    TeamManager teamManager = TeamManager.getInstance();
 
     public void addTeam(String teamName)
     {
@@ -63,7 +73,7 @@ public class TeamParser
         }
         return null;
     }
-    
+
     public void clearAllFiles()
     {
         teamManager.clearAllFiles();

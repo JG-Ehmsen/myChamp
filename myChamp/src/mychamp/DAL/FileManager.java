@@ -22,9 +22,12 @@ public class FileManager
     //Group file final variables
     private static final int RECORD_SIZE_GROUPS = (INT_SIZE * 5);
 
-    //Round file final variables - still need to do this
-    private static final int RECORD_SIZE_ROUNDS = (INT_SIZE * 5);
-
+    /**
+     * Ensures that the class can be used as a singleton, by making a static
+     * instance of it, ensuring that the constructor is private, and having a
+     * method that either returns the static instance if it exists, or makes a
+     * new one.
+     */
     private static FileManager instance;
 
     public static FileManager getInstance()
@@ -41,6 +44,12 @@ public class FileManager
 
     }
 
+    /**
+     * Gets a string for a team name and saves said team to teams.txt. A new
+     * team record will always have variables starting at 0.
+     *
+     * @param teamName
+     */
     public void saveTeam(String teamName)
     {
         int nextId;
@@ -80,6 +89,15 @@ public class FileManager
         }
     }
 
+    /**
+     * Gets lists of integers representing the teams that are in a group, and
+     * saves them as a single record along with a group ID.
+     *
+     * @param groupAID
+     * @param groupBID
+     * @param groupCID
+     * @param groupDID
+     */
     public void saveAllGroups(List<Integer> groupAID, List<Integer> groupBID, List<Integer> groupCID, List<Integer> groupDID)
     {
         int nextGroupId = 1;
@@ -110,6 +128,14 @@ public class FileManager
 
     }
 
+    /**
+     * Method for saving a sinle group, given a RAF instance and a list of ID's
+     * that need to be saved. Effectively saves one group.
+     *
+     * @param groupRAF
+     * @param groupArray
+     * @throws IOException
+     */
     public void saveGroup(RandomAccessFile groupRAF, List<Integer> groupArray) throws IOException
     {
         if (groupArray.size() == 4)
@@ -130,43 +156,16 @@ public class FileManager
 
     }
 
-//    public void saveGroup(List<Integer> groupArray) throws IOException
-//    {
-//        int nextGroupId;
-//
-//        try (RandomAccessFile groupRAF = new RandomAccessFile(new File("groups.txt"), "rw"))
-//        {
-//            if (groupRAF.length() == 0)
-//            {
-//                groupRAF.writeInt(1);
-//                groupRAF.seek(0);
-//            }
-//            groupRAF.seek(0);
-//            nextGroupId = groupRAF.readInt();
-//            groupRAF.seek(0);
-//            groupRAF.writeInt(nextGroupId + 1);
-//
-//            groupRAF.seek(groupRAF.length());
-//            groupRAF.writeInt(nextGroupId);
-//
-//            if (groupArray.size() == 4)
-//            {
-//                for (Integer teamID : groupArray)
-//                {
-//                    groupRAF.writeInt(teamID);
-//                }
-//
-//            } else
-//            { //Only accounts for 3 teams in the group. Writes 0 for the ID of the 4th team.
-//                for (Integer teamID : groupArray)
-//                {
-//                    groupRAF.writeInt(teamID);
-//                }
-//                groupRAF.writeInt(-2);
-//            }
-//
-//        }
-//    }
+    /**
+     * Returns a long that represents the a pointer for a random access file.
+     * Enables us to write into records that have previously been cleared, so
+     * that empty spots in the file are utilized, and so that the file size will
+     * grow unnecessarily large.
+     *
+     * @return
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     public long getFirstAvailPointer() throws FileNotFoundException, IOException
     {
 
@@ -187,6 +186,14 @@ public class FileManager
         }
     }
 
+    /**
+     * Retunrs a list of teams containing all the teams that have previously
+     * been added.
+     *
+     * @return
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
     public List<Team> getAllTeams() throws FileNotFoundException, IOException
     {
         try (RandomAccessFile raf = new RandomAccessFile(new File("teams.txt"), "rw"))
@@ -208,6 +215,15 @@ public class FileManager
 
     }
 
+    /**
+     * Is handed a random access file instance and reads the records for a
+     * single team, before creating a new instance with said data and returning
+     * it.
+     *
+     * @param raf
+     * @return
+     * @throws IOException
+     */
     private Team getOneTeam(RandomAccessFile raf) throws IOException
     {
 
@@ -236,6 +252,14 @@ public class FileManager
 
     }
 
+    /**
+     * Is handed a single team ID and searches teams.txt for a team with a
+     * matching ID, then returns said team if found.
+     *
+     * @param id
+     * @return
+     * @throws IOException
+     */
     private Team getTeamByID(int id) throws IOException
     {
         String teamNameString = "";
@@ -270,6 +294,48 @@ public class FileManager
 
     }
 
+    /**
+     * Given a team ID, this searches the teams.txt file for a matching ID and
+     * then returns the team name associated with it.
+     *
+     * @param id
+     * @return
+     * @throws IOException
+     */
+    public String getTeamName(int id) throws IOException
+    {
+        String teamNameString = "";
+
+        try (RandomAccessFile teamRAF = new RandomAccessFile(new File("teams.txt"), "r"))
+        {
+
+            for (int pos = INT_SIZE; pos < teamRAF.length(); pos += RECORD_SIZE_TEAMS)
+            {
+                teamRAF.seek(pos);
+                int teamId = teamRAF.readInt();
+                if (teamId == id)
+                {
+
+                    byte[] teamName = new byte[TEAM_NAME_SIZE];
+                    teamRAF.read(teamName);
+                    teamNameString = new String(teamName).trim();
+
+                }
+
+            }
+            return teamNameString;
+        }
+
+    }
+
+    /**
+     * Given a string representation of a group, this returns a list containing
+     * all teams in said group.
+     *
+     * @param group
+     * @return
+     * @throws IOException
+     */
     public List<Team> getTeamsInGroup(String group) throws IOException
     {
         int offset = 0;
@@ -316,6 +382,13 @@ public class FileManager
 
     }
 
+    /**
+     * Given a team ID, this searched the teams.txt file for a matching ID, and
+     * if found, deletes the records associated with it.
+     *
+     * @param id
+     * @throws IOException
+     */
     public void clearTeam(int id) throws IOException
     {
         try (RandomAccessFile raf = new RandomAccessFile(new File("teams.txt"), "rw"))
@@ -337,6 +410,11 @@ public class FileManager
 
     }
 
+    /**
+     * Checks whether or not groups.txt has any content, or exists at all.
+     *
+     * @return
+     */
     public boolean checkGroupRAF()
     {
         try (RandomAccessFile groupRAF = new RandomAccessFile(new File("groups.txt"), "r"))
@@ -352,6 +430,10 @@ public class FileManager
         return false;
     }
 
+    /**
+     * Clears both groups.txt and teams.txt file, making ready for a new
+     * tournament to be created.
+     */
     public void clearAllFiles()
     {
         try

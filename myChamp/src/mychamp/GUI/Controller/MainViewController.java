@@ -6,14 +6,12 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import mychamp.GUI.Model.GroupParser;
 import mychamp.GUI.Model.Model;
 import mychamp.GUI.Model.TeamParser;
@@ -21,16 +19,22 @@ import mychamp.GUI.Model.TeamParser;
 public class MainViewController implements Initializable
 {
 
+    /**
+     * Gets the singleton instance of the model.
+     */
     Model model = Model.getInstance();
+    /**
+     * Gets the singleton instance of the team parser.
+     */
     TeamParser teamParser = TeamParser.getInstance();
+    /**
+     * Gets the singleton instance of the group parser.
+     */
     GroupParser groupParser = GroupParser.getInstance();
 
-    private Window primaryStage;
     @FXML
     private Button btnNew;
 
-    private Stage window;
-    private Parent root;
     Scene scene;
 
     @FXML

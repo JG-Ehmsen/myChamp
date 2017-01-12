@@ -3,6 +3,8 @@ package mychamp.BLL;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import mychamp.BE.Match;
 import mychamp.BE.Team;
 import mychamp.DAL.FileManager;
@@ -10,8 +12,12 @@ import mychamp.DAL.FileManager;
 public class MatchManager
 {
 
-    FileManager fileManager = FileManager.getInstance();
-
+    /**
+     * Ensures that the class can be used as a singleton, by making a static
+     * instance of it, ensuring that the constructor is private, and having a
+     * method that either returns the static instance if it exists, or makes a
+     * new one.
+     */
     private static MatchManager instance;
 
     public static MatchManager getInstance()
@@ -22,32 +28,27 @@ public class MatchManager
         }
         return instance;
     }
-    private String group;
 
     private MatchManager()
     {
-
     }
 
-    List<Match> round1 = new ArrayList();
-    List<Match> round2 = new ArrayList();
-    List<Match> round3 = new ArrayList();
-    List<Match> round4 = new ArrayList();
-    List<Match> round5 = new ArrayList();
-    List<Match> round6 = new ArrayList();
+    /**
+     * Gets the singleton instance of the filemanager.
+     */
+    FileManager fileManager = FileManager.getInstance();
 
+    /**
+     * Given a string representing a group, this method loads the teams and
+     * shuffles the list, before returning it as a 2D String array.
+     *
+     * @param group
+     * @return
+     * @throws IOException
+     */
     private String[][] generateMatchList(String group) throws IOException
     {
         int noOfTeamsInGroup = fileManager.getTeamsInGroup(group).size();
-
-        //If there are odd number of teams then we create a local ghost team.
-        boolean ghost = false;
-
-        if (noOfTeamsInGroup % 2 == 1)
-        {
-            noOfTeamsInGroup++;
-            ghost = true;
-        }
 
         //Generates the match fixturelist using a cyclic algorithm.
         int totalRounds = noOfTeamsInGroup - 1;
@@ -113,12 +114,26 @@ public class MatchManager
 
     }
 
+    /**
+     * Flips the string contained within a string array.
+     *
+     * @param match
+     * @return
+     */
     private String flip(String match)
     {
         String[] components = match.split(" v ");
         return components[1] + " v " + components[0];
     }
 
+    /**
+     * Gets a string representation for a group and schedules the matches within
+     * the group stage.
+     *
+     * @param group
+     * @return
+     * @throws IOException
+     */
     private List<Match> scheduleGroup(String group) throws IOException
     {
         String[][] generatedMatches = generateMatchList(group);
@@ -156,45 +171,98 @@ public class MatchManager
                         awayID = team.getTeamID();
 
                     }
-
                 }
-
-                Match newMatch = new Match(roundID, matchID, homeID, awayID);
+                Match newMatch = new Match(roundID, matchID, homeID, awayID, fileManager.getTeamName(homeID), fileManager.getTeamName(awayID));
                 groupMatchlist.add(newMatch);
             }
-
         }
-
         return groupMatchlist;
     }
 
-//    public void printGroups() throws IOException
-//    {
-//        List<Match> list = scheduleGroup("groupA");
-//
-//        for (Match match : list)
-//        {
-//            System.out.println("matchID: " + match.getMatchID() + " roundID: " + match.getRoundID() + " home: " + match.getHomeTeamID() + " away: " + match.getAwayTeamID());
-//        }
-//        List<Team> teamsInGroup = fileManager.getTeamsInGroup("groupA");
-//
-//        for (Team team : teamsInGroup)
-//        {
-//           System.out.println("teamID: " + team.getTeamID());
-//        }
-//    for (int round = 0; round < 6; round++)
-//        {
-//            for (int match = 0; match < 2; match++)
-//            {
-//                System.out.println(generatedMatches[round][match]);
-//            }
-//
-//        }
-//        
-//        
-//        for (Team team : teamsInGroup)
-//        {
-//            System.out.println("teamID: " + team.getTeamID());
-//        }
-//    }
+    /**
+     * Given a specific round in the tournament, this method returns the matches
+     * that are played in that round.
+     *
+     * @param round
+     * @return
+     */
+    public List<Match> matchesForRound(int round)
+    {
+        List<Match> allMatches = new ArrayList();
+        try
+        {
+            allMatches.addAll(scheduleGroup("groupA"));
+
+            allMatches.addAll(scheduleGroup("groupB"));
+
+            allMatches.addAll(scheduleGroup("groupC"));
+
+            allMatches.addAll(scheduleGroup("groupD"));
+
+        } catch (IOException ex)
+        {
+            Logger.getLogger(MatchManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        List<Match> round1 = new ArrayList();
+        List<Match> round2 = new ArrayList();
+        List<Match> round3 = new ArrayList();
+        List<Match> round4 = new ArrayList();
+        List<Match> round5 = new ArrayList();
+        List<Match> round6 = new ArrayList();
+
+        for (Match match : allMatches)
+        {
+            int roundID = match.getRoundID();
+
+            switch (roundID)
+            {
+                case 0:
+                    round1.add(match);
+                    break;
+                case 1:
+                    round2.add(match);
+                    break;
+                case 2:
+                    round3.add(match);
+                    break;
+                case 3:
+                    round4.add(match);
+                    break;
+                case 4:
+                    round5.add(match);
+                    break;
+                case 5:
+                    round6.add(match);
+                    break;
+            }
+        }
+
+        if (round == 1)
+        {
+            return round1;
+        }
+        if (round == 2)
+        {
+            return round2;
+        }
+        if (round == 3)
+        {
+            return round3;
+        }
+        if (round == 4)
+        {
+            return round4;
+        }
+        if (round == 5)
+        {
+            return round5;
+        }
+        if (round == 6)
+        {
+            return round6;
+        }
+
+        return null;
+    }
+
 }

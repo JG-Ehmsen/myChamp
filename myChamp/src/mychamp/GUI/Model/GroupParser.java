@@ -8,9 +8,13 @@ import mychamp.BLL.GroupManager;
 public class GroupParser
 {
 
+    /**
+     * Ensures that the class can be used as a singleton, by making a static
+     * instance of it, ensuring that the constructor is private, and having a
+     * method that either returns the static instance if it exists, or makes a
+     * new one.
+     */
     private static GroupParser instance;
-    GroupManager groupManager = GroupManager.getInstance();
-    public boolean contTour = false;
 
     public static GroupParser getInstance()
     {
@@ -25,6 +29,11 @@ public class GroupParser
     private GroupParser()
     {
     }
+
+    /**
+     * Gets the singleton instance of the group manager.
+     */
+    GroupManager groupManager = GroupManager.getInstance();
 
     public List<Team> teamNamesInAGroup(String group) throws IOException
     {

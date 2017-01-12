@@ -15,6 +15,12 @@ import mychamp.GUI.Model.Model;
 public class GroupManager
 {
 
+    /**
+     * Ensures that the class can be used as a singleton, by making a static
+     * instance of it, ensuring that the constructor is private, and having a
+     * method that either returns the static instance if it exists, or makes a
+     * new one.
+     */
     private static GroupManager instance;
 
     public static GroupManager getInstance()
@@ -26,19 +32,22 @@ public class GroupManager
         return instance;
     }
 
-    public GroupManager()
+    private GroupManager()
     {
     }
 
+    /**
+     * Gets the singleton instance of the filemanager.
+     */
     FileManager fileManager = FileManager.getInstance();
 
-    List<Team> shuffleTeams;// = new ArrayList();
-    Queue<Team> teamQueue;
+    List<Team> shuffleTeams; // Contains the shuffled teams.
+    Queue<Team> teamQueue; // Queue of teams ready to get shuffled.
 
-    List<Team> groupA = new ArrayList();
-    List<Team> groupB = new ArrayList();
-    List<Team> groupC = new ArrayList();
-    List<Team> groupD = new ArrayList();
+    List<Team> groupA = new ArrayList();// New ArrayList that contains groupA
+    List<Team> groupB = new ArrayList();// New ArrayList that contains groupB
+    List<Team> groupC = new ArrayList();// New ArrayList that contains groupC
+    List<Team> groupD = new ArrayList();// New ArrayList that contains groupD
 
     /**
      * Shuffles all teams stored in the random access file and puts them in a
@@ -98,27 +107,49 @@ public class GroupManager
         }
     }
 
-    //Getters for group which will show which teams are in each group.
+    /**
+     * returns a list of teams that are in group A.
+     *
+     * @return
+     */
     public List<Team> getGroupA()
     {
         return groupA;
     }
 
+    /**
+     * returns a list of teams that are in group B.
+     *
+     * @return
+     */
     public List<Team> getGroupB()
     {
         return groupB;
     }
 
+    /**
+     * returns a list of teams that are in group C.
+     *
+     * @return
+     */
     public List<Team> getGroupC()
     {
         return groupC;
     }
 
+    /**
+     * returns a list of teams that are in group D.
+     *
+     * @return
+     */
     public List<Team> getGroupD()
     {
         return groupD;
     }
 
+    /**
+     * Sends all teams to have their ID's extracted, and then saves all groups.
+     */
     public void sendGroupInfo()
     {
         fileManager.saveAllGroups(
@@ -129,6 +160,12 @@ public class GroupManager
         );
     }
 
+    /**
+     * Gets a list of teams(a group) and returns a list of all their ID's.
+     *
+     * @param group
+     * @return
+     */
     private List<Integer> extractTeamIDs(List<Team> group)
     {
         List<Integer> groupWithTeamIDs = new ArrayList();
@@ -141,11 +178,25 @@ public class GroupManager
         return groupWithTeamIDs;
     }
 
+    /**
+     * Passes on a string with a group name to the filemanager, and returns a
+     * lit of teams.
+     *
+     * @param group
+     * @return
+     * @throws IOException
+     */
     public List<Team> teamNamesInAGroup(String group) throws IOException
     {
         return fileManager.getTeamsInGroup(group);
     }
 
+    /**
+     * Passes through to the fileManager a request for checking the status of
+     * the groups.txt file.
+     *
+     * @return
+     */
     public boolean checkGroupRAF()
     {
         return fileManager.checkGroupRAF();

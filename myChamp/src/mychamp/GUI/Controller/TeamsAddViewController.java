@@ -29,9 +29,18 @@ import mychamp.GUI.Model.TeamParser;
 public class TeamsAddViewController implements Initializable
 {
 
-    private Model model = Model.getInstance(); // Gets the singleton instance of 'Model'.
+    /**
+     * Gets the singleton instance of the model.
+     */
+    private Model model = Model.getInstance();
 
-    private TeamParser teamParser = TeamParser.getInstance(); // Gets the singleton instance of 'TeamParser'.
+    /**
+     * Gets the singleton instance of the team parser.
+     */
+    private TeamParser teamParser = TeamParser.getInstance();
+    /**
+     * Gets the singleton instance of the group parser.
+     */
     private GroupParser groupParser = GroupParser.getInstance();
 
     @FXML
@@ -212,7 +221,7 @@ public class TeamsAddViewController implements Initializable
 
     /**
      * Gets information about the currently selected team in the list, and
-     * deletes if. Produces an error message if no team has been selected. Also
+     * deletes it. Produces an error message if no team has been selected. Also
      * asks for confirmation before deleting. The request is then relayed
      * downwards through the layers. Finally calls a request to update the
      * counter.

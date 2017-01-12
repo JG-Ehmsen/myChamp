@@ -20,7 +20,13 @@ import mychamp.GUI.Model.Model;
 public class MatchListScheduleController implements Initializable
 {
 
+    /**
+     * Gets the singleton instance of the model.
+     */
     Model model = Model.getInstance();
+    /**
+     * Gets the singleton instance of the match manager.
+     */
     MatchManager matchManager = MatchManager.getInstance();
 
     @FXML
@@ -106,6 +112,10 @@ public class MatchListScheduleController implements Initializable
         stage.close();
     }
 
+    /**
+     * Sets the cell value factories for all the columns in the view, and
+     * consecutively loads the correct items into them.
+     */
     private void populateLists()
     {
         r1H.setCellValueFactory(new PropertyValueFactory("homeTeamName"));
@@ -125,7 +135,7 @@ public class MatchListScheduleController implements Initializable
         ObservableList<Match> round1 = FXCollections.observableArrayList(matchManager.matchesForRound(1));
         tblrnd1.setItems(round1);
 
-       ObservableList<Match> round2 = FXCollections.observableArrayList(matchManager.matchesForRound(2));
+        ObservableList<Match> round2 = FXCollections.observableArrayList(matchManager.matchesForRound(2));
         tblrnd2.setItems(round2);
 
         ObservableList<Match> round3 = FXCollections.observableArrayList(matchManager.matchesForRound(3));

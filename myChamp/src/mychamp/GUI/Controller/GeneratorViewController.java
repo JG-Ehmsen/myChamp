@@ -21,6 +21,9 @@ import mychamp.GUI.Model.Model;
 public class GeneratorViewController implements Initializable
 {
 
+    /**
+     * Gets the singleton instance of the model.
+     */
     Model model = Model.getInstance();
 
     private Window generatorStage;
@@ -72,8 +75,8 @@ public class GeneratorViewController implements Initializable
     }
 
     /**
-     * Runs the changeView method and closes this stage. Shows an alert
-     * if info is missing in cBoxNoOfTeams or txtFldTournamentTitle.
+     * Runs the changeView method and closes this stage. Shows an alert if info
+     * is missing in cBoxNoOfTeams or txtFldTournamentTitle.
      *
      * @throws IOException
      */

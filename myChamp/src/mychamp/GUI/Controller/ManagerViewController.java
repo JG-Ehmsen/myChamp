@@ -21,11 +21,15 @@ import mychamp.GUI.Model.TeamParser;
 public class ManagerViewController implements Initializable
 {
 
+    /**
+     * Gets the singleton instance of the team parser.
+     */
     TeamParser teamParser = TeamParser.getInstance();
 
-    private Model model = Model.getInstance();
-
-    private Window primaryStage;
+    /**
+     * Gets the singleton instance of the model.
+     */
+    Model model = Model.getInstance();
 
     @FXML
     private ComboBox<String> cbRound;

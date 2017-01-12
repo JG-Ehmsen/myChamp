@@ -1,5 +1,9 @@
 package mychamp.BLL;
 
+/**
+ * Currently unused.
+ *
+ */
 public class ResultManager
 {
 

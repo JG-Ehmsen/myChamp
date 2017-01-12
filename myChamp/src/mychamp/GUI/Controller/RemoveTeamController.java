@@ -29,6 +29,9 @@ public class RemoveTeamController implements Initializable
     @FXML
     private Button btnClose;
 
+    /**
+     * Gets the singleton instance of the team parser.
+     */
     TeamParser teamParser = TeamParser.getInstance();
 
     @Override

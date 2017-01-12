@@ -22,7 +22,13 @@ import mychamp.GUI.Model.Model;
 public class GroupStageOverviewController implements Initializable
 {
 
+    /**
+     * Gets the singleton instance of the model.
+     */
     private Model model = Model.getInstance();
+    /**
+     * Gets the singleton instance of the group parser.
+     */
     private GroupParser groupParser = GroupParser.getInstance();
 
     @FXML
@@ -134,6 +140,10 @@ public class GroupStageOverviewController implements Initializable
         stage.close();
     }
 
+    /**
+     * Sets the cell value factories for all columns in the display, and
+     * consecutively loads the correct items into the table views.
+     */
     private void populateList()
     {
         groupAClmn.setCellValueFactory(new PropertyValueFactory("teamName"));

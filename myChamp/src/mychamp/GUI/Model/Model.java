@@ -15,14 +15,13 @@ import mychamp.MyChamp;
 public class Model
 {
 
-    TeamManager teamManager = TeamManager.getInstance();
-    GroupManager groupManager = GroupManager.getInstance();
-    
- 
-
+    /**
+     * Ensures that the class can be used as a singleton, by making a static
+     * instance of it, ensuring that the constructor is private, and having a
+     * method that either returns the static instance if it exists, or makes a
+     * new one.
+     */
     private static Model instance;
-
-    public Window stage;
 
     public static Model getInstance()
     {
@@ -40,7 +39,20 @@ public class Model
     }
 
     /**
-     * Changes the view.
+     * Gets the singleton instance of the team manager.
+     */
+    TeamManager teamManager = TeamManager.getInstance();
+    /**
+     * Gets the singleton instance of the group manager.
+     */
+    GroupManager groupManager = GroupManager.getInstance();
+
+    public Window stage;
+
+    /**
+     * Changes the view, given parameters such as type, title and the path to
+     * the new view. Also optionally passes on extra parameters needed in the
+     * TeamAddView.
      *
      * @param title
      * @param path
@@ -72,7 +84,5 @@ public class Model
 
         dialogStage.show();
     }
-
-
 
 }

@@ -12,8 +12,12 @@ import mychamp.DAL.FileManager;
 public class MatchManager
 {
 
-    FileManager fileManager = FileManager.getInstance();
-
+    /**
+     * Ensures that the class can be used as a singleton, by making a static
+     * instance of it, ensuring that the constructor is private, and having a
+     * method that either returns the static instance if it exists, or makes a
+     * new one.
+     */
     private static MatchManager instance;
 
     public static MatchManager getInstance()
@@ -24,25 +28,27 @@ public class MatchManager
         }
         return instance;
     }
-    private String group;
 
     private MatchManager()
     {
-
     }
 
+    /**
+     * Gets the singleton instance of the filemanager.
+     */
+    FileManager fileManager = FileManager.getInstance();
+
+    /**
+     * Given a string representing a group, this method loads the teams and
+     * shuffles the list, before returning it as a 2D String array.
+     *
+     * @param group
+     * @return
+     * @throws IOException
+     */
     private String[][] generateMatchList(String group) throws IOException
     {
         int noOfTeamsInGroup = fileManager.getTeamsInGroup(group).size();
-
-        //If there are odd number of teams then we create a local ghost team.
-        boolean ghost = false;
-
-        if (noOfTeamsInGroup % 2 == 1)
-        {
-            noOfTeamsInGroup++;
-            ghost = true;
-        }
 
         //Generates the match fixturelist using a cyclic algorithm.
         int totalRounds = noOfTeamsInGroup - 1;
@@ -108,12 +114,26 @@ public class MatchManager
 
     }
 
+    /**
+     * Flips the string contained within a string array.
+     *
+     * @param match
+     * @return
+     */
     private String flip(String match)
     {
         String[] components = match.split(" v ");
         return components[1] + " v " + components[0];
     }
 
+    /**
+     * Gets a string representation for a group and schedules the matches within
+     * the group stage.
+     *
+     * @param group
+     * @return
+     * @throws IOException
+     */
     private List<Match> scheduleGroup(String group) throws IOException
     {
         String[][] generatedMatches = generateMatchList(group);
@@ -150,7 +170,6 @@ public class MatchManager
                     {
                         awayID = team.getTeamID();
 
-
                     }
                 }
                 Match newMatch = new Match(roundID, matchID, homeID, awayID, fileManager.getTeamName(homeID), fileManager.getTeamName(awayID));
@@ -160,6 +179,13 @@ public class MatchManager
         return groupMatchlist;
     }
 
+    /**
+     * Given a specific round in the tournament, this method returns the matches
+     * that are played in that round.
+     *
+     * @param round
+     * @return
+     */
     public List<Match> matchesForRound(int round)
     {
         List<Match> allMatches = new ArrayList();

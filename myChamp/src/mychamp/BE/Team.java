@@ -4,23 +4,30 @@ public class Team
 {
 
     private int teamID; // The ID of the team.
-    private String teamName; // The name of the team.
-    private int teamGoalsScored; // The amount of goals the team has scored.
-    private int teamGoalsScoredAgainst; // The amount of goals scored against the team.
-    private int teamGamesPlayed; // The total amount of games played by the team.
-    private int teamGamesWon; // The amount of games won by the team.
-    private int teamGamesLost; // The amount of games lost by the team.
-    private int teamGamesDraw; // The amount of games played by the team that ended in a draw.
-    private int teamPoints; // The amount of points the team has earned.
+    private String teamName = ""; // The name of the team.
+    private int teamGoalsScored = 0; // The amount of goals the team has scored.
+    private int teamGoalsScoredAgainst = 0; // The amount of goals scored against the team.
+    private int teamGamesPlayed = 0; // The total amount of games played by the team.
+    private int teamGamesWon = 0; // The amount of games won by the team.
+    private int teamGamesLost = 0; // The amount of games lost by the team.
+    private int teamGamesDraw = 0; // The amount of games played by the team that ended in a draw.
+    private int teamPoints = 0; // The amount of points the team has earned.
+    private int teamGoalDifference = 0;
 
     /**
      * Creates a new 'Team' instance with the provided parameters.
      *
      * @param teamID, the ID of the team.
      * @param teamName, the name of the team.
+     * @param gamesPlayed, the total amount of games played.
+     * @param gamesWon, the amount of games that have been won.
+     * @param gamesDraw, the amount of games that have resulted in a draw.
+     * @param gamesLost, the amount of games that have been lost.
+     * @param goalsScored, the amount of goals the team has scored.
+     * @param goalsAgainst, the amount of goals that have been scored against
+     * the team.
      */
     public Team(int teamID, String teamName, int gamesPlayed, int gamesWon, int gamesDraw, int gamesLost, int goalsScored, int goalsAgainst)
-            
 
     {
         this.teamID = teamID;
@@ -211,6 +218,26 @@ public class Team
     public void setTeamPoints(int teamPoints)
     {
         this.teamPoints = teamPoints;
+    }
+
+    /**
+     * Returns the team goal difference.
+     *
+     * @return
+     */
+    public int getTeamGoalDifference()
+    {
+        return teamGoalDifference;
+    }
+
+    /**
+     * Sets the team goal difference.
+     *
+     * @param teamGoalDifference
+     */
+    public void setTeamGoalDifference(int teamGoalDifference)
+    {
+        this.teamGoalDifference = teamGoalDifference;
     }
 
 }

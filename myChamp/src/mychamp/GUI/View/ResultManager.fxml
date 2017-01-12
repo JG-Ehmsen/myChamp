@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="212.0" prefWidth="268.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mychamp.GUI.Controller.ResultManagerController">
+   <children>
+      <Label layoutX="60.0" layoutY="71.0" text="Team 1" textFill="WHITE" AnchorPane.leftAnchor="15.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="60.0" layoutY="119.0" text="Team 2" textFill="WHITE" AnchorPane.leftAnchor="15.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="60.0" layoutY="14.0" prefHeight="23.0" prefWidth="121.0" text="Goals scored" textFill="WHITE" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="98.0" AnchorPane.topAnchor="14.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tfScoreTeam1" layoutX="203.0" layoutY="67.0" minHeight="20.0" minWidth="50.0" prefHeight="27.0" prefWidth="50.0" AnchorPane.leftAnchor="203.0" AnchorPane.rightAnchor="15.0" />
+      <TextField fx:id="tfScoreTeam2" layoutX="203.0" layoutY="115.0" minHeight="20.0" minWidth="50.0" prefHeight="27.0" prefWidth="50.0" AnchorPane.leftAnchor="203.0" AnchorPane.rightAnchor="15.0" />
+      <Button fx:id="closeBtnresultManager" layoutX="86.0" layoutY="170.0" minHeight="20.0" minWidth="50.0" mnemonicParsing="false" onAction="#btnCloseResultManager" text="Close" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="86.0" />
+      <Button layoutX="126.0" layoutY="170.0" minHeight="20.0" minWidth="50.0" mnemonicParsing="false" onAction="#btnSaveResultManager" text="Save" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+   </children>
+</AnchorPane>

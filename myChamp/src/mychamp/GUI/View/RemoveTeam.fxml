@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="134.0" prefWidth="223.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mychamp.GUI.Controller.RemoveTeamController">
+   <children>
+      <ComboBox fx:id="removeTeam" layoutX="13.0" layoutY="48.0" prefHeight="27.0" prefWidth="176.0" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="45.0" />
+      <Label layoutX="13.0" layoutY="14.0" text="Remove team" textFill="WHITE" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Button fx:id="btnRemove" layoutX="131.0" layoutY="92.0" mnemonicParsing="false" onAction="#removeTeamFromTournament" text="Remove" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
+      <Button fx:id="btnClose" layoutX="14.0" layoutY="135.0" mnemonicParsing="false" onAction="#handleCloseView" prefHeight="27.0" prefWidth="68.0" text="Close" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" />
+   </children>
+</AnchorPane>
